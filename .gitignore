@@ -6,7 +6,10 @@
 
 # Ignore bundler config.
 /.bundle
-
+/config/database.yml
+/config/private.pub
+.DS_Store
+/.DS-Store
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
