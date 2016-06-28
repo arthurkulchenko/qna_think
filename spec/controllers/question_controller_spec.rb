@@ -9,12 +9,17 @@ RSpec.describe QuestionController, :type => :controller do
       expect(assigns(:questions)).to match_array @questions
     end
 
-    it 'renders template'
+    it 'renders template' do
+      expect(response).to render_template :index
+    end
 
   end
 
   describe 'GET #new' do
-  	it 'renders template'
+  	it 'renders template' do
+  	  expect(response).to render_template :new
+  	end
+
   	it 'assigns new question'
   end
 
