@@ -45,6 +45,7 @@ gem 'jbuilder', '~> 2.0'
 group :development, :test do 
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
 

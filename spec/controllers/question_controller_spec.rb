@@ -6,7 +6,7 @@ RSpec.describe QuestionController, :type => :controller do
   	let(:questions) { create_list(:question, 3) }
 
     it 'assigns array of quesitons' do
-      expect.assigns(@questions).to match_array questions
+      expect(assigns(:questions)).to match_array @questions
     end
 
     it 'renders template'
@@ -24,5 +24,5 @@ RSpec.describe QuestionController, :type => :controller do
   	  it 'creates new question'
   	end
   end
-  
+
 end
