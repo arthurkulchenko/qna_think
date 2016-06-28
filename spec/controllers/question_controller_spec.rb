@@ -20,7 +20,9 @@ RSpec.describe QuestionController, :type => :controller do
   	  expect(response).to render_template :new
   	end
 
-  	it 'assigns new question'
+  	it 'assigns new question' do
+  	  expect(assigns(:question)).to 
+  	end
   end
 
   describe 'POST #create' do
