@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionController, :type => :controller do
-  let(:question) { create(:question, :with_strong_parametrs) }
+  let(:question) { create(:question) }
   let(:questions) { create_list(:question, 3) }
   describe 'GET #index' do
   	before { get :index }
@@ -34,12 +34,12 @@ RSpec.describe QuestionController, :type => :controller do
   end
 
   describe 'POST #create' do
-    let(:request) { post :create, id: question, question: attributes_for(:question) }
+    let(:request) { post :create, id: :question, question: attributes_for(:question) }
 
   	context 'in success context  -- ' do
 
       it 'creates new question' do
-        expect { request }.to change(Question, :count).by(1)
+        expect{request}.to change(Question, :count).from(0).to(1)
       end
 
   	  it 'redirect after save to #index' do
