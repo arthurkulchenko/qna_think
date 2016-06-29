@@ -1,11 +1,16 @@
 FactoryGirl.define do
   factory :question do
-    title
-    content
+    title "-title-"
+    content "-content-"
 
     trait :with_strong_parametrs do
-      title 'HI'
-      content 'Hallo'
+      title "-title-"
+      content "-content-"
+    end
+
+    trait :with_illegal_values do
+      title nil
+      content nil
     end
   end
 end
