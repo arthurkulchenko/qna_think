@@ -13,7 +13,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-/config/database.yml
-/config/private.pub
+config/database.yml
+config/private.pub
 # Ignore Byebug command history file.
 .byebug_history
