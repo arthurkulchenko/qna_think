@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionController, :type => :controller do
-  let(:question) { create(:question) }
+  let(:question) { create(:question, :with_strong_parametrs) }
   let(:questions) { create_list(:question, 3) }
   describe 'GET #index' do
   	before { get :index }
