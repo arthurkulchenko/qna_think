@@ -12,7 +12,8 @@ class QuestionController < ApplicationController
   	if @question.save
       redirect_to question_path(@question) 
     else 
-      redirect_to :back, notice: err_any?(@question)
+      # redirect_to :back, notice: err_any?(@question)
+      redirect_to new_question_path, notice: err_any?(@question)
     end
   end
 

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe QuestionController, :type => :controller do
   let(:question) { create(:question) }
   let(:questions) { create_list(:question, 3) }
-
+  
   describe 'GET #index' do
   	before { get :index }
 
@@ -61,9 +61,12 @@ RSpec.describe QuestionController, :type => :controller do
 # post "/sessions", {:session => {:email => user.email, 
 #   :password => user.password}}, {"HTTPS" => "on", 'HTTP_REFERER' => '/signin'}
 
+# let(:request) { post :create, :session => { :title => nil, :content => nil}, {'HTTP_REFERER' => '/question/new'}
+# request.env["HTTP_REFERER"] = "/question/new"
+      
       let(:request) { post :create, question: attributes_for(:with_illegal_values) }
       it 'do not creates new question' do
-        expect{request}.to change(Question, :count).from(0).to(0)
+        expect{request}.to_not change(Question, :count)
       end
 
       it 'redirect to back if does not save' do
