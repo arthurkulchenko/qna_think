@@ -41,7 +41,7 @@ RSpec.describe AnswerController, :type => :controller do
     context 'seccess answer creating  --' do
       let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:answer) }
   	  it 'create new answer' do
-  	    expect{ request }.to change(Answer, :count).by(1)
+  	    expect{ request }.to change(question.answers, :count).by(1)
   	  end
   
   	  it 'redirects to question_path' do
@@ -51,15 +51,15 @@ RSpec.describe AnswerController, :type => :controller do
     end
 
     context 'fail answer creating  --' do
-      # request.env['HTTP_REFERER'] = 'http://test.com/sessions/new'
+      # request.env['HTTP_REFERER'] = new_question_answer_path(question)
       let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:with_wrong_values) }
       it 'do not create new answer' do
         expect{ request }.to_not change(Answer, :count)
       end
   
-      it 'redirects to new_question_answer_path' do
+      it 'renders :new' do
         request
-        expect(response).to redirect_to new_question_answer_path(question)
+        expect(response).to render_template :new
       end
     end
   end

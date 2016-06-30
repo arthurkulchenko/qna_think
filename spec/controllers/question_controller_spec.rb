@@ -69,9 +69,9 @@ RSpec.describe QuestionController, :type => :controller do
         expect{request}.to_not change(Question, :count)
       end
 
-      it 'redirect to back if does not save' do
+      it 'renders :new' do
         request
-        expect(response).to redirect_to new_question_path
+        expect(response).to render_template :new
       end
       
     end

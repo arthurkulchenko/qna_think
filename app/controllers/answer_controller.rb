@@ -15,7 +15,7 @@ class AnswerController < ApplicationController
       redirect_to question_path(@question)
     else
       # redirect_to :back, notice: err_any?(@answer)
-      redirect_to new_question_answer_path(@question), notice: err_any?(@answer)
+      render :new
     end
   end
 
