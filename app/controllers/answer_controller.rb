@@ -11,7 +11,11 @@ class AnswerController < ApplicationController
 
   def create
   	@answer = @question.answers.new(answer_params)
-  	redirect_to question_index_path if @answer.save
+  	if @answer.save
+      redirect_to question_path(@question)
+    else
+      redirect_to :back, notice: err_any?(@answer)
+    end
   end
 
   def show
@@ -21,7 +25,7 @@ class AnswerController < ApplicationController
   private
 
   def question_load
-  	@question ||= Question.find(params[:question_id])
+  	@question = Question.find(params[:question_id])
   end
 
   def answer_params

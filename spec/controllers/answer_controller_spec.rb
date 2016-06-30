@@ -37,14 +37,31 @@ RSpec.describe AnswerController, :type => :controller do
   end
 
   describe 'POST #create' do
-  	let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:answer) }
+  	
+    context 'seccess answer creating  --' do
+      let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:answer) }
+  	  it 'create new answer' do
+  	    expect{ request }.to change(Answer, :count).by(1)
+  	  end
+  
+  	  it 'redirects to question_path' do
+        request
+        expect(response).to redirect_to question_path(question)
+  	  end
+    end
 
-  	it 'create new answer' do
-  	  expect{ request }.to change(Answer, :count).by(1)
-  	end
-
-  	it 'redirects to question_path' do
-  	end
+    context 'fail answer creating  --' do
+      # request.env['HTTP_REFERER'] = 'http://test.com/sessions/new'
+      let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:with_wrong_values) }
+      it 'do not create new answer' do
+        expect{ request }.to change(Answer, :count).by(0)
+      end
+  
+      it 'redirects to new_question_answer_path' do
+        request
+        expect(response).to redirect_to new_question_answer_path(:question)
+      end
+    end
   end
 
   describe 'GET #show' do

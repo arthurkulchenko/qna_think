@@ -9,7 +9,11 @@ class QuestionController < ApplicationController
 
   def create
   	@question = Question.new(question_params)
-  	redirect_to question_path(@question) if @question.save
+  	if @question.save
+      redirect_to question_path(@question) 
+    else 
+      redirect_to :back, notice: err_any?(@question)
+    end
   end
 
   def show
