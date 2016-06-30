@@ -12,6 +12,10 @@ class QuestionController < ApplicationController
   	redirect_to question_path(@question) if @question.save
   end
 
+  def show
+    @question = Question.find(params[:id])
+  end
+
   private
   def question_params
     params.require(:question).permit(:title, :content)	
