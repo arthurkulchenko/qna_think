@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 	
+  devise_for :users
   resources :question, only: [:index, :new, :show, :create] do
     resources :answer
   end
