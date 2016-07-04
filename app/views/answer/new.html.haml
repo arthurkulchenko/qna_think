@@ -1,1 +1,5 @@
-%h2 new answer
+= form_for @answer, url: question_answer_index_path, method: :post do |a|
+ = a.label :content, 'Form for Answer'
+ = a.text_field :content
+ = a.submit 'Provide an answer'
+%h3 new answer

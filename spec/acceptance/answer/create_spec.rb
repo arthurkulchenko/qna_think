@@ -3,7 +3,8 @@ require_relative '../acceptance_helper'
 feature 'answer a question', %q(
   In oreder to help someone
   As a registred user
-  I want to give an answer) do
+  I want to give an answer
+  ) do
 
     given(:question){ create(:question)  }
 

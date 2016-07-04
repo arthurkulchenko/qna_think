@@ -12,7 +12,7 @@ module AcceptanceHelper
   # end
 
   def sharing_of_advice
-    visit question_path(:question)
+    visit question_path(question)
     click_on 'Share you experiance and wisdom'
     fill_in 'Form for Answer', with: 'First of all you need ...'\
                   ' and only then ... Best Regards and Good luck!'

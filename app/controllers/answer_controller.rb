@@ -1,5 +1,5 @@
 class AnswerController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  # before_action :authenticate_user!, only: [:create]
   before_filter :question_load
   
   def index
