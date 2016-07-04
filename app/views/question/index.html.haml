@@ -1,1 +1,5 @@
-%h2 Question index
+= link_to "Ask a question", new_question_path
+%br
+%h3 Question index
+- @questions.each do |question|
+    = question.title

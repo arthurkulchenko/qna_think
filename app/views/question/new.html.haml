@@ -1,1 +1,8 @@
-%h2 Question new
+= form_for @question, url: question_index_path, method: :post do |q|
+  = q.label :title, 'Problem'
+  = q.text_field :title
+  = q.label :content, 'Description'
+  = q.text_field :content
+  = q.submit 'Ask for Help'
+%br
+%h3 Question new

@@ -1,4 +1,5 @@
 class QuestionController < ApplicationController
+  # before_action :authenticate_user!, only: [:create]
   def index
   	@questions = Question.all
   end
@@ -10,9 +11,9 @@ class QuestionController < ApplicationController
   def create
   	@question = Question.new(question_params)
   	if @question.save
-      redirect_to question_path(@question) 
-    else 
-      # redirect_to :back, notice: err_any?(@question)
+      redirect_to question_path(@question), notice: 'Please wait for a while,' \
+                                                 ' someone will answer you soon.' 
+    else
       render :new
     end
   end

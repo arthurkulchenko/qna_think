@@ -1,4 +1,5 @@
 class AnswerController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
   before_filter :question_load
   
   def index
@@ -12,7 +13,7 @@ class AnswerController < ApplicationController
   def create
   	@answer = @question.answers.new(answer_params)
   	if @answer.save
-      redirect_to question_path(@question)
+      redirect_to question_path(@question), notice: 'Thank you for you Answer'
     else
       # redirect_to :back, notice: err_any?(@answer)
       render :new
