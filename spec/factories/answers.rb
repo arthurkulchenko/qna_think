@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  sequence(:content) { |n| "Content#{n}" }
   factory :answer do
     content 'Hallo'
     question
