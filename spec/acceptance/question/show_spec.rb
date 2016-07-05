@@ -7,7 +7,7 @@ feature 'showing question', %q(
   I want to see a current question and it's answers
   ) do
     given!(:question) { create(:question) }
-    given(:answers){ create_list(:with_wrong_values, 3, question: question) }
+    given(:answers){ create_list(:answer, 3, question: question) }
     scenario 'show question' do
       visit question_path(question)
       expect(page).to have_content question.title
@@ -17,7 +17,6 @@ feature 'showing question', %q(
     scenario 'listing answers' do
       # expect(page).to have_content question.answers[0].content
       question.answers.each do |answer|
-        полная тарабарщина
         expect(page).to have_content answer.content
       end
       # save_and_open_page
