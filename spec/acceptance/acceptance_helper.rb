@@ -5,6 +5,7 @@ RSpec.configure do |config|
   config.include AcceptanceHelper, type: :feature
   
   config.use_transactional_fixtures = false
+  # config.use_transactional_tests = false
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
