@@ -1,4 +1,6 @@
+# require 'rails_helper'
 module AcceptanceHelper
+  # require 'rails_helper'
   # def sign_in(user)
   #   visit new_user_session_path # or '/sign_in'
   #     fill_in 'Email', with: user.email
