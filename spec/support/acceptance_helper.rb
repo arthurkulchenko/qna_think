@@ -21,8 +21,9 @@ module AcceptanceHelper
     click_on 'Sign up'
   end
 
-  def sharing_of_advice
+  def sharing_of_advice(question)
     visit question_path(question)
+    save_and_open_page
     click_on 'Share you experiance and wisdom'
     fill_in 'Form for Answer', with: 'First of all you need ...'\
                   ' and only then ... Best Regards and Good luck!'
