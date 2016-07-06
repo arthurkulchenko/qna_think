@@ -10,15 +10,9 @@ feature 'showing question', %q(
     given(:answers){ create_list(:answer, 3, question: question) }
     scenario 'show question' do
       %Q(#{question.title} #{question.content} Offer\ solution)
-               .split.each{ |i| expect(page).to have_content i}
+              .split.each{ |i| expect(page).to have_content i }
     end
     scenario 'listing answers' do
-      # save_and_open_page
-      # expect(page).to have_content answers[0].content
-      # expect(page).to have_content answers[1].content
-      # expect(page).to have_content answers[2].content
-      question.answers.each do |answer|
-        expect(page).to have_content answer.content
-      end
+      answers.each { |a| expect(page).to have_content a.content }
     end    
   end

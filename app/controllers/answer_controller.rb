@@ -1,6 +1,6 @@
 class AnswerController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-  before_filter :question_load
+  before_action :question_load
   
   def index
     @answers = @question.answers

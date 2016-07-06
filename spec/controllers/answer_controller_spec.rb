@@ -7,12 +7,14 @@ require 'rails_helper'
 # end
 
 RSpec.describe AnswerController, :type => :controller do
-  let(:question) { create(:question) }
-  let(:answer) { create(:answer, question: question) }
-  let(:answers) { create_list(:answer, 3, question: question) }
+  let(:user) { create(:user) }
+  sign_in_user
+  let(:question) { create(:question, user: user) }
+  let(:answer) { create(:answer, question: question, user: user) }
+  let(:answers) { create_list(:answer, 3, question: question, user: user) }
 
   describe 'GET #index' do
-  	before { get :index, question_id: question }
+  	before { get :index, params: { question_id: question }, session: { user_id: 1 } }
   	
   	it 'renders template' do
   	  expect(response).to render_template :index
@@ -37,6 +39,10 @@ RSpec.describe AnswerController, :type => :controller do
   end
 
   describe 'POST #create' do
+    context 'registred user try to create answer' do
+    end
+    context 'unregistred user try to create answer' do
+    end
   	
     context 'seccess answer creating  --' do
       let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:answer) }
@@ -48,6 +54,8 @@ RSpec.describe AnswerController, :type => :controller do
         request
         expect(response).to redirect_to question_path(question)
   	  end
+    context 'fail to creat answer' do
+    end
     end
 
     context 'fail answer creating  --' do
