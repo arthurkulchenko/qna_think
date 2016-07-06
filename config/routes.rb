@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   	                             unlock: 'unblock', registration: 'register', 
   	                             sign_up: 'cmon_let_me_in' }
   root 'question#index'
-  resources :question, only: [:index, :new, :show, :create] do
-    resources :answer
+  resources :question, only: [:index, :new, :show, :create, :destroy] do
+    resources :answer, only: [:index, :new, :show, :create, :destroy]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

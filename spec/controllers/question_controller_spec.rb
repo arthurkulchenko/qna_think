@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe QuestionController, :type => :controller do
-  let(:question) { create(:question) }
-  let(:questions) { create_list(:question, 3) }
+  let(:user){ create(:user) }
+  let(:question){ create(:question, user: user) }
+  let(:questions){ create_list(:question, 3) }
   
   describe 'GET #index' do
   	before { get :index }
@@ -18,6 +19,7 @@ RSpec.describe QuestionController, :type => :controller do
   end
 
   describe 'GET #new' do
+    sign_in_user
     before { get :new }
 
   	it 'renders template' do
@@ -42,7 +44,7 @@ RSpec.describe QuestionController, :type => :controller do
   end
 
   describe 'POST #create' do
-
+    sign_in_user
   	context 'in success context  -- ' do
     let(:request) { post :create, question: attributes_for(:question) }
       it 'creates new question' do
@@ -74,6 +76,30 @@ RSpec.describe QuestionController, :type => :controller do
         expect(response).to render_template :new
       end
       
+    end
+  end
+  describe 'DELETE #destroy' do
+    let(:question){ create(:question, user: user) }
+    let(:request){ delete :destroy, id: question }
+    let(:another_user){ create(:user, email: 'another@email.rspec') }
+    context 'owner deleting his question' do
+      sign_in_user
+      it 'deletes question' do
+        question
+        expect{ request }.to change(Question, :count).by(-1)
+      end
+
+      it 'redirects to index' do
+        question
+        request
+        expect(response).to redirect_to question_index_path
+      end
+    end
+    context 'not owner try to delete question' do
+      sign_in_user(:another_user)
+      it 'do not delete questoin' do
+        expect{ request }.to_not change(Question, :count)
+      end
     end
   end
 

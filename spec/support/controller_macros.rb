@@ -10,7 +10,7 @@ module ControllerMacros
   def sign_out_user(user=nil)
     @user = user ? user : create(:user)
     @request.env['devise.mapping'] = Devise.mappings[:user]
-    sign_out @user	
+    sign_out @user  
   end
 
   def current_user_in
