@@ -8,16 +8,14 @@ feature 'answer a question', %q(
 
     given(:question){ create(:question)  }
     given(:user){ create(:user) }
-
+    background { sharing_of_advice(question) }
+    
     scenario 'giving an answer' do
-      sign_in(user)
-      sharing_of_advice(question)
       expect(page).to have_content 'Thank you for you Answer'
-      expect(page).to have_link 'Share your experiance and wisdom'
+      expect(page).to have_link 'Offer solution'
     end
     
     scenario 'answer apears after its create' do
-      visit question_path(question)
       expect(page).to have_content 'First of all you need ...'\
                   ' and only then ... Best Regards and Good luck!'
     end

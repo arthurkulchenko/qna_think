@@ -7,7 +7,6 @@ feature 'create question', %q(
   
   given(:user){ create(:user) }
   scenario 'asking for help' do
-    sign_in(user)
     ask_for_help
     expect(page).to have_content 'Please wait for a while,'\
                             ' someone will answer you soon.'

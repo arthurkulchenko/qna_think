@@ -7,10 +7,10 @@ feature 'showing question', %q(
   ) do
     background { visit question_path(question) }
     given!(:question) { create(:question) }
-    given!(:answers){ create_list(:answer, 3, question: question) }
+    given(:answers){ create_list(:answer, 3, question: question) }
     scenario 'show question' do
-      %Q(#{question.title} #{question.content} Share\ your\ 
-      experiance\ and\ wisdom).split.each{ |i| expect(page).to have_content i}
+      %Q(#{question.title} #{question.content} Offer\ solution)
+               .split.each{ |i| expect(page).to have_content i}
     end
     scenario 'listing answers' do
       # save_and_open_page
