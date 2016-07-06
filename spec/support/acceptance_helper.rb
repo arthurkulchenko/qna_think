@@ -12,7 +12,7 @@ module AcceptanceHelper
   def sign_out
     click_on 'Log out'
   end
-
+# TODO hi
   def registration(user)
     visit new_user_registration_path
     fill_in 'Email', with: user.email
