@@ -7,12 +7,15 @@ feature 'showing question', %q(
   ) do
     background { visit question_path(question) }
     given!(:question) { create(:question) }
-    given(:answers){ create_list(:answer, 3, question: question) }
+    # given(:answers){ create_list(:answer, 3, question: question) }
+    given(:answer) { create(:answer, question: question) }
+
     scenario 'show question' do
       %Q(#{question.title} #{question.content} Offer\ solution)
               .split.each{ |i| expect(page).to have_content i }
     end
     scenario 'listing answers' do
-      answers.each { |a| expect(page).to have_content a.content }
+      expect(page).to have_content answer.content
+      # answers.each { |a| expect(page).to have_content a.content }
     end    
   end
