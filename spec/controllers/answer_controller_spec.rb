@@ -1,4 +1,4 @@
-require 'rails_helper'
+# require 'rails_helper'
 
 # def necessary_template
 #   @name = self.name #metadata #.description
