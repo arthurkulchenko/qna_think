@@ -24,6 +24,15 @@ class AnswerController < ApplicationController
   	@answer = @question.answers.where(id: params[:id]).first
   end
 
+  def destroy
+    @answer = @question.answers.where(id: params[:id]).first
+    if @answer.delete
+      redirect_to question_path(@question)
+    else
+      render "question#show/#{@question}"
+    end
+  end
+
   private
 
   def question_load

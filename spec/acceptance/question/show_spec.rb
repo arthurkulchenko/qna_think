@@ -8,8 +8,6 @@ feature 'showing question', %q(
     
     given!(:question) { create(:question) }
     given!(:answers){ create_list(:answer, 3, question: question) }
-    # given!(:answer) { create(:answer, question: question) }
-
     background { visit question_path(question) }
 
     scenario 'show question' do
@@ -17,9 +15,6 @@ feature 'showing question', %q(
               .split.each{ |i| expect(page).to have_content i }
     end
     scenario 'listing answers' do
-      save_and_open_page
-      # expect(page).to have_content answer.content
-
       answers.each { |a| expect(page).to have_content a.content }
     end    
   end

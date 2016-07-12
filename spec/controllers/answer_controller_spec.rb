@@ -75,4 +75,29 @@ RSpec.describe AnswerController, :type => :controller do
   	  expect(assigns(:answer)).to eq answer
   	end
   end
+
+  #---------------------------------------------DELETE
+  describe 'DELETE #destroy' do
+    # let(:answer){ create(:answer, user: user) }
+    let(:request){ delete :destroy, question_id: question, id: answer }
+    let(:another_user){ create(:user, email: 'another@email.rspec') }
+    context 'owner deleting his question' do
+      sign_in_user
+      it 'deletes question' do
+        answer
+        expect{ request }.to change(Answer, :count).by(-1)
+      end
+
+      it 'redirects to question' do
+        request
+        expect(response).to redirect_to question_path(question)
+      end
+    end
+    context 'not owner try to delete question' do
+      sign_in_user(:another_user)
+      it 'do not delete questoin' do
+        expect{ request }.to_not change(Answer, :count)
+      end
+    end
+  end
 end

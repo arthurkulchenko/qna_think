@@ -46,7 +46,6 @@ RSpec.describe QuestionController, :type => :controller do
   	context 'in success context  -- ' do
       let(:request) { post :create, question: attributes_for(:question) }
         it 'creates new question' do
-          # expect{request}.to change(Question, :count).from(0).to(1)
           expect{request}.to change(Question, :count).by(1)
         end
 
