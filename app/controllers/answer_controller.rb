@@ -27,9 +27,7 @@ class AnswerController < ApplicationController
   def destroy
     @answer = @question.answers.where(id: params[:id]).first
     if @answer.delete
-      redirect_to question_path(@question)
-    else
-      render "question#show/#{@question}"
+      redirect_to question_path(@question), notice: 'Your answer deleted'
     end
   end
 

@@ -4,13 +4,15 @@
 %h3 Question Content
 = @question.content
 %br
-= link_to 'Delete my Question', question_path(@question), method: :delete
+- if user_signed_in? && current_user.is_author_of?(@question)
+ = link_to 'Delete my Question', question_path(@question), method: :delete
 %br
 %h3 Question Answers
 - @question.answers.each do |answer| 
  = answer.content
+ - if user_signed_in? && current_user.is_author_of?(answer)
+  = link_to 'Delete my Answer', question_answer_path(@question, answer.id), method: :delete
  %hr
 = link_to 'Offer solution', new_question_answer_path(@question)
 
 %h3 Question Show
-%p // if user_signed_in?
