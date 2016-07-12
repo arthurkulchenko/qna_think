@@ -11,6 +11,6 @@ I want to delete my own question
     visit question_path(question)
     click_on 'Delete my Question'
     visit question_index_path
-    expect(page).to not_have_content question.content
+    expect(page).to_not have_content question.content
   end
 end

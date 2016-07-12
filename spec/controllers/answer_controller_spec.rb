@@ -1,18 +1,10 @@
-# require 'rails_helper'
-
-# def necessary_template
-#   @name = self.name #metadata #.description
-#   @index = @name.rindex('#')
-#   @necessary_template = @name[@index.next..-1].to_sym
-# end
-
 RSpec.describe AnswerController, :type => :controller do
   let(:user) { create(:user) }
   sign_in_user
   let(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
   let(:answers) { create_list(:answer, 3, question: question, user: user) }
-
+#---------------------------------------------#INDEX
   describe 'GET #index' do
   	before { get :index, params: { question_id: question }, session: { user_id: 1 } }
   	
@@ -25,7 +17,7 @@ RSpec.describe AnswerController, :type => :controller do
   	end
 
   end
-
+#---------------------------------------------#NEW
   describe 'GET #new' do
     before { get :new, question_id: question }
 
@@ -37,7 +29,7 @@ RSpec.describe AnswerController, :type => :controller do
   	  expect(response).to render_template :new
   	end
   end
-
+#---------------------------------------------#POST(CREATE)
   describe 'POST #create' do
     context 'registred user try to create answer' do
     end
@@ -71,7 +63,7 @@ RSpec.describe AnswerController, :type => :controller do
       end
     end
   end
-
+#---------------------------------------------#SHOW
   describe 'GET #show' do
   	before { get :show, id: answer ,question_id: question }
   	
