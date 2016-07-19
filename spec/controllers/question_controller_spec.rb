@@ -53,6 +53,10 @@ RSpec.describe QuestionController, :type => :controller do
           request
           expect(response).to redirect_to question_path(assigns(:question))
         end
+
+        it 'relate question with its user' do
+          expect(assigns(:question).user).to eq @user
+        end
   	end
 
     context 'in fail context  -- ' do

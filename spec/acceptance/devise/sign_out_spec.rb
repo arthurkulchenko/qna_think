@@ -9,5 +9,6 @@ I want to log out
   scenario 'sign out' do
     sign_in(user)
     sign_out
+    expect(page).to have_content 'Signed out successfully.'
   end
 end

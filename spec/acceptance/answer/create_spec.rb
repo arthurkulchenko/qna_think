@@ -8,7 +8,14 @@ feature 'answer a question', %q(
 
     given(:question){ create(:question)  }
     given(:user){ create(:user) }
-    background { sharing_of_advice(question) }
+    background do
+      sign_in(user)
+      visit question_path(question)
+      click_on 'Offer solution'
+      fill_in 'Form for Answer', with: 'First of all you need ...'\
+                    ' and only then ... Best Regards and Good luck!'
+      click_on 'Provide an answer'
+    end
     
     scenario 'giving an answer' do
       expect(page).to have_content 'Thank you for you Answer'

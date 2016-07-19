@@ -8,5 +8,6 @@ feature 'logginig', %q(
     given(:user) { create(:user) }
     scenario 'sign in' do
       sign_in(user)
+      expect(page).to have_content 'Signed in successfully.'
     end
 end

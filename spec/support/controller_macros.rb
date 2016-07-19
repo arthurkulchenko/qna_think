@@ -14,6 +14,6 @@ module ControllerMacros
   end
 
   def current_user_in
-    current_user
+    subject.current_user
   end
 end

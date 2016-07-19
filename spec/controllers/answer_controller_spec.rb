@@ -31,23 +31,23 @@ RSpec.describe AnswerController, :type => :controller do
   end
 #---------------------------------------------#POST(CREATE)
   describe 'POST #create' do
-    context 'registred user try to create answer' do
-    end
-    context 'unregistred user try to create answer' do
-    end
-  	
+    	
     context 'seccess answer creating  --' do
       let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:answer) }
   	  it 'create new answer' do
   	    expect{ request }.to change(question.answers, :count).by(1)
   	  end
+
+      it 'relate to its user' do
+        request
+        expect(assigns(:answer).user).to eq @user
+      end
   
   	  it 'redirects to question_path' do
         request
         expect(response).to redirect_to question_path(question)
   	  end
-    context 'fail to creat answer' do
-    end
+    
     end
 
     context 'fail answer creating  --' do
