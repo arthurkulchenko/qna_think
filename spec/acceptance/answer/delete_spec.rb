@@ -19,8 +19,14 @@ feature 'delete answer', %q(
       expect(page).to_not have_content answer.content
     end
 
-    scenario 'deleteing answer' do
+    scenario 'sign_in deleteing answer' do
       sign_in(another_user)
+      visit question_path(question)
+      expect(page).to_not have_content 'Delete my Answer'
+      expect(page).to have_content answer.content
+    end
+
+    scenario 'not sign_in deleteing answer' do
       visit question_path(question)
       expect(page).to_not have_content 'Delete my Answer'
       expect(page).to have_content answer.content
