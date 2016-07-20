@@ -16,7 +16,7 @@ class AnswerController < ApplicationController
   	@answer = @question.answers.new(answer_params)
     @answer.user = current_user
   	if @answer.save
-      redirect_to question_path(@question), notice: 'Thank you for you Answer'
+      redirect_to questions_path(@question), notice: 'Thank you for you Answer'
     else
       # redirect_to :back, notice: err_any?(@answer)
       render :new

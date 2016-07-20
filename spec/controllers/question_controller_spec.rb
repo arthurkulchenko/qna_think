@@ -93,7 +93,7 @@ RSpec.describe QuestionController, :type => :controller do
       it 'redirects to index' do
         question
         request
-        expect(response).to redirect_to question_index_path
+        expect(response).to redirect_to questions_path
       end
     end
     context 'not owner try to delete question' do

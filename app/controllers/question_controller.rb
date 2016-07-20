@@ -13,7 +13,7 @@ class QuestionController < ApplicationController
   	@question = Question.new(question_params)
     @question.user = current_user
   	if @question.save
-      redirect_to question_path(@question), notice: 'Please wait for a while,' \
+      redirect_to questions_path(@question), notice: 'Please wait for a while,' \
                                                  ' someone will answer you soon.' 
     else
       render :new
@@ -26,7 +26,7 @@ class QuestionController < ApplicationController
 
   def destroy
     # @question = Question.find(params[:id])
-    redirect_to question_index_path if @question.destroy
+    redirect_to questions_path if @question.destroy
   end
 
   private

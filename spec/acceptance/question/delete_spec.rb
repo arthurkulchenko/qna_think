@@ -13,7 +13,7 @@ I want to delete my own question
     sign_in(user)
     visit question_path(question)
     click_on 'Delete my Question'
-    visit question_index_path
+    visit questions_path
     expect(page).to_not have_content question.content
   end
   scenario 'another auth user cant delete alian question' do
