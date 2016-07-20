@@ -15,6 +15,6 @@
 //= require turbolinks
 //= require_tree .
 $(document).ready(function () {
-  $('.new_answer').hide();
+  $('.new_answer').hide(); 
 })
     

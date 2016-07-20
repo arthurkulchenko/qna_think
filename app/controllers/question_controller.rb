@@ -21,12 +21,10 @@ class QuestionController < ApplicationController
   end
 
   def show
-    # @question = Question.find(params[:id])
   end
 
   def destroy
-    # @question = Question.find(params[:id])
-    redirect_to questions_path if @question.destroy
+    redirect_to question_index_path if @question.destroy
   end
 
   private

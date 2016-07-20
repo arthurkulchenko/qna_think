@@ -55,6 +55,7 @@ RSpec.describe QuestionController, :type => :controller do
         end
 
         it 'relate question with its user' do
+          request
           expect(assigns(:question).user).to eq @user
         end
   	end

@@ -11,11 +11,9 @@ module AcceptanceHelper
     click_on 'Log out'
   end
 # TODO hi
-  def registration(user)
+  def registration
     visit new_user_registration_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    fill_in 'Password confirmation', with: user.password
+    %Q(Email Password Password\ confirmation).split.each{|e| fill_in e, with: 'usered@example.fi'}
     click_on 'Sign up'
   end
 
