@@ -1,5 +1,7 @@
 class AnswerController < ApplicationController
-  before_filter :question_load
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :question_load
+  before_action :answer_load, only: [:show, :edit, :update, :destroy]
   
   def index
     @answers = @question.answers
@@ -11,16 +13,21 @@ class AnswerController < ApplicationController
 
   def create
   	@answer = @question.answers.new(answer_params)
+    @answer.user = current_user
   	if @answer.save
-      redirect_to question_path(@question)
+      redirect_to questions_path(@question), notice: 'Thank you for you Answer'
     else
-      # redirect_to :back, notice: err_any?(@answer)
       render :new
     end
   end
 
   def show
-  	@answer = @question.answers.where(id: params[:id]).first
+  end
+
+  def destroy
+    if @answer.delete
+      redirect_to @question, notice: 'Your answer deleted'
+    end
   end
 
   private
@@ -33,6 +40,8 @@ class AnswerController < ApplicationController
     params.require(:answer).permit(:content)
   end
 
-
+  def answer_load
+    @answer = @question.answers.find(params[:id])
+  end
 
 end

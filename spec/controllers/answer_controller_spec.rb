@@ -1,18 +1,12 @@
-require 'rails_helper'
-
-# def necessary_template
-#   @name = self.name #metadata #.description
-#   @index = @name.rindex('#')
-#   @necessary_template = @name[@index.next..-1].to_sym
-# end
-
 RSpec.describe AnswerController, :type => :controller do
-  let(:question) { create(:question) }
-  let(:answer) { create(:answer, question: question) }
-  let(:answers) { create_list(:answer, 3, question: question) }
-
+  let(:user) { create(:user) }
+  sign_in_user
+  let(:question) { create(:question, user: user) }
+  let(:answer) { create(:answer, question: question, user: user) }
+  let(:answers) { create_list(:answer, 3, question: question, user: user) }
+#---------------------------------------------#INDEX
   describe 'GET #index' do
-  	before { get :index, question_id: question }
+  	before { get :index, params: { question_id: question }, session: { user_id: 1 } }
   	
   	it 'renders template' do
   	  expect(response).to render_template :index
@@ -23,7 +17,7 @@ RSpec.describe AnswerController, :type => :controller do
   	end
 
   end
-
+#---------------------------------------------#NEW
   describe 'GET #new' do
     before { get :new, question_id: question }
 
@@ -35,19 +29,25 @@ RSpec.describe AnswerController, :type => :controller do
   	  expect(response).to render_template :new
   	end
   end
-
+#---------------------------------------------#POST(CREATE)
   describe 'POST #create' do
-  	
+    	
     context 'seccess answer creating  --' do
       let(:request) { post :create, id: :answer, question_id: question, answer: attributes_for(:answer) }
   	  it 'create new answer' do
   	    expect{ request }.to change(question.answers, :count).by(1)
   	  end
+
+      it 'relate to its user' do
+        request
+        expect(assigns(:answer).user).to eq @user
+      end
   
   	  it 'redirects to question_path' do
         request
         expect(response).to redirect_to question_path(question)
   	  end
+    
     end
 
     context 'fail answer creating  --' do
@@ -63,7 +63,7 @@ RSpec.describe AnswerController, :type => :controller do
       end
     end
   end
-
+#---------------------------------------------#SHOW
   describe 'GET #show' do
   	before { get :show, id: answer ,question_id: question }
   	
@@ -74,5 +74,30 @@ RSpec.describe AnswerController, :type => :controller do
   	it 'recive instance' do
   	  expect(assigns(:answer)).to eq answer
   	end
+  end
+
+  #---------------------------------------------DELETE
+  describe 'DELETE #destroy' do
+    # let(:answer){ create(:answer, user: user) }
+    let(:request){ delete :destroy, question_id: question, id: answer }
+    let(:another_user){ create(:user, email: 'another@email.rspec') }
+    context 'owner deleting his question' do
+      sign_in_user
+      it 'deletes question' do
+        answer
+        expect{ request }.to change(Answer, :count).by(-1)
+      end
+
+      it 'redirects to question' do
+        request
+        expect(response).to redirect_to question_path(question)
+      end
+    end
+    context 'not owner try to delete question' do
+      sign_in_user(:another_user)
+      it 'do not delete questoin' do
+        expect{ request }.to_not change(Answer, :count)
+      end
+    end
   end
 end
