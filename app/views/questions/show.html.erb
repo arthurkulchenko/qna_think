@@ -1,2 +1,25 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+%h3 Question Title
+= @question.title
+%br
+%h3 Question Content
+= @question.content
+%br
+- if user_signed_in? && current_user.is_author_of?(@question)
+ = link_to 'Delete my Question', question_path(@question), method: :delete
+ %br
+%br
+%h3 Question Answers
+- @question.answers.each do |answer| 
+ = answer.content
+ - if user_signed_in? && current_user.is_author_of?(answer)
+  = link_to 'Delete my Answer', question_answer_path(@question, answer.id), method: :delete
+ %hr
+= link_to 'Offer solution', new_question_answer_path(@question)
+/ = link_to_function('Offer solution', "$(this).click($('.new_answer').fadeToggle())")
+
+.new_answer
+ %hr
+ = render template: 'answer/new'
+ %hr
+
+%h3 Question Show

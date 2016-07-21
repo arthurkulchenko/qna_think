@@ -1,2 +1,5 @@
-<h1>Answers#new</h1>
-<p>Find me in app/views/answers/new.html.erb</p>
+= form_for @question.answers.new, url: question_answer_index_path(@question), method: :post do |a|
+ = a.label :content, 'Form for Answer'
+ = a.text_field :content
+ = a.submit 'Provide an answer'
+%h3 new answer

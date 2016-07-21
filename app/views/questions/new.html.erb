@@ -1,2 +1,8 @@
-<h1>Questions#new</h1>
-<p>Find me in app/views/questions/new.html.erb</p>
+= form_for @question, url: question_index_path, method: :post do |q|
+  = q.label :title, 'Problem'
+  = q.text_field :title
+  = q.label :content, 'Description'
+  = q.text_field :content
+  = q.submit 'Ask for Help'
+%br
+%h3 Question new
