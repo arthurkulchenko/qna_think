@@ -24,8 +24,8 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    return unless @question.user == current_user
-    return unless @question.delete
+    return redirect_to @question unless @question.user == current_user
+    return redirect_to @question unless @question.delete
       redirect_to questions_path
   end
 
