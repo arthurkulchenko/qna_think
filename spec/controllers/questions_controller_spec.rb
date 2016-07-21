@@ -1,5 +1,5 @@
 RSpec.describe QuestionsController, :type => :controller do
-  let(:user){ create(:user) }
+  let!(:user){ create(:user) }
   let(:question){ create(:question, user: user) }
   let(:questions){ create_list(:question, 3) }
 #---------------------------------------------INDEX
@@ -90,8 +90,11 @@ RSpec.describe QuestionsController, :type => :controller do
         expect{ request }.to change(Question, :count).by(-1)
       end
 
-      it 'relates to its user' do
-        expect(question.user).to eq user
+      # it 'relates to its user' do
+      #   expect(question.user).to eq subject.current_user
+      # end
+      it 'relate question with its user' do
+        expect(subject.current_user).to eq question.user  #@user
       end
 
       it 'redirects to index' do

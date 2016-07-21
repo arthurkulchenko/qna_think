@@ -1,4 +1,5 @@
 module ControllerMacros
+
   def sign_in_user(user=nil)
     before do
       @user = user ? user : create(:user)
