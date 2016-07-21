@@ -88,14 +88,24 @@ RSpec.describe AnswersController, :type => :controller do
         expect{ request }.to change(Answer, :count).by(-1)
       end
 
+      it 'relates to its owner' do
+        answer
+        expect(answer.user).to eq user
+      end
+
       it 'redirects to question' do
         request
         expect(response).to redirect_to question_path(question)
       end
+
     end
     context 'not owner try to delete question' do
       sign_in_user(:another_user)
+      it 'relates to its user' do
+        expect(answer.user).to_not eq another_user
+      end
       it 'do not delete questoin' do
+        answer
         expect{ request }.to_not change(Answer, :count)
       end
     end

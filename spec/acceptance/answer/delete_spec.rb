@@ -32,12 +32,12 @@ feature 'delete answer', %q(
       expect(page).to have_content answer.content
     end
 
-    scenario 'unauth and alian users do not see del link' do
-      visit question_path(question)
-      expect(page).to_not have_content 'Delete my Answer'
-      sign_in(another_user)
-      visit question_path(question)
-      expect(page).to_not have_content 'Delete my Answer'
-    end
+    # scenario 'unauth and alian users do not see del link' do
+    #   visit question_path(question)
+    #   expect(page).to_not have_content 'Delete my Answer'
+    #   sign_in(another_user)
+    #   visit question_path(question)
+    #   expect(page).to_not have_content 'Delete my Answer'
+    # end
 
 end

@@ -81,25 +81,30 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do
-    let(:question){ create(:question, user: user) }
+    let!(:question){ create(:question, user: user) }
     let(:request){ delete :destroy, id: question }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his question' do
       sign_in_user
       it 'deletes question' do
-        question
         expect{ request }.to change(Question, :count).by(-1)
       end
 
+      it 'relates to its user' do
+        expect(question.user).to eq user
+      end
+
       it 'redirects to index' do
-        question
         request
         expect(response).to redirect_to questions_path
       end
     end
     context 'not owner try to delete question' do
       sign_in_user(:another_user)
-      it 'do not delete questoin' do
+      it 'relates to its user' do
+        expect(question.user).to_not eq another_user
+      end
+      it 'do not delete question' do
         expect{ request }.to_not change(Question, :count)
       end
     end
