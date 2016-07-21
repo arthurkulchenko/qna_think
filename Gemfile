@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'specific_install'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
 gem 'pg', '~> 0.18'
 gem 'sass-rails', '~> 5.0'
