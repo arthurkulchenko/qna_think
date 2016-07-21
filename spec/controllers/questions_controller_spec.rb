@@ -1,10 +1,10 @@
 RSpec.describe QuestionsController, :type => :controller do
   let!(:user){ create(:user) }
   let(:question){ create(:question, user: user) }
-  let(:questions){ create_list(:question, 3) }
 #---------------------------------------------INDEX
   describe 'GET #index' do
     before { get :index }
+    let(:questions){ create_list(:question, 3) }
 
     it 'assigns array of quesitons' do
       expect(assigns(:questions)).to match_array @questions
