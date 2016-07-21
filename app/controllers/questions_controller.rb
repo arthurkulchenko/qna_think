@@ -2,17 +2,17 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :question_load, only: [:show, :edit, :update, :destroy]
   def index
-  	@questions = Question.all
+    @questions = Question.all
   end
 
   def new
-  	@question = Question.new
+    @question = Question.new
   end
 
   def create
-  	@question = Question.new(question_params)
+    @question = Question.new(question_params)
     @question.user = current_user
-  	if @question.save
+    if @question.save
       redirect_to question_path(@question), notice: 'Please wait for a while,' \
                                                  ' someone will answer you soon.' 
     else
@@ -24,7 +24,9 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    redirect_to question_index_path if @question.destroy
+    return unless !question.user == current_user
+    return unless @question.delete
+      redirect_to questions_path
   end
 
   private

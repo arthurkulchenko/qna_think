@@ -6,6 +6,7 @@ feature 'create question', %q(
   I want to be able ask for help  -- ) do
   
   given(:user){ create(:user) }
+  given(:question){ create(:question) }
   background do
     sign_in(user)
     visit root_path
@@ -17,7 +18,7 @@ feature 'create question', %q(
   scenario 'asking for help' do
     expect(page).to have_content 'Please wait for a while,'\
                             ' someone will answer you soon.'
-    expect(page).to have_content 
+    expect(page).to have_content question.content
   end
   	
 end

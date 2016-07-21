@@ -8,13 +8,13 @@ class AnswersController < ApplicationController
   end
 
   def new
-  	@answer = @question.answers.new
+    @answer = @question.answers.new
   end
 
   def create
-  	@answer = @question.answers.new(answer_params)
+    @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-  	if @answer.save
+    if @answer.save
       redirect_to question_path(@question), notice: 'Thank you for you Answer'
     else
       render :new
@@ -25,15 +25,15 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    if @answer.delete
+    return unless @answer.user == current_user
+    return unless @answer.delete
       redirect_to @question, notice: 'Your answer deleted'
-    end
   end
 
   private
 
   def question_load
-  	@question = Question.find(params[:question_id])
+    @question = Question.find(params[:question_id])
   end
 
   def answer_params

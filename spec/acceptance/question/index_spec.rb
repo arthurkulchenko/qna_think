@@ -7,7 +7,6 @@ feature 'listing all question', %q(
 ) do
 
     given!(:questions) { create_list(:question, 2) }
-    # given(:answers) { create_list(:answer, 2, question_id: _question) }
 
     scenario ' indexing questions' do
       visit question_index_path
