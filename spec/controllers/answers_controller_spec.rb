@@ -43,10 +43,10 @@ RSpec.describe AnswersController, :type => :controller do
         expect(assigns(:answer).user).to eq @user
       end
   
-      # it 'redirects to question_path' do
-      #   request
-      #   expect(response).to redirect_to question_path(question)
-      # end
+      it 'renders answers create' do
+        request
+        expect(response).to render_template 'answers/create'
+      end
     
     end
 
