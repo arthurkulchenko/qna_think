@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    return redirect_to @question unless @answer.user == current_user
+    return redirect_to @question unless @answer.user_id == current_user.user_id
     return redirect_to @question unless @answer.delete
       redirect_to @question, notice: 'Your answer deleted'
   end
