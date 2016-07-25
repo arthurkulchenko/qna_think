@@ -64,7 +64,7 @@ RSpec.configure do |config|
   end
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.infer_spec_type_from_file_location!
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.
   config.mock_with :rspec do |mocks|

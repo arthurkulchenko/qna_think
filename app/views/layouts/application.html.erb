@@ -3,13 +3,11 @@
   <head>
     <title>QaThinknetikaApp</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  <%console%>
   <%= link_to "Log out", destroy_user_session_path, method: :delete if user_signed_in? %>
   <% if notice %>
     <p class="alert alert-success"><%= notice %></p>

@@ -11,7 +11,7 @@ feature 'showing question', %q(
     background { visit question_path(question) }
 
     scenario 'show question' do
-      %Q(#{question.title} #{question.content} Offer\ solution)
+      %Q(#{question.title} #{question.content})
               .split.each{ |i| expect(page).to have_content i }
     end
     scenario 'listing answers' do

@@ -14,18 +14,14 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-    if @answer.save
-      redirect_to question_path(@question), notice: 'Thank you for you Answer'
-    else
-      render :new
-    end
+    @answer.save
   end
 
   def show
   end
 
   def destroy
-    return redirect_to @question unless @answer.user_id == current_user.user_id
+    return redirect_to @question unless @answer.user_id == current_user.id
     return redirect_to @question unless @answer.delete
       redirect_to @question, notice: 'Your answer deleted'
   end
