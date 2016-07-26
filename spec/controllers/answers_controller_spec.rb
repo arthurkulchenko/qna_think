@@ -34,7 +34,8 @@ RSpec.describe AnswersController, :type => :controller do
   
     end
   end
-
+#---------------------------------------------UPDATE
+  describe 'UPDATE '
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do
     sign_in_user
