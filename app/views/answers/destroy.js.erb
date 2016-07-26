@@ -1,3 +1,5 @@
 // $('.answer').children('a').click(function () {
 //     $(this).parent('.answer').remove();
 // });
+$('.answers').html('<%= j render @question.answers %>');
+$('.edit_answer_form').hide();

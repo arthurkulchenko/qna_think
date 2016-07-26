@@ -8,10 +8,6 @@
  = link_to 'Delete my Question', @question, method: :delete
  %br
 %br
-%h3 Question Answers
-.answers
- = render @question.answers
- %hr
 .new_answer
  %hr
  = form_for [@question, @question.answers.new], remote: true do |a|
@@ -20,4 +16,8 @@
   = a.text_field :content
   %br
   = a.submit 'Provide an answer'
+ %hr
+%h3 Question Answers
+.answers
+ = render @question.answers
  %hr

@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    flash[:notice] = 'Your Answer deleted' if @answer.delete
+    @answer.delete
   end
 
   private
