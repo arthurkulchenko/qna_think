@@ -79,6 +79,33 @@ RSpec.describe QuestionsController, :type => :controller do
       end
     end
   end
+#---------------------------------------------UPDATE
+  describe 'PATCH #update' do
+    sign_in_user
+    let!(:question){ create(:question, user: @user) }
+    let(:request) { patch :update, id: question, question: attributes_for(:question, content: "UNIQ"), format: :js }
+    context 'successful' do
+      it 'recive instance' do
+        expect(assigns(:question)).to eq @question
+      end
+      it 'relates to its owner' do
+        expect(subject.current_user).to eq question.user
+      end
+      it 'patching' do
+        request
+        question.reload
+        expect(question.content).to eq "UNIQ"
+      end
+    end
+    context 'fail' do
+      let(:request) { patch :update, id: question, question: attributes_for(:with_wrong_values), format: :js }
+      it 'do not patching' do
+        request
+        question.reload
+        expect(question.content).to_not eq "UNIQ"
+      end
+    end
+  end
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do
     sign_in_user

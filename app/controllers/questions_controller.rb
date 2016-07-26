@@ -24,6 +24,10 @@ class QuestionsController < ApplicationController
   def show
   end
 
+  def update
+    @question.update(question_params)
+  end
+
   def destroy
     redirect_to questions_path, notice: 'Your Question is deleted' if @question.delete
     # return redirect_to @question unless @question.user_id == current_user.id
