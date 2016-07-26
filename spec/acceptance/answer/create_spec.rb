@@ -17,12 +17,12 @@ feature 'answer a question', %q(
       click_on 'Provide an answer'
     end
     
-    scenario 'giving an answer' do
-      expect(page).to have_content 'Thank you for you Answer'
-      expect(page).to have_link 'Offer solution'
+    scenario 'giving an answer', js: true do
+      expect(page).to have_content 'First of all you need ...'\
+                    ' and only then ... Best Regards and Good luck!'
     end
     
-    scenario 'answer apears after its create' do
+    scenario 'answer apears after its create', js: true do
       expect(page).to have_content 'First of all you need ...'\
                   ' and only then ... Best Regards and Good luck!'
     end
