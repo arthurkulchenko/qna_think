@@ -14,18 +14,18 @@ feature '', %q(
   scenario 'auth user' do
     sign_in(user)
     visit question_path(question)
-    expect(page).to have_content 'Edit answer'
+    expect(page).to have_content 'Edit Answer'
   end
 
   scenario 'not owner user' do
     sign_in(another_user)
     visit question_path(question)
-    expect(page).to_not have_content 'Edit answer'
+    expect(page).to_not have_content 'Edit Answer'
   end
 
   scenario 'not auth user' do
     visit question_path(question)
-    expect(page).to_not have_content 'Edit answer'
+    expect(page).to_not have_content 'Edit Answer'
   end
 	
 end

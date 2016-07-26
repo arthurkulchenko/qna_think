@@ -4,3 +4,6 @@
 $(document).ready () ->
  $('.answer').children('a').click () ->
   $(this).parent('.answer').remove()
+ $('.edit_answer_form').hide()
+ $('.edit_answer_link').click () ->
+  $(this).parent('.answer').children('.edit_answer_form').fadeIn()

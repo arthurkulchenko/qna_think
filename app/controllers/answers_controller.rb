@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :question_load
-  before_action :answer_load, :authorship_verification, only: [:update, :destroy]
+  before_action :answer_load, :authorship_verification, only: [:edit, :update, :destroy]
   
   def index
     @answers = @question.answers
@@ -15,6 +15,9 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     @answer.save
+  end
+
+  def edit
   end
 
   def update
