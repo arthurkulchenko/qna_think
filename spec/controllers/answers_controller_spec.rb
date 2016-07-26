@@ -80,7 +80,7 @@ RSpec.describe AnswersController, :type => :controller do
     sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:answer){ create(:answer, question: question, user: @user) }
-    let(:request){ delete :destroy, question_id: question, id: answer }
+    let(:request){ delete :destroy, question_id: question, id: answer, format: :js }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his question' do
       it 'deletes question' do
@@ -91,10 +91,10 @@ RSpec.describe AnswersController, :type => :controller do
         expect(subject.current_user).to eq answer.user
       end
 
-      it 'redirects to question' do
-        request
-        expect(response).to redirect_to question_path(question)
-      end
+      # it 'redirects to question' do
+      #   request
+      #   expect(response).to redirect_to question_path(question)
+      # end
 
     end
     context 'not owner try to delete question' do

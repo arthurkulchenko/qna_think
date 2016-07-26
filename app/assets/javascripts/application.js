@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-    
+// $(document).ready(function () {
+//   $('.answer').children('a').click(function () {
+//     $(this).parent('.answer').remove();
+//   });
+// })

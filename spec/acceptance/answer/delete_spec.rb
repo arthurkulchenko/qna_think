@@ -11,33 +11,24 @@ feature 'delete answer', %q(
     given!(:question){ create(:question, user: user) }
     given!(:answer){ create(:answer, question: question, user: user) }
 
-    scenario 'deleteing answer' do
+    scenario 'deleting answer', js: true do
       sign_in(user)
       visit question_path(question)
       click_on 'Delete my Answer'
-      expect(page).to have_content 'Your answer deleted'
       expect(page).to_not have_content answer.content
     end
 
-    scenario 'sign_in deleteing answer' do
+    scenario 'sign_in deleteing answer', js: true do
       sign_in(another_user)
       visit question_path(question)
       expect(page).to_not have_content 'Delete my Answer'
       expect(page).to have_content answer.content
     end
 
-    scenario 'not sign_in deleteing answer' do
+    scenario 'not sign_in deleteing answer', js: true do
       visit question_path(question)
       expect(page).to_not have_content 'Delete my Answer'
       expect(page).to have_content answer.content
     end
-
-    # scenario 'unauth and alian users do not see del link' do
-    #   visit question_path(question)
-    #   expect(page).to_not have_content 'Delete my Answer'
-    #   sign_in(another_user)
-    #   visit question_path(question)
-    #   expect(page).to_not have_content 'Delete my Answer'
-    # end
 
 end

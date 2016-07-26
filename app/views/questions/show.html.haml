@@ -5,7 +5,7 @@
 = @question.content
 %br
 - if user_signed_in? && current_user.is_author_of?(@question)
- = link_to 'Delete my Question', question_path(@question), method: :delete
+ = link_to 'Delete my Question', @question, method: :delete
  %br
 %br
 %h3 Question Answers
@@ -21,4 +21,3 @@
   %br
   = a.submit 'Provide an answer'
  %hr
-%h3 Question Show

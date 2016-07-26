@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
   private
   
   def authorship_verification
-    redirect_to @question, notice: "You can't delete this Question" unless @question.user_id == current_user.id
+    redirect_to @question, notice: "You can't modify this Question" unless @question.user_id == current_user.id
   end
 
   def question_params
