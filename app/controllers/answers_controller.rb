@@ -2,6 +2,7 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :question_load
   before_action :answer_load, only: [:show, :edit, :update, :destroy]
+  before_action :authorship_verification, only: [:destroy]
   
   def index
     @answers = @question.answers
@@ -21,12 +22,17 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    return redirect_to @question unless @answer.user_id == current_user.id
-    return redirect_to @question unless @answer.delete
-      redirect_to @question, notice: 'Your answer deleted'
+    flash[:notice] = 'Your Answer deleted' if @answer.delete
+    # return redirect_to @question unless @answer.user_id == current_user.id
+    # return redirect_to @question unless @answer.delete
+    #   redirect_to @question, notice: 'Your answer deleted'
   end
 
   private
+
+  def authorship_verification
+    redirect_to @question, notice: "You can't delete this Answer" unless @answer.user_id == current_user.id
+  end
 
   def question_load
     @question = Question.find(params[:question_id])

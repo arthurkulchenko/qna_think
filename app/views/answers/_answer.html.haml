@@ -2,4 +2,4 @@
  = answer.content
  %br
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
-  = link_to 'Delete my Answer', question_answer_path(@question, answer.id), method: :delete
+  = link_to 'Delete my Answer', [@question, answer], method: :delete

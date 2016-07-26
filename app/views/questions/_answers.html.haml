@@ -1,6 +1,0 @@
-- @question.answers.each do |answer|
- = answer.content
- %br
- - if user_signed_in? && current_user.is_author_of?(answer)
-  = link_to 'Delete my Answer', question_answer_path(@question, answer.id), method: :delete
- %br

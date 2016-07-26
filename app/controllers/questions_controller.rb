@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :question_load, only: [:show, :edit, :update, :destroy]
+  before_action :authorship_verification, only: [:destroy]
   def index
     @questions = Question.all
   end
@@ -24,12 +25,18 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    return redirect_to @question unless @question.user_id == current_user.id
-    return redirect_to @question unless @question.delete
-      redirect_to questions_path
+    redirect_to questions_path, notice: 'Your Question is deleted' if @question.delete
+    # return redirect_to @question unless @question.user_id == current_user.id
+    # return redirect_to @question unless @question.delete
+    #   redirect_to questions_path
   end
 
   private
+  
+  def authorship_verification
+    redirect_to @question, notice: "You can't delete this Question" unless @question.user_id == current_user.id
+  end
+
   def question_params
     params.require(:question).permit(:title, :content)	
   end
