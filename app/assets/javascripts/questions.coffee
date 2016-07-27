@@ -9,8 +9,8 @@ jQuery ->
   $('.answer').children('.delete_answer_link').click () ->
    $(this).parent('.answer').remove()
  
-  $('.answer').children('.edit_answer_link').click () ->
-   $(this).closest('.edit_answer_form').fadeToggle()
+#  $('.answer').children('.edit_answer_link').click () ->
+#   $(this).closest('.edit_answer_form').fadeToggle()
  
-  $('.div').click () ->
-   $(this).fadeOut
+#  $('.div').click () ->
+#   $(this).fadeOut
