@@ -57,10 +57,12 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'capybara-webkit'
-  # gem 'selenium-webdriver'
+  gem 'selenium-webdriver'
+  gem 'poltergeist'
 end
 
 group :development do
+  gem 'quiet_assets', '~> 1.1'
   gem 'listen', '~> 3.0.5'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '~> 3.0' 

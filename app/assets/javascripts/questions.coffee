@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
  $(document).ready () ->
+  $('.edit_question_form').hide()
   $('.edit_answer_form').hide()
  
   $('.answer').children('.delete_answer_link').click () ->
