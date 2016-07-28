@@ -1,11 +1,11 @@
 = form_for @question do |q|
   = q.label :title, 'Problem'
   %br
-  = q.text_field :title
+  = q.text_field :title, :onclick => 'this.select();'
   %br
   = q.label :content, 'Description'
   %br
-  = q.text_field :content
+  = q.text_field :content, :onclick => 'this.select();'
   %br
   = q.submit 'Ask for Help'
   %br

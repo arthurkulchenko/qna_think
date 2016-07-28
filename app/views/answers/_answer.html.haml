@@ -4,8 +4,8 @@
   - if answer.persisted? && user_signed_in? && current_user.is_author_of?(@question)
    = form_for answer, url: question_answer_path(@question, answer), remote: true do |f|
     = f.label :best_answer, 'Is this Answer The Best?'
-    = f.check_box :best_answer
-    = f.submit 'Yes'
+    = f.check_box :best_answer, :onclick => '$(this).parent("form").submit();'
+    / = f.submit 'Yes'
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
   = link_to_function("Edit Answer", "$(this).parent('.answer').children('.edit_answer_form').fadeToggle()", class: 'appear_link')
   / = link_to 'Edit Answer', '#', class: 'edit_answer_link', data: { answer_id: answer.id }
@@ -13,7 +13,7 @@
    = form_for answer, url: question_answer_path(@question, answer), remote: true do |f|
     = f.label :content, "Update Form"
     %br
-    = f.text_field :content
+    = f.text_field :content, :onclick => 'this.select();'
     %br
     = f.submit 'Update an answer'
   %br
