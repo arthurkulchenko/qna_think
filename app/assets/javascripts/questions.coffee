@@ -3,14 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
  $(document).ready () ->
-  $('.edit_question_form').hide()
-  $('.edit_answer_form').hide()
+#  $('.edit_question_form').hide()
+#  $('.edit_answer_form').hide()
  
   $('.answer').children('.delete_answer_link').click () ->
    $(this).parent('.answer').remove()
- 
-#  $('.answer').children('.edit_answer_link').click () ->
-#   $(this).closest('.edit_answer_form').fadeToggle()
- 
-#  $('.div').click () ->
-#   $(this).fadeOut

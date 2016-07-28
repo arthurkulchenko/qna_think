@@ -6,11 +6,12 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  
+<%console%>
   <body>
   <%= link_to "Questions index", root_path %>
   <%= link_to "Questions new", new_question_path %>
   <br>
+  <%= link_to "Log in", new_user_session_path if !user_signed_in? %>
   <%= link_to "Log out", destroy_user_session_path, method: :delete if user_signed_in? %>
   <% if notice %>
     <p class="alert alert-success"><%= notice %></p>

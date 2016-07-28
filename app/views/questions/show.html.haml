@@ -30,5 +30,6 @@
   %hr
  %h3 Question Answers
  .answers
-  = render @question.answers
+  = render @question.answers.best_first
+  / sort_by {|answer| answer.best_answer ? 0 : 1 }
   %hr

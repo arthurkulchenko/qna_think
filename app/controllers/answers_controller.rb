@@ -39,7 +39,7 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:content)
+    params.require(:answer).permit(:content, :best_answer)
   end
 
   def answer_load

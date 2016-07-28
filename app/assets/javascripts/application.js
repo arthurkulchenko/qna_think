@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require_tree .
 // $(document).ready(function () {
+  // $('.edit_question_form').hide();
+  // $('.edit_answer_form').hide();
 //   $('.answer').children('a').click(function () {
 //     $(this).parent('.answer').remove();
 //   });
