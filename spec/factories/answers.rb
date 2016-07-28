@@ -1,15 +1,13 @@
 FactoryGirl.define do
-  sequence(:content) { |n| "Content#{n}" }
+  sequence(:content) { |n| "sequenced content -- #{n}" }
+  sequence(:best_answer) { |n| true if n > 2 }
   factory :answer do
     content
     question
     user
+    best_answer
   end
-  # factory :new_answer, class: Answer do
-  #   content "UNIQ"
-  #   question
-  #   user
-  # end
+
   factory :with_wrong_values, class: Answer do
     content nil
     question
