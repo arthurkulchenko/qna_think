@@ -14,15 +14,11 @@ class Answer < ApplicationRecord
 
   def check_of_best
     if it_already_have_best_answer?
-      if id == @best_answer.id
-        @best_answer.save
-        save
+      if ( id == @best_answer.id ) || ( best_answer == false )
       else
         @best_answer.best_answer = false
         @best_answer.save
-        save
-      end
-    else
+      end     
     end
   end
   
