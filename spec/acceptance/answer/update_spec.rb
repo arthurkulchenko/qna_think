@@ -22,14 +22,14 @@ feature '', %q(
                     ' and only then ... Best Regards and Good luck!'
     click_on 'Provide an answer'
     expect(page).to have_content 'Edit Answer'
-    
-    click_on "Edit Answer #{question.answers[0].id}"
-    expect(page).to have_content "Update Form #{question.answers[0].id}"
-    # save_and_open_page
-    fill_in "Update Form #{question.answers[0].id}", with: 'Hello Iam Lindsay Lohan'
-    click_on 'Update an answer'
-    sleep 900
-    expect(page).to have_content 'Hello Iam Lincy Lohan'
+    save_and_open_page
+    click_on "Edit Answer"
+    within '.answers' do
+      fill_in "Update Form", with: 'Hello Iam Lindsay Lohan'
+      click_on 'Update an answer'
+      expect(page).to have_content 'Hello Iam Lindsay Lohan'
+    end
+    # sleep 900
 
   end
 
