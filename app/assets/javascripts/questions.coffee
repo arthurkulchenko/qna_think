@@ -3,17 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
  $(document).ready () ->
-#  $('.edit_question_form').hide()
-#  $('.edit_answer_form').hide()
-
-#  check_cheker = (check_box) ->
-#    if check_box.prop("checked") == previose_stance
-#    else
-#     check_box.parent('form').submit()
-#    end
- 
   $('.answer').children('.delete_answer_link').click () ->
    $(this).parent('.answer').remove()
+
+#  // $('.answer').children('.appear_link').click () ->
+#  //  $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
   
 #  $('.answer').children('.vote_answer_form').children('#answer_best_answer').click () ->
 #    alert('hi')
