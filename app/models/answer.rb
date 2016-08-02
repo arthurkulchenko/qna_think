@@ -11,7 +11,8 @@ class Answer < ApplicationRecord
   private
   
   def it_already_have_best_answer?
-    @best_answer = question.answers.map{|i| i if i.best_answer == true }.compact.first
+    @best_answer = question.answers.where(best_answer: true).first
+    # @best_answer = question.answers.map{|i| i if i.best_answer == true }.compact.first
   end
 
   def check_of_best
