@@ -30,15 +30,12 @@ class QuestionsController < ApplicationController
 
   def destroy
     redirect_to questions_path, notice: 'Your Question is deleted' if @question.delete
-    # return redirect_to @question unless @question.user_id == current_user.id
-    # return redirect_to @question unless @question.delete
-    #   redirect_to questions_path
   end
 
   private
   
   def authorship_verification
-    redirect_to @question, notice: "You can't modify this Question" unless @question.user_id == current_user.id
+    redirect_to @question, notice: "You can't modify this Question" unless current_user.is_author_of?(@question)
   end
 
   def question_params

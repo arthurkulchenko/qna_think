@@ -31,7 +31,7 @@ class AnswersController < ApplicationController
   private
 
   def authorship_verification
-    redirect_to @question, notice: "You can't modify this Answer" unless @answer.user_id == current_user.id
+    redirect_to @question, notice: "You can't modify this Answer" unless current_user.is_author_of?(@answer)
   end
 
   def question_load
