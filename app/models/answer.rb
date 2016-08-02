@@ -7,6 +7,8 @@ class Answer < ApplicationRecord
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
+
+  private
   
   def it_already_have_best_answer?
     @best_answer = question.answers.map{|i| i if i.best_answer == true }.compact.first

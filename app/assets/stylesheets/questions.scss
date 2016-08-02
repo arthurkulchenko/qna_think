@@ -7,3 +7,11 @@
 .edit_answer_form{
   display:none;	
 }
+.button{
+  margin: 0px auto;
+  cursor: default;
+  width: 90px;
+  height: 20px;
+  background: yellow;
+  z-index: -1;
+}
