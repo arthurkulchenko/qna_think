@@ -12,6 +12,23 @@
   cursor: default;
   width: 90px;
   height: 20px;
-  background: yellow;
+  border: solid 1px black;
   z-index: -1;
+  padding: 5px;
+  p{
+    margin: 0px;
+  }
 }
+
+.button-answer{
+    margin: 0px auto;
+    cursor: default;
+    width: 90px;
+    height: 20px;
+    border: solid 1px black;
+    z-index: -1;
+    padding: 5px;
+    p{
+      margin: 0px;
+  }
+  }

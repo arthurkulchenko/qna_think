@@ -10,23 +10,11 @@ class Answer < ApplicationRecord
 
   private
   
-  def it_already_have_best_answer?
-    @best_answer = question.answers.where(best_answer: true).first
-  end
-
   def check_of_best
-    return unless it_already_have_best_answer?
+    return unless @best_answer = question.answers.where(best_answer: true).first
     return unless ( id != @best_answer.id ) || ( best_answer )
       @best_answer.best_answer = false
       @best_answer.save
-    # if it_already_have_best_answer?
-    #   if ( id != @best_answer.id ) || ( best_answer )
-    #     @best_answer.best_answer = false
-    #     @best_answer.save
-    #   end     
-    # end
-
-
   end
   
 end

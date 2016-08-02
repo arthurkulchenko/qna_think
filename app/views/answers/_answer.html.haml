@@ -10,7 +10,7 @@
 
     = f.submit 'Yes'
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
-  %div.button
+  %div.button-answer
    %p Edit Answer
   .edit_answer_form
    = form_for answer, url: question_answer_path(@question, answer), remote: true do |f|
