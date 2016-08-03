@@ -11,16 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
 $(document).ready(function () {
-  // function check_cheker() {
-  //   $(this).parent('form').submit;
-  // };
-  // $('.edit_question_form').hide();
-  // $('.edit_answer_form').hide();
-//   $('.answer').children('a').click(function () {
-//     $(this).parent('.answer').remove();
-//   });
+  
 })
+

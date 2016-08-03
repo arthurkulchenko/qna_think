@@ -1,3 +1,7 @@
-$('.answers').html('<%= j render @question.answers %>');
+// $('.answers').html('<%= j render @question.answers.best_first %>');
+$('.answers').append('<%= j render @answer%>')
 $('#answer_content').val('');
-$('.edit_answer_form').hide();
+// $('.edit_answer_form').hide();
+// $('.button-answer').click(function() {
+//  $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
+// });

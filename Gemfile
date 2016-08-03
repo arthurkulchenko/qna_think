@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5.x'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

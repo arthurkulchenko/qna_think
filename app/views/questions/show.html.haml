@@ -3,7 +3,7 @@
  .question_content
   %h3= @question.content
  - if user_signed_in? && current_user.is_author_of?(@question)
-  / = link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
+  =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
   %div.button
    %p Edit Question
   .edit_question_form
@@ -28,5 +28,7 @@
   %hr
  %h3 Question Answers
  .answers
-  = render @question.answers.best_first
+  - if @question.answers.best_first.first.best_answer
+   = render @question.answers.best_first.first
+  = render @question.answers.where(best_answer: false)
   %hr
