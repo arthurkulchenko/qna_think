@@ -4,11 +4,11 @@
   - if answer.persisted? && user_signed_in? && current_user.is_author_of?(@question)
    = form_for answer, url: question_answer_path(@question, answer), remote: true do |f|
     = f.label :best_answer, 'Is this Answer The Best?'
-
-    = f.check_box :best_answer
+    .answer-check-box
+     = f.check_box :best_answer
     / , :onclick => '$(this).parent("form").submit();'
-
-    = f.submit 'Yes'
+    .submit-button
+     / = f.submit 'Yes'
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
   %div.button-answer
    %p Edit Answer

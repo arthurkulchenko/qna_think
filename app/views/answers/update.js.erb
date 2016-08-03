@@ -1,5 +1,8 @@
 $('.answers').html('<%= j render @question.answers.best_first %>');
-$('.edit_answer_form').hide();
+// $('.answers').children('.answer').first().prepend('<%= j render @question.answers.best_first.first %>');
 $('.button-answer').click(function() {
-   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
+   $(this).parent('.answer').children('.edit_answer_form').fadeToggle();
 });
+$('.answer-check-box').click(function (){
+    $(this).parent('form').submit();
+})

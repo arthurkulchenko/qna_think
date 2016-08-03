@@ -8,7 +8,33 @@ feature '', %q(
   
   given(:user){create(:user)}
   given(:another_user){ create(:user) }
-  given!(:question){ create(:question) }
+  given!(:question){ create(:question, user: user) }
+  given!(:answers){ create_list(:answer, 3, question: question) }
+
+
+  scenario 'question owner choose best answer', js: true do
+    sign_in(user)
+    visit question_path(question)
+    
+    fill_in 'Form for Answer', with: 'First'
+    click_on 'Provide an answer'
+      
+      visit question_path(question)
+      check('Is this Answer The Best?')
+    save_and_open_page
+    within '.answers' do
+      fill_in 'Form for Answer', with: 'second'
+      
+      click_on 'Provide an answer'
+    end
+    
+    # expect(page).to have_content "Question Answers #{question.answers[0].content}"
+    
+
+    # expect(page).to have_content 
+
+
+  end
 
   scenario 'auth user', js: true do
     sign_in(user)
@@ -16,7 +42,7 @@ feature '', %q(
     fill_in 'Form for Answer', with: 'First of all you need ...'\
                     ' and only then ... Best Regards and Good luck!'
     click_on 'Provide an answer'
-    click_on "Edit Answer"
+    # click_on "Edit Answer"
     within '.answers' do
       fill_in "Update Form", with: 'Hello Iam Lindsay Lohan'
       click_on 'Update an answer'

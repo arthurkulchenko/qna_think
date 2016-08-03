@@ -1,5 +1,4 @@
 $('.answers').html('<%= j render @question.answers.best_first %>');
-// $('.edit_answer_form').hide();
-// $('.button-answer').click(function() {
-//    $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-// });
+$('.button-answer').click(function() {
+   $(this).parent('.answer').children('.edit_answer_form').fadeToggle();
+});

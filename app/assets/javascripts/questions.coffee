@@ -1,42 +1,81 @@
 jQuery ->
- $(document).ready () ->
-  $('.answer').children('.delete_answer_link').click () ->
-   $(this).parent('.answer').remove()
 
- $('.button-answer').click () ->
-  $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-
- $('.button').click () ->
-  $(this).parent('.question').children('.edit_question_form').fadeToggle()
-
-checking_box = ->
- $('.vote_answer_form').children('input[type=checkbox]').click () ->
-  $(this).parent('form').submit()
-
-$(document).on "turbolinks:update", () ->
- alert 'hi'
- $('.vote_answer_form').children('input[type=checkbox]').click () ->
-  $(this).parent('form').submit()
-
-
- $(document).on "turbolinks:load", (e) ->
-  e.preventDefault()
-  $('.button-answer').click () ->
-   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-
+ $(document).on "turbolinks:load", () ->
+#
+#  $('.answer').children('.delete_answer_link').click () ->
+#   $(this).parent('.answer').fadeOut()
+#   $(this).parent('.answer').remove()
+#
+#  $('.button-answer').click () ->
+#   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
+#
   $('.button').click () ->
    $(this).parent('.question').children('.edit_question_form').fadeToggle()
 
+#------------------------------------------------------------------------------------
  $(document).on "turbolinks:update", () ->
-  e.preventDefault()
-
+ 
+  $('.answer').children('.delete_answer_link').click () ->
+   $(this).parent('.answer').fadeOut()
+   $(this).parent('.answer').remove()
+ 
   $('.button-answer').click () ->
    $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-
+ 
   $('.button').click () ->
    $(this).parent('.question').children('.edit_question_form').fadeToggle()
 
-  $('.edit_answer_form').hide();
+#------------------------------------------------------------------------------------
+$(document).on "ajax:complete", () ->
+# $('.button-answer').click () ->
+#   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
+
+#  $('.button').click () ->
+#   $(this).parent('.question').children('.edit_question_form').fadeToggle()
+
+
+
+
+
+
+
+
+
+
+#------------------------------------------------------------------------------------
+# $(document).on "turbolinks:request-start", (e) ->
+#  e.preventDefault()
+#  $('.button-answer').click () ->
+#   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
+#  $('.button').click () ->
+#   $(this).parent('.question').children('.edit_question_form').fadeToggle()
+#  $('.edit_answer_form').hide();
+
+
+#------------------------------------------------------------------------------------
+# $(document).ready () ->
+#  $('.answer').children('.delete_answer_link').click () ->
+#   $(this).parent('.answer').fadeOut()
+#   $(this).parent('.answer').remove()
+
+# $('.edit_answer_form').hide();
+# $('.edit_question_form').hide();
+
+
+# $('.button-answer').click () ->
+#  $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
+#
+# $('.button').click () ->
+#  $(this).parent('.question').children('.edit_question_form').fadeToggle()
+
+# $(document).on "turbolinks:update", () ->
+#  $('.vote_answer_form').children('input[type=checkbox]').click () ->
+#   $(this).parent('form').submit()
+
+
+#checking_box = ->
+# $('.vote_answer_form').children('input[type=checkbox]').click () ->
+#  $(this).parent('form').submit()
 
 
 #  $('.answer').children('.vote_answer_form').children('#answer_best_answer').click () ->
