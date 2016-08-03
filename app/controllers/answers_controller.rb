@@ -1,15 +1,8 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  before_action :question_load
-  before_action :answer_load, :authorship_verification, only: [:edit, :update, :destroy]
-  
-  def index
-    @answers = @question.answers
-  end
-
-  def new
-    @answer = @question.answers.new
-  end
+  before_action :authenticate_user!
+  before_action :question_load, only: [:create]
+  before_action :special_loader_for_shallow_routes, only: [:update, :delete]
+  before_action :authorship_verification, only: [:update, :delete]
 
   def create
     @answer = @question.answers.new(answer_params)
@@ -17,14 +10,13 @@ class AnswersController < ApplicationController
     @answer.save
   end
 
-  def edit
-  end
-
   def update
     @answer.update(answer_params)
   end
 
   def destroy
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
     @answer.delete
   end
 
@@ -42,8 +34,10 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:content, :best_answer)
   end
 
-  def answer_load
-    @answer = @question.answers.find(params[:id])
+  def special_loader_for_shallow_routes
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
   end
+
 
 end

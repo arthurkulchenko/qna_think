@@ -2,7 +2,7 @@
  %strong= answer.content
  .vote_answer_form
   - if answer.persisted? && user_signed_in? && current_user.is_author_of?(@question)
-   = form_for answer, url: question_answer_path(@question, answer), remote: true do |f|
+   = form_for answer, url: answer_path(answer), remote: true do |f|
     = f.label :best_answer, 'Is this Answer The Best?'
     .answer-check-box
      = f.check_box :best_answer
@@ -13,13 +13,13 @@
   %div.button-answer
    %p Edit Answer
   .edit_answer_form
-   = form_for answer, url: question_answer_path(@question, answer), remote: true do |f|
+   = form_for answer, url: answer_path(answer), remote: true do |f|
     = f.label :content, "Update Form"
     %br
     = f.text_field :content
     %br
     = f.submit 'Update an answer'
   %br
-  = link_to 'Delete my Answer', [@question, answer], method: :delete, remote: true, class: 'delete_answer_link'
+  = link_to 'Delete my Answer', answer_path(answer), method: :delete, remote: true, class: 'delete_answer_link'
   %br
   %br

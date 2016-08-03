@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   	                             sign_up: 'cmon_let_me_in' }
   root 'questions#index'
 
-  resources :questions do
+  resources :questions, shallow: true do
     resources :answers
   end
 end
