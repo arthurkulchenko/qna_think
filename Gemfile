@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'specific_install'
+
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
 gem 'pg', '~> 0.18'
 gem 'sass-rails', '~> 5.0'
@@ -10,10 +10,6 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5.x'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-# source 'https://rubygems.org'
 
 # group :standart do
   gem 'thin'
