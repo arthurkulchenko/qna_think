@@ -14,7 +14,5 @@ feature 'showing question', %q(
       %Q(#{question.title} #{question.content})
               .split.each{ |i| expect(page).to have_content i }
     end
-    scenario 'listing answers' do
-      answers.each { |a| expect(page).to have_content a.content }
-    end    
+
   end

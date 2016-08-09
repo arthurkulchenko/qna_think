@@ -6,12 +6,11 @@ feature 'listing of all answer wich '\
   As a regular user
   I want to see list of answers
   ) do
-  given(:question){ create(:question) }
-  given(:answers){ create_list(:answer, 3, question_id: question) }
-  scenario 'listing of answers' do
-    visit question_path(question)
-    question.answers.each do |answer|
-      expect(page).to have_content answer.content
+    given(:question){ create(:question) }
+    given(:answers){ create_list(:answer, 3, question: question) }
+    background { visit question_path(question) }
+    
+    scenario 'listing answers' do
+      question.answers.each { |a| expect(page).to have_content a.content }
     end
-  end
 end

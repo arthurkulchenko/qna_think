@@ -3,9 +3,14 @@
  .vote_answer_form
   - if answer.persisted? && user_signed_in? && current_user.is_author_of?(@question)
    = form_for answer, url: answer_path(answer), remote: true do |f|
-    = f.label :best_answer, 'Is this Answer The Best?'
     .answer-check-box
-     = f.check_box :best_answer
+     - if f.object.best_answer
+      #best-answer
+       = f.label :best_answer, 'Is this Answer The Best?'
+       = f.check_box :best_answer
+     - else
+      = f.label :best_answer, 'Is this Answer The Best?'
+      = f.check_box :best_answer
     / , :onclick => '$(this).parent("form").submit();'
     .submit-button
      / = f.submit 'Yes'

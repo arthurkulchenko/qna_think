@@ -22,6 +22,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @one_best_answer = @question.answers.best_first.first
   end
 
   def update

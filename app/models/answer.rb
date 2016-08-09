@@ -2,7 +2,7 @@ class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
 
-  validates :content, :user_id, presence: true
+  validates :content, presence: true
 
   before_update :check_of_best
 

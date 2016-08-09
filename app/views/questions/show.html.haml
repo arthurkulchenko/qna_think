@@ -26,9 +26,10 @@
    %br
    = a.submit 'Provide an answer'
   %hr
- %h3 Question Answers
+ %h2 Answers
  .answers
-  - if @question.answers.best_first.first.best_answer
-   = render @question.answers.best_first.first
+  - if @one_best_answer
+   - if @one_best_answer.best_answer
+    = render @one_best_answer
   = render @question.answers.where(best_answer: false)
  %hr

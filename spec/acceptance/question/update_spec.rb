@@ -8,11 +8,12 @@ feature '', %q(
   given(:user){create(:user)}
   given(:another_user){ create(:user) }
   given!(:question){ create(:question, user: user) }
+  given!(:answers){ create_list(:answer, 3, question: question) }
 
   scenario 'auth user', js: true do
     sign_in(user)
     visit question_path(question)
-    click_on "Edit Question"
+    # click_on "Edit Question"
     within '.edit_question_form' do
       fill_in "Update Form", with: 'Its corrected question'
       click_on 'Update a question'

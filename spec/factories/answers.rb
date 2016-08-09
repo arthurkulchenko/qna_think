@@ -1,6 +1,6 @@
 FactoryGirl.define do
   sequence(:content) { |n| "sequenced content -- #{n}" }
-  sequence(:best_answer) { |n| true if n > 2 }
+  sequence(:best_answer) { |n| n > 2 ? true : false }
   factory :answer do
     content
     question

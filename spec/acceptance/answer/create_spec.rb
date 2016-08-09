@@ -17,11 +17,6 @@ feature 'answer a question', %q(
       click_on 'Provide an answer'
     end
     
-    scenario 'giving an answer', js: true do
-      expect(page).to have_content 'First of all you need ...'\
-                    ' and only then ... Best Regards and Good luck!'
-    end
-    
     scenario 'answer apears after its create', js: true do
       expect(page).to have_content 'First of all you need ...'\
                   ' and only then ... Best Regards and Good luck!'

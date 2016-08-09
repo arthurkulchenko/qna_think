@@ -6,9 +6,11 @@ feature 'create question', %q(
   I want to be able ask for help  -- ) do
   
   given(:user){ create(:user) }
-  given(:question){ create(:question) }
+  given(:question){ create(:question, user: user) }
+  given!(:answers){ create_list(:answer, 3, question: question) }
   background do
     sign_in(user)
+    # visit question_path(question)
     visit root_path
     click_on 'Ask a question'
     fill_in 'Problem', with: 'ern Error: missing important thing code:234'
