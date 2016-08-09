@@ -13,18 +13,17 @@ gem 'jbuilder', '~> 2.0'
 
 # group :standart do
   gem 'thin'
-  gem 'sdoc', '~> 0.4.0', group: :doc
 # end
 
 # group :added do
-  gem 'normalize-rails', '~> 3.0.3'
+
   gem 'execjs'
   gem 'exception_notification', '~> 4.1', '>= 4.1.1'
   gem 'eventmachine'
-  gem 'i18n', '~> 0.7.0'
-  gem 'bcrypt', '~> 3.1.10'
+  gem 'i18n'
+  gem 'bcrypt'
   gem 'russian', '~> 0.6.0'
-  gem 'railties'
+  # gem 'railties'
 
   gem 'carrierwave'
   gem 'private_pub'
@@ -58,7 +57,6 @@ group :test do
 end
 
 group :development do
-  gem 'quiet_assets', '~> 1.1'
   gem 'listen', '~> 3.0.5'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '~> 3.0' 
