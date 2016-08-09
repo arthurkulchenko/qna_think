@@ -5,9 +5,10 @@ In order to delete question
 As a auth user
 I want to delete my own question
 )do
-  given(:user) { create(:user) }
+  given!(:user) { create(:user) }
   given(:one_more_user) { create(:user) }
-  given!(:question){ create(:question, user: user) }
+  given(:question){ create(:question, user: user) }
+  given(:answers){ create_list(:answer, 3, question: question) }
   
   scenario '***********only owner can delete question' do
     sign_in(user)

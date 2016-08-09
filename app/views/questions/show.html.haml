@@ -1,23 +1,35 @@
-%h3 Question Title
-= @question.title
-%br
-%h3 Question Content
-= @question.content
-%br
-- if user_signed_in? && current_user.is_author_of?(@question)
- = link_to 'Delete my Question', @question, method: :delete
+.question
+ %h3= @question.title
+ .question_content
+  %h3= @question.content
+ - if user_signed_in? && current_user.is_author_of?(@question)
+  =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
+  %div.button
+   %p Edit Question
+  .edit_question_form
+   = form_for @question, url: question_path(@question), remote: true do |f|
+    = f.label :content, "Update Form"
+    %br
+    = f.text_field :content
+    %br
+    = f.submit 'Update a question'
+  %br
+  = link_to 'Delete my Question', @question, method: :delete
+  %br
  %br
-%br
-%h3 Question Answers
-.answers
- = render @question.answers
- %hr
-.new_answer
- %hr
- = form_for [@question, @question.answers.new], remote: true do |a|
-  = a.label :content, 'Form for Answer'
-  %br
-  = a.text_field :content
-  %br
-  = a.submit 'Provide an answer'
+ .new_answer
+  %hr
+  = form_for [@question, @question.answers.new], remote: true do |a|
+   = a.label :content, 'Form for Answer'
+   %br
+   = a.text_field :content
+   %br
+   = a.submit 'Provide an answer'
+  %hr
+ %h2 Answers
+ .answers
+  - if @one_best_answer
+   - if @one_best_answer.best_answer
+    = render @one_best_answer
+  = render @question.answers.where(best_answer: false)
  %hr

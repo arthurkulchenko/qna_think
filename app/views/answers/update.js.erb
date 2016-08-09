@@ -1,0 +1,8 @@
+$('.answers').html('<%= j render @answer.answers_stack.best_first %>');
+// $('.answers').children('.answer').first().prepend('<%= j render @question.answers.best_first.first %>');
+$('.button-answer').click(function() {
+   $(this).parent('.answer').children('.edit_answer_form').fadeToggle();
+});
+$('.answer-check-box').click(function (){
+    $(this).parent('form').submit();
+})

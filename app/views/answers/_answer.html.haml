@@ -1,5 +1,30 @@
 .answer
- = answer.content
- %br
+ %strong= answer.content
+ .vote_answer_form
+  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(@question)
+   = form_for answer, url: answer_path(answer), remote: true do |f|
+    .answer-check-box
+     - if f.object.best_answer
+      #best-answer
+       = f.label :best_answer, 'Is this Answer The Best?'
+       = f.check_box :best_answer
+     - else
+      = f.label :best_answer, 'Is this Answer The Best?'
+      = f.check_box :best_answer
+    / , :onclick => '$(this).parent("form").submit();'
+    .submit-button
+     / = f.submit 'Yes'
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
-  = link_to 'Delete my Answer', [@question, answer], method: :delete, remote: true
+  %div.button-answer
+   %p Edit Answer
+  .edit_answer_form
+   = form_for answer, url: answer_path(answer), remote: true do |f|
+    = f.label :content, "Update Form"
+    %br
+    = f.text_field :content
+    %br
+    = f.submit 'Update an answer'
+  %br
+  = link_to 'Delete my Answer', answer_path(answer), method: :delete, remote: true, class: 'delete_answer_link'
+  %br
+  %br

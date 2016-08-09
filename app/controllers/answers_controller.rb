@@ -1,16 +1,8 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :question_load
-  before_action :answer_load, only: [:show, :edit, :update, :destroy]
-  before_action :authorship_verification, only: [:destroy]
-  
-  def index
-    @answers = @question.answers
-  end
-
-  def new
-    @answer = @question.answers.new
-  end
+  before_action :authenticate_user!
+  before_action :question_load, only: [:create]
+  before_action :special_loader_for_shallow_routes, only: [:update, :delete]
+  before_action :authorship_verification, only: [:update, :delete]
 
   def create
     @answer = @question.answers.new(answer_params)
@@ -18,20 +10,20 @@ class AnswersController < ApplicationController
     @answer.save
   end
 
-  def show
+  def update
+    @answer.update(answer_params)
   end
 
   def destroy
-    flash[:notice] = 'Your Answer deleted' if @answer.delete
-    # return redirect_to @question unless @answer.user_id == current_user.id
-    # return redirect_to @question unless @answer.delete
-    #   redirect_to @question, notice: 'Your answer deleted'
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    @answer.delete
   end
 
   private
 
   def authorship_verification
-    redirect_to @question, notice: "You can't modify this Answer" unless @answer.user_id == current_user.id
+    redirect_to @question, notice: "You can't modify this Answer" unless current_user.is_author_of?(@answer)
   end
 
   def question_load
@@ -39,11 +31,13 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:content)
+    params.require(:answer).permit(:content, :best_answer)
   end
 
-  def answer_load
-    @answer = @question.answers.find(params[:id])
+  def special_loader_for_shallow_routes
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
   end
+
 
 end

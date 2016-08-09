@@ -1,3 +1,38 @@
 // Place all the styles related to the Questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.edit_question_form{
+//  display:none;
+}
+.edit_answer_form{
+//  /*display:none;	*/
+}
+.button{
+  user-select: none;
+  margin: 0px auto;
+  cursor: default;
+  width: 90px;
+  height: 20px;
+  border: solid 1px black;
+  z-index: -1;
+  padding: 5px;
+  p{
+    margin: 0px;
+    user-select: none;
+  }
+}
+
+.button-answer{
+    user-select: none;
+    margin: 0px auto;
+    cursor: default;
+    width: 90px;
+    height: 20px;
+    border: solid 1px black;
+    z-index: -1;
+    padding: 5px;
+    p{
+      user-select: none;
+      margin: 0px;
+  }
+  }
