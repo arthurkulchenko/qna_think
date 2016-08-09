@@ -109,9 +109,6 @@ GEM
       eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
     eventmachine (1.2.0.1)
-    exception_notification (4.2.1)
-      actionmailer (>= 4.0, < 6)
-      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -179,7 +176,6 @@ GEM
     pkg-config (1.1.7)
     private_pub (1.0.3)
       faye
-    puma (3.6.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.1)
@@ -235,8 +231,6 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    russian (0.6.0)
-      i18n (>= 0.5.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -292,7 +286,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt
   byebug
   cancan
   capistrano
@@ -306,14 +299,9 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   database_cleaner
   devise
-  eventmachine
-  exception_notification
-  execjs
   factory_girl_rails
   faker
-  faye
   haml
-  i18n
   jbuilder (~> 2.5)
   jquery-rails
   launchy
@@ -323,13 +311,11 @@ DEPENDENCIES
   oauth
   pg (~> 0.18)
   private_pub
-  puma (~> 3.0)
   pundit
   rails (~> 5.0.0)
   rails-controller-testing
   responders
   rspec-rails
-  russian
   sass-rails (~> 5.0)
   shoulda-matchers
   sphinx
