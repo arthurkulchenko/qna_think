@@ -1,50 +1,35 @@
 source 'https://rubygems.org'
 
-gem 'rails', '>= 5.0.0.rc1', '< 5.1'
+gem 'rails', '~> 5.0.0'
 gem 'pg', '~> 0.18'
+# gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-
+gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
-gem 'turbolinks', '~> 5.x'
-gem 'jquery-turbolinks'
-gem 'jbuilder', '~> 2.0'
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
 
-# group :standart do
-  gem 'thin'
-# end
+gem 'thin'
+# gem 'bcrypt'
+gem 'carrierwave'
+gem 'private_pub'
+gem 'oauth'
+gem 'sphinx'
+gem 'cancan'
+gem 'pundit'
+gem 'responders'
+gem 'haml'
+gem 'devise'
 
-# group :added do
 
-  gem 'execjs'
-  gem 'exception_notification', '~> 4.1', '>= 4.1.1'
-  gem 'eventmachine'
-  gem 'i18n'
-  gem 'bcrypt'
-  gem 'russian', '~> 0.6.0'
-  # gem 'railties'
-
-  gem 'carrierwave'
-  gem 'private_pub'
-  gem 'oauth', '~> 0.4.7'
-  gem 'sphinx'
-  gem 'cancan'
-  gem 'pundit'
-  gem 'responders'
-  gem 'faye'
-  gem 'haml'
-  gem 'devise'
-  # gem 'activemerchant'
-# end
-
-group :development, :test do 
+group :development, :test do
   gem 'byebug', platform: :mri
+
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
-
 end
 
 group :test do
@@ -57,18 +42,23 @@ group :test do
 end
 
 group :development do
+  gem 'web-console'
   gem 'listen', '~> 3.0.5'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '~> 3.0' 
   gem 'spring'
-  gem 'letter_opener', '~> 1.4', '>= 1.4.1'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'letter_opener'
   gem 'capistrano'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano-ssh-doctor', '~> 1.0'
+  gem 'capistrano-ssh-doctor'
+
 end
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
   gem 'libv8'
+  # gem 'exception_notification'
 end
