@@ -6,17 +6,18 @@ feature '', %q(
   I whant to be able do it
 )do
   
-  given(:user){create(:user)}
+  given!(:user){create(:user)}
   given(:another_user){ create(:user) }
-  given(:question){ create(:question, user: user) }
-  given(:answers){ create_list(:answer, 3, question: question) }
+  given!(:question){ create(:question, user: user) }
+  given!(:answers){ create_list(:answer, 3, question: question) }
 
   scenario 'auth user', js: true do
     sign_in(user)
     visit question_path(question)
-    fill_in 'Form for Answer', with: 'First of all you need ...'\
-                    ' and only then ... Best Regards and Good luck!'
-    click_on 'Provide an answer'
+    save_and_open_page
+    # fill_in 'Form for Answer', with: 'First of all you need ...'\
+    #                 ' and only then ... Best Regards and Good luck!'
+    # click_on 'Provide an answer'
     # click_on "Edit Answer"
     within '.answers' do
       fill_in "Update Form", with: 'Hello Iam Lindsay Lohan'

@@ -6,23 +6,14 @@ feature 'delete answer', %q(
   I want to delete my own answer
   )do
      
-    given(:user){ create(:user) }
+    given!(:user){ create(:user) }
     given(:another_user){ create(:user) }
     given!(:question){ create(:question, user: user) }
     given!(:answer){ create(:answer, question: question, user: user) }
-    background do
-      sign_in(user)
-      visit root_path
-      click_on 'Ask a question'
-      fill_in 'Problem', with: 'ern Error: missing important thing code:234'
-      fill_in 'Description', with: 'Every time, when I do ..., I get ..., what should I do?'
-      click_on 'Ask for Help'
-    end
-
+    
     scenario 'deleting answer', js: true do
       sign_in(user)
       visit question_path(question)
-      save_and_open_page
       click_on 'Delete my Answer'
       expect(page).to_not have_content answer.content
     end

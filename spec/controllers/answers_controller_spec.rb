@@ -67,7 +67,7 @@ RSpec.describe AnswersController, :type => :controller do
     sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:answer){ create(:answer, question: question, user: @user) }
-    let(:request){ delete :destroy, question_id: question, id: answer, format: :js }
+    let(:request){ delete :destroy, question: question, id: answer, format: :js }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his question' do
       it 'deletes question' do
