@@ -14,7 +14,9 @@ gem 'thin'
 gem 'haml'
 gem 'devise'
 
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'cocoon'
+
 gem 'private_pub'
 gem 'oauth'
 gem 'sphinx'

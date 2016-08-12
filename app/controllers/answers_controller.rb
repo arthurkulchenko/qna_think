@@ -20,7 +20,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:content, :best_answer)
+    params.require(:answer).permit(:content, :best_answer, attachments_attributes: [file:[]])
   end
 
   def answer_loader_and_authorship_verification

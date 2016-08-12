@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727105813) do
+ActiveRecord::Schema.define(version: 20160812220013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20160727105813) do
     t.boolean  "best_answer", default: false,              comment: "For deside wich answer is better or the best"
     t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
     t.index ["user_id"], name: "index_answers_on_user_id", using: :btree
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.string   "file"
+    t.string   "attachable_type"
+    t.integer  "attachable_id"
+    t.string   "attachable_kind",              comment: "need to describe what model is use it"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["attachable_kind"], name: "index_attachments_on_attachable_kind", using: :btree
+    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id", using: :btree
   end
 
   create_table "questions", force: :cascade do |t|
