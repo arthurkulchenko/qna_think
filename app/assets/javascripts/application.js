@@ -14,8 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-$(document).ready(function () {
-  
-})
-
+// , :onclick => '$(this).parent("form").submit();'

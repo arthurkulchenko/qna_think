@@ -1,4 +1,1 @@
 $('.answers').html('<%= j render @answer.answers_stack.best_first %>');
-$('.button-answer').click(function() {
-   $(this).parent('.answer').children('.edit_answer_form').fadeToggle();
-});

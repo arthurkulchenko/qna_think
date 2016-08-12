@@ -1,55 +1,17 @@
 jQuery ->
-
  $(document).on "turbolinks:load", () ->
-#
-#  $('.answer').children('.delete_answer_link').click () ->
-#   $(this).parent('.answer').fadeOut()
-#   $(this).parent('.answer').remove()
-#
-#  $('.button-answer').click () ->
-#   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-#
   $('.button').click () ->
    $(this).parent('.question').children('.edit_question_form').fadeToggle()
 
-#------------------------------------------------------------------------------------
- $(document).on "turbolinks:update", () ->
- 
-  $('.answer').children('.delete_answer_link').click () ->
-   $(this).parent('.answer').fadeOut()
-   $(this).parent('.answer').remove()
- 
-  $('.button-answer').click () ->
-   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
- 
-  $('.button').click () ->
-   $(this).parent('.question').children('.edit_question_form').fadeToggle()
+$(document).ajaxComplete () ->
+ $('.button-answer').click () ->
+  $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
 
-#------------------------------------------------------------------------------------
-$(document).on "ajax:complete", () ->
 # $('.button-answer').click () ->
 #   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
 
 #  $('.button').click () ->
 #   $(this).parent('.question').children('.edit_question_form').fadeToggle()
-
-
-
-
-
-
-
-
-
-
-#------------------------------------------------------------------------------------
-# $(document).on "turbolinks:request-start", (e) ->
-#  e.preventDefault()
-#  $('.button-answer').click () ->
-#   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-#  $('.button').click () ->
-#   $(this).parent('.question').children('.edit_question_form').fadeToggle()
-#  $('.edit_answer_form').hide();
 
 
 #------------------------------------------------------------------------------------

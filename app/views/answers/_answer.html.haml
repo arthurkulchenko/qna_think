@@ -1,19 +1,18 @@
 .answer
  %strong= answer.content
  .vote_answer_form
-  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(@question)
+  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer.question)
    = form_for answer, url: answer_path(answer), remote: true do |f|
     .answer-check-box
      - if f.object.best_answer
       #best-answer
        = f.label :best_answer, 'Is this Answer The Best?'
-       = f.check_box :best_answer
+       = f.check_box :best_answer, { class: 'vote-check-box' }
      - else
       = f.label :best_answer, 'Is this Answer The Best?'
-      = f.check_box :best_answer
-    / , :onclick => '$(this).parent("form").submit();'
+      = f.check_box :best_answer, { class: 'vote-check-box' }
     .submit-button
-     / = f.submit 'Yes'
+     = f.submit 'Yes'
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
   %div.button-answer
    %p Edit Answer
