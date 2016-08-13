@@ -29,6 +29,8 @@
     = f.fields_for :attachable do |attache|
      = render 'layouts/attachment_fields', f: attache
     = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
+   = link_to_remove_association "remove file", f
+   %br
    = f.submit 'Update an answer'
   %br
   = link_to 'Delete my Answer', answer_path(answer), method: :delete, remote: true, class: 'delete_answer_link'
