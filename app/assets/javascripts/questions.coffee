@@ -1,57 +1,35 @@
 jQuery ->
-
  $(document).on "turbolinks:load", () ->
-#
-#  $('.answer').children('.delete_answer_link').click () ->
-#   $(this).parent('.answer').fadeOut()
-#   $(this).parent('.answer').remove()
-#
-#  $('.button-answer').click () ->
-#   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-#
   $('.button').click () ->
    $(this).parent('.question').children('.edit_question_form').fadeToggle()
 
-#------------------------------------------------------------------------------------
- $(document).on "turbolinks:update", () ->
- 
-  $('.answer').children('.delete_answer_link').click () ->
-   $(this).parent('.answer').fadeOut()
-   $(this).parent('.answer').remove()
- 
-  $('.button-answer').click () ->
-   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
- 
-  $('.button').click () ->
-   $(this).parent('.question').children('.edit_question_form').fadeToggle()
+$(document).ajaxComplete () ->
+ $('.button-answer').click () ->
+  $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
 
-#------------------------------------------------------------------------------------
-$(document).on "ajax:complete", () ->
 # $('.button-answer').click () ->
 #   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
 
 #  $('.button').click () ->
 #   $(this).parent('.question').children('.edit_question_form').fadeToggle()
-
-
-
-
-
-
-
-
-
-
-#------------------------------------------------------------------------------------
-# $(document).on "turbolinks:request-start", (e) ->
-#  e.preventDefault()
-#  $('.button-answer').click () ->
-#   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-#  $('.button').click () ->
-#   $(this).parent('.question').children('.edit_question_form').fadeToggle()
-#  $('.edit_answer_form').hide();
-
-
+#--------------Nested-Attributes------------------------------------------------------
+#$(document).on 'click', 'form .remove_field', (event) ->
+#
+#    $(this).prev('input[type=hidden]').val('1')
+#    $(this).closest('fieldset').fadeOut(900)
+#    event.preventDefault()
+#
+#  x = 0
+#  $('form').on 'click', '.add_fields', (event) ->
+#    event.preventDefault()
+#    time = new Date().getTime()    
+#    regexp = new RegExp(
+#    	$(this).data('id'), 'g'
+#    )
+#
+#    $(this).before(
+#        $(this).data('fields').replace(regexp, time)
+#    )
 #------------------------------------------------------------------------------------
 # $(document).ready () ->
 #  $('.answer').children('.delete_answer_link').click () ->

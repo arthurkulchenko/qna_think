@@ -18,3 +18,8 @@ body{
   margin: 30px auto;
   text-align: center;
 }
+a{
+  text-decoration-style: none;
+  color: yellow;
+  background: gray;
+}

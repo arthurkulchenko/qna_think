@@ -4,27 +4,41 @@
   %h3= @question.content
  - if user_signed_in? && current_user.is_author_of?(@question)
   =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
+  .attached-files
+   %h4 Attached files
+   %ul
+   - @question.attachments.each do |attached_file|
+    %li
+     = attached_file.identifier
   %div.button
    %p Edit Question
-  .edit_question_form
-   = form_for @question, url: question_path(@question), remote: true do |f|
-    = f.label :content, "Update Form"
-    %br
-    = f.text_field :content
-    %br
-    = f.submit 'Update a question'
+  = form_for @question, url: question_path(@question), remote: true, html: {class:"edit_question_form"} do |f|
+   = f.label :content, "Update Form"
+   %br
+   = f.text_field :content
+   %br
+   #attache-file-to-question
+    = f.fields_for :attachable do |a|
+     = render 'layouts/attachment_fields', f: a 
+     = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
+    = link_to_remove_association "remove file", f
+   %br
+   = f.submit 'Update a question'
   %br
   = link_to 'Delete my Question', @question, method: :delete
   %br
- %br
- .new_answer
-  %hr
-  = form_for [@question, @question.answers.new], remote: true do |a|
-   = a.label :content, 'Form for Answer'
-   %br
-   = a.text_field :content
-   %br
-   = a.submit 'Provide an answer'
+ %hr
+ = form_for [@question, @question.answers.new], remote: true, html: {calss: "new_answer"} do |f|
+  = f.label :content, 'Form for Answer'
+  %br
+  = f.text_field :content
+  #attache-file-to-answer
+   = f.fields_for :attachable do |attache|
+    = render 'layouts/attachment_fields', f: attache
+   = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
+  = link_to_remove_association "remove file", f
+  %br
+  = f.submit 'Provide an answer'
   %hr
  %h2 Answers
  .answers

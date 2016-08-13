@@ -1,5 +1,2 @@
 $('.answers').last('.answer').append('<%= j render @answer%>');
 $('#answer_content').val('');
-$('.button-answer').click(function() {
- $(this).parent('.answer').children('.edit_answer_form').fadeToggle();
-});
