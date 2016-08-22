@@ -10,6 +10,11 @@
    - @question.attachments.each do |attached_file|
     %li
      = attached_file.identifier
+  %div.button-ranknig
+   %p RANK IT AS GOOD
+  %div.button-ranknig
+   %p RANK IT AS BAD
+  %p="Total rate is #{@question.mark}"
   %div.button
    %p Edit Question
   = form_for @question, url: question_path(@question), remote: true, html: {class:"edit_question_form"} do |f|

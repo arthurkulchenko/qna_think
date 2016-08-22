@@ -5,8 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
    has_many :questions, dependent: :destroy
    has_many :answers, dependent: :destroy
+   has_many :votes, as: :ballot
 
    def is_author_of?(obj)
      obj.user_id == id
    end
+
 end
