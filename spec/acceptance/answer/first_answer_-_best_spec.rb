@@ -12,7 +12,7 @@ feature 'first answer is the Best', %q(
     scenario 'The Best answer is on the top', js: true do
       sign_in(user)
       visit question_path(question)
-      expect(page).to have_content "sequenced content -- 3 sequenced"\
-      " content -- 1 sequenced content -- 2"  
+      expect(page).to have_content "sequenced content -- 3 Attached" \
+      " files sequenced content -- 1 Attached files sequenced content -- 2 Attached files"
     end
 end
