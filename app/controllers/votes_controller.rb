@@ -2,26 +2,13 @@ class VotesController < ApplicationController
 
   def create
 
-    # case @object
-    # when params[:commit] == 'Rate Question'
-    #   Question.find(params[:question_id])
-    # when params[:commit] == 'Rate Answer'
-    #   Answer.find(params[:answer_id])   	
-    # end
-
     @object =
               if params[:commit] == 'Rate Question'
                 Question.find(params[:question_id])
               elsif params[:commit] == 'Rate Answer'
                 Answer.find(params[:answer_id])   	
               end
-
-
-    # @question = Question.find(params[:question_id])
-    # @answer = Answer.find(params[:answer_id])
-
-    # @object = @answer || @question
-
+              
     @vote = @object.votes.new(vote_params)
     @existed_vote = current_user.votes.where(ballot: @object.id).first
     @existed_vote.delete if @existed_vote

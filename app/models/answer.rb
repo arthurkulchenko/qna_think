@@ -23,6 +23,4 @@ class Answer < ApplicationRecord
     return @best_answer.toggle(:best_answer).save unless ( id == @best_answer.id ) || ( !best_answer )
   end
 
-  
-
 end
