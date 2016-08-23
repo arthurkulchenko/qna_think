@@ -11,20 +11,14 @@
      = f.label :best_answer, 'Is this Answer The Best?'
      = f.check_box :best_answer, { class: 'vote-check-box' }
    = f.submit 'Yes', class: 'submit-button'
+ = render partial: 'answers/voting', locals: {answer: answer}
  .attached-files
   %h4 Attached files
   %ul
   - answer.attachments.each do |attached_file|
    %li
-    = attached_file.identifier
+    = attached_file.identifier 
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
-  / = link_to "RATE IT GOOD",
-  = render partial: 'layouts/voting', locals: {vote: answer.votes.new}
-  %div.button-ranknig
-   %p RANK IT AS GOOD
-  %div.button-ranknig
-   %p RANK IT AS BAD
-  %p="Total rate is #{answer.mark}"
   %div.button-answer
    %p Edit Answer
   = form_for answer, url: answer_path(answer), remote: true, html: { class: "edit_answer_form" } do |f|

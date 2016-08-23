@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root 'questions#index'
 
   resources :questions, shallow: true do
-    resources :answers
+    resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]
+    resources :answers do
+      resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]
+    end
   end
 end

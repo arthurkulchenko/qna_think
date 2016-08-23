@@ -66,16 +66,19 @@ ActiveRecord::Schema.define(version: 20160822105900) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "ballot_id",                            comment: "for references"
+    t.integer  "ballot_id",                            comment: "belongs_to ballot"
+    t.integer  "user_id"
     t.integer  "mark",        default: 0,              comment: "total score"
     t.string   "ballot_type"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["ballot_id"], name: "index_votes_on_ballot_id", using: :btree
     t.index ["ballot_type"], name: "index_votes_on_ballot_type", using: :btree
+    t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
   end
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "votes", "users"
 end

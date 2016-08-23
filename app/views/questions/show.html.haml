@@ -2,19 +2,15 @@
  %h3= @question.title
  .question_content
   %h3= @question.content
+ = render partial: 'questions/voting', locals: {question: @question}
  - if user_signed_in? && current_user.is_author_of?(@question)
-  =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
+  / =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
   .attached-files
    %h4 Attached files
    %ul
    - @question.attachments.each do |attached_file|
     %li
      = attached_file.identifier
-  %div.button-ranknig
-   %p RANK IT AS GOOD
-  %div.button-ranknig
-   %p RANK IT AS BAD
-  %p="Total rate is #{@question.mark}"
   %div.button
    %p Edit Question
   = form_for @question, url: question_path(@question), remote: true, html: {class:"edit_question_form"} do |f|

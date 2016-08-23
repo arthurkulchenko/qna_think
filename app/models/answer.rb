@@ -8,8 +8,6 @@ class Answer < ApplicationRecord
 
   validates :content, presence: true
 
-  after_create :create_voting
-
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
@@ -19,15 +17,6 @@ class Answer < ApplicationRecord
   end
 
   private
-
-  def mark_count
-    votes.map{|i| @mark += i.mark}
-    mark = @mark
-  end
-
-  def create_voting
-    votes.create
-  end
   
   def check_of_best
     return unless @best_answer = question.answers.where(best_answer: true).first
