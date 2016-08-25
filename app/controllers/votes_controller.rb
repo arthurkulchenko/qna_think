@@ -16,7 +16,7 @@ class VotesController < ApplicationController
     @vote.user = current_user
     respond_to do |format|
       if @vote.save
-        format.json { render json: @vote }
+        format.json { render json: @object.reload }
       else
         format.json { render json: @vote.errors.full_messages, status: :unprocessable_entity }
       end
@@ -29,7 +29,7 @@ class VotesController < ApplicationController
     if current_user.is_author_of?(@vote)
       @object.update(mark: @object.votes.pluck(:mark).sum) if @vote.delete
       respond_to do |format|
-        format.json { render json: 'You tack back your voice' }
+        format.json { render json: @object.reload }
       end
     end
   end

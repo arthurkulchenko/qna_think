@@ -1,4 +1,14 @@
 jQuery ->
+
+ $('.question').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
+  mark = JSON.parse(xhr.responseText).mark
+  $('.question').children('#mark').html(mark)
+
+ $('.question').children('.tack_back_voice').bind 'ajax:success', (e, data, status, xhr) ->
+  mark = JSON.parse(xhr.responseText).mark
+  alert mark
+  
+
  $(document).on "turbolinks:load", () ->
   $('.button').click () ->
    $(this).parent('.question').children('.edit_question_form').fadeToggle()
@@ -6,6 +16,25 @@ jQuery ->
 $(document).ajaxComplete () ->
  $('.button-answer').click () ->
   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
+
+#$('.question').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
+# $('<h2>hello</h2>').insertBefore('.question')
+# answer = JSON.parse(xhr.responseText)
+# answer.id.appendTo('.question')
+#$('.question').children('.rate-form').children('form').ajaxComplete () ->
+#$(document).ajaxSuccess () ->
+# $('<h2>hello</h2>').insertBefore('.question')
+# parsedData = JSON.parse()
+#$(document).ajaxSuccess (event, xhr, settings) ->
+# alert xhr.responseText
+ #$('.question').children('.rate-form').children('form.new_vote').bind "ajax:success", (event, data, xhr, settings) ->
+  #alert "hi"
+# $('<h2>hello</h2>').insertBefore('.question')
+
+#$('.question').children('.rate-form').children('form').ajaxSuccess ( event, request, settings ) -> 
+# alert request
+#  $( "<li>Successful Request!</li>" ).appendTo( '.question' )
+
 
 # $('.button-answer').click () ->
 #   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()

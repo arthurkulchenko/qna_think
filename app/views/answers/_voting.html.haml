@@ -1,4 +1,5 @@
 .rate-form
+ %p="Total rate is #{answer.mark}"
  - if answer.persisted? && user_signed_in? && answer.user_id != current_user.id
   = form_for answer.votes.new, remote: true, url: answer_votes_path(answer), method: :post do |i|
    = i.label :mark, "Good"
@@ -8,6 +9,5 @@
    = i.radio_button :mark, -1
    %hr
    = i.submit "Rate Answer"
-  %p="Total rate is #{answer.mark}"
   - if @vote = answer.votes.where(user: current_user).first
-   = link_to "Take back your voice", vote_path(@vote), method: :delete
+   = link_to "Take back your voice", vote_path(@vote), method: :delete, remote: true
