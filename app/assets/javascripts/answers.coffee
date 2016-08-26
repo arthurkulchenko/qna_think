@@ -1,4 +1,12 @@
 jQuery ->
+ $('.answer').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
+  json_mark = JSON.parse(xhr.responseText).mark
+  $(this).closest('.rate-form').children('p').hide()
+  $(this).closest('.rate-form').prepend("<p>Total mark is: " + json_mark + "</p>")
+ $('.answer').children('.tack_back_voice').bind 'ajax:complete', (e, data, status, xhr) ->
+  json_mark = JSON.parse(xhr.responseText).mark
+  alert json_mark
+
  $('.answer-check-box').click () ->
   $(this).parent('form').submit()
 
