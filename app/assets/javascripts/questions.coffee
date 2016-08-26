@@ -2,7 +2,9 @@ jQuery ->
 
  $('.question').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
   mark = JSON.parse(xhr.responseText).mark
-  $('.question').children('#mark').html(mark)
+  alert mark
+  mark.appendTo('.question')
+ # $('.question').children('#mark').html(mark)
 
  $('.question').children('.tack_back_voice').bind 'ajax:success', (e, data, status, xhr) ->
   mark = JSON.parse(xhr.responseText).mark
