@@ -2,12 +2,10 @@ class VotesController < ApplicationController
 
   def create
 
-    # request.original_fullpath
-
     @object =
-              if params[:commit] == 'Rate Question'
+              if request.original_fullpath.match('questions')
                 Question.find(params[:question_id])
-              elsif params[:commit] == 'Rate Answer'
+              elsif request.original_fullpath.match('answers')
                 Answer.find(params[:answer_id])   	
               end  
     @vote = @object.votes.new(vote_params)
