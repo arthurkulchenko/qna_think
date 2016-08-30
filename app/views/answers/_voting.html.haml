@@ -1,6 +1,6 @@
 .rate-form
  %p="Total rate is #{answer.mark}"
- - if answer.persisted? && user_signed_in? && answer.user_id != current_user.id
+ - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer) #answer.user_id != current_user.id
   = form_for answer.votes.new, remote: true, url: answer_votes_path(answer), method: :post do |i|
    = i.label :mark, "Good"
    = i.radio_button :mark, 1, id: "answers-rate"

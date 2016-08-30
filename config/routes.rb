@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   	                             sign_up: 'cmon_let_me_in' }
   root 'questions#index'
 
-  resources :questions, shallow: true do
+  concern :votable do
     resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]
-    resources :answers do
-      resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]
-    end
+  end
+
+  resources :questions, concerns: :votable, shallow: true do
+    resources :answers, concerns: :votable
   end
 end
