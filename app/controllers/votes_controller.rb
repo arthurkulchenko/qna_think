@@ -1,34 +1,22 @@
 class VotesController < ApplicationController
+  respond_to :json
 
   def create
-
-    @object =
-              if request.original_fullpath.match('questions')
-                Question.find(params[:question_id])
-              elsif request.original_fullpath.match('answers')
-                Answer.find(params[:answer_id])   	
-              end  
+    @obj = request.original_fullpath[/[\w]+/]
+    @object = @obj.classify.constantize.find(params[@obj.singularize.insert(-1,'_id').to_sym])
     @vote = @object.votes.new(vote_params)
 
-
-
-    @vote.user = current_user
-    respond_to do |format|
-      if @vote.save #(user: current_user)
-        format.json { render json: @object.reload }
-      else
-        format.json { render json: @vote.errors.full_messages, status: :unprocessable_entity }
-      end
-    end  	
+    if @vote.save(user: current_user)
+      respond_with( render json: @object.reload )
+    else
+      respond_with( render json: @vote.errors.full_messages, status: :unprocessable_entity )
+    end
   end
 
   def destroy
     @vote = Vote.find(params[:id])
     @vote.destroy if current_user.is_author_of?(@vote)
-    respond_to do |format|
-      # format.json { render json: @vote.ballot.reload }
-      format.json { render :nothing => true }
-    end
+    respond_with( render :nothing => true )
   end
 
   private

@@ -8,7 +8,6 @@ module Voting
   end
 
   def check_uniqness_of_users_vote
-      # votes.where(user:)
   end
 	
 end
