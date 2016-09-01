@@ -1,22 +1,27 @@
 class VotesController < ApplicationController
-  respond_to :json
 
   def create
     @obj = request.original_fullpath[/[\w]+/]
-    @object = @obj.classify.constantize.find(params[@obj.singularize.insert(-1,'_id').to_sym])
+    @object = @obj.classify.constantize.find(params["#{@obj.singularize}".+('_id').to_sym])
     @vote = @object.votes.new(vote_params)
-
-    if @vote.save(user: current_user)
-      respond_with( render json: @object.reload )
-    else
-      respond_with( render json: @vote.errors.full_messages, status: :unprocessable_entity )
+    @vote.user = current_user
+    
+    respond_to do |format|
+      if @vote.save
+        format.json { render json: @object.reload }
+      else
+        format.json { render json: @vote.errors.full_messages, status: :unprocessable_entity }
+      end
     end
+
   end
 
   def destroy
     @vote = Vote.find(params[:id])
     @vote.destroy if current_user.is_author_of?(@vote)
-    respond_with( render :nothing => true )
+    respond_to do |format|
+      format.json { render :nothing => true }
+    end
   end
 
   private
