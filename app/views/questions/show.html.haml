@@ -2,7 +2,7 @@
  %h3= @question.title
  .question_content
   %h3= @question.content
- = render partial: 'questions/voting', locals: {question: @question}
+ = render partial: 'layouts/voting', locals: {parent_object: @question}
  - if user_signed_in? && current_user.is_author_of?(@question)
   / =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
   .attached-files

@@ -11,7 +11,7 @@
      = f.label :best_answer, 'Is this Answer The Best?'
      = f.check_box :best_answer, { class: 'vote-check-box' }
    = f.submit 'Yes', class: 'submit-button'
- = render partial: 'answers/voting', locals: {answer: answer}
+ = render partial: 'layouts/voting', locals: {parent_object: answer}
  .attached-files
   %h4 Attached files
   %ul

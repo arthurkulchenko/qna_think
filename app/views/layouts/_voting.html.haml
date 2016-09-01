@@ -1,0 +1,13 @@
+.rate-form
+ %p="Total rate is #{parent_object.mark}"
+ - if parent_object.persisted? && user_signed_in? && !current_user.is_author_of?(parent_object)
+  = form_for [parent_object, parent_object.votes.new], remote: true do |i|
+   = i.label :mark, "Good"
+   = i.radio_button :mark, 1, id: "#{parent_object.class}s-rate"
+   %hr
+   = i.label :mark, "Bad"
+   = i.radio_button :mark, -1
+   %hr
+   = i.submit "Rate #{parent_object.class}"
+  - if @vote = parent_object.votes.where(user: current_user).first
+   = link_to "Take back your voice", vote_path(@vote), method: :delete, remote: true
