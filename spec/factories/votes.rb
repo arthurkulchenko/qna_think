@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :vote do
-    ballot
     user
     mark 0
   end
@@ -13,5 +12,10 @@ FactoryGirl.define do
   factory :voted_minus, class: Vote do
     user 
     mark -1
+  end
+
+  factory :illigal_voted, class: Vote do
+    user 
+    mark -2
   end
 end

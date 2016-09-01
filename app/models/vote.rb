@@ -2,7 +2,7 @@ class Vote < ApplicationRecord
   belongs_to :ballot, polymorphic: true
   belongs_to :user
   
-  validates :mark, inclusion: { in: [1,-1], message: "%{value} is not a valid value" }
+  validates :mark, inclusion: { in: [1,0,-1], message: "%{value} is not a valid value" }
 
   after_create :delete_same_users_vote, :update_mark_sum
   after_destroy :update_mark_sum

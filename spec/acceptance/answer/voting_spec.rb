@@ -15,17 +15,13 @@ feature 'answer voting', %q(
       visit question_path(question)
     end
 
-    scenario "owner can't vote" do
+    scenario "owner of answer can't vote for his answer" do
       expect(page).to have_content "sequenced content -- 2 Total rate is 0 Attached files"
-    end
-
-    scenario "not owner can Rate Answer" do
-      expect(page).to have_button "Rate Answer"
+      # save_and_open_page  
     end
 
     scenario "voice is considered", js: true do
-      # choose "Good", visible: false # не может найти элемент
-      page.execute_script("document.getElementById('answers-rate').checked = true")
+      page.execute_script("document.getElementById('Answers-rate').checked = true")
       click_on 'Rate Answer'
       expect(page).to have_content "Total mark is: 1"
     end
