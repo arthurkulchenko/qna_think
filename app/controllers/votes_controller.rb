@@ -1,8 +1,7 @@
 class VotesController < ApplicationController
 
   def create
-    @obj = request.original_fullpath[/[\w]+/]
-    @object = @obj.classify.constantize.find(params["#{@obj.singularize}".+('_id').to_sym])
+    parent_object
     @vote = @object.votes.new(vote_params)
     @vote.user = current_user
     
@@ -25,6 +24,11 @@ class VotesController < ApplicationController
   end
 
   private
+
+  def parent_object
+    @obj = request.original_fullpath[/[\w]+/]
+    @object = @obj.classify.constantize.find(params["#{@obj.singularize}".+('_id').to_sym])
+  end
 
   def vote_params
     params.require(:vote).permit(:mark)

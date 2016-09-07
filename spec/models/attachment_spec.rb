@@ -1,1 +1,3 @@
-RSpec.describe Attachment, type: :model do;end
+RSpec.describe Attachment, type: :model do
+  it { should belong_to :attachable }
+end
