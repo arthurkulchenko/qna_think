@@ -25,6 +25,8 @@ gem 'cancan'
 gem 'pundit'
 gem 'responders'
 
+gem 'gon'
+
 group :production do
   gem 'libv8'
   # gem 'exception_notification'

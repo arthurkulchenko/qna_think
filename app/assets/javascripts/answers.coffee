@@ -21,6 +21,16 @@ jQuery ->
   $('.submit-button').click () ->
    $(this).parent('.answer').hide()
 
+currentUser = gon.current_user
+questionId = (/[\d]+/g).exec(window.location.pathname)[0]
+channel_of = "/questions/" + questionId + "/answers"
+
+PrivatePub.subscribe channel_of, (data, channel) ->
+ $('.answers').last('.answer').append(data.answer.content)
+ # #$('.answers').last('.answer').append("#{escape_javascript(render template: "answers/answer", locals: {answer: data.answer, user: currentUser })}")
+
+#  alert data.message.content
+#-------------
 #  $('.button').click () ->
 #   $(this).parent('.question').children('.edit_question_form').fadeToggle()
 
