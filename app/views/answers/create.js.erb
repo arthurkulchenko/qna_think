@@ -1,2 +1,7 @@
-$('.answers').last('.answer').append('<%= j render @answer%>');
+// $('.answers').last('.answer').append("<%= j render @answer%>");
+// alert "hi";
+<% publish_to "/questions/#{@answer.question_id}/answers" do %>
+  $('.answers').last('.answer').append("<%= j render @answer%>");
+<%end%>
+// alert "hi2";
 $('#answer_content').val('');

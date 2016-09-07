@@ -29,7 +29,8 @@
   = link_to 'Delete my Question', @question, method: :delete
   %br
  %hr
- = form_for [@question, @question.answers.new], remote: true, html: {calss: "new_answer"} do |f|
+ / = form_for [@question, @question.answers.new], remote: true, html: {class: "new_answer"}, data: { type: :json } do |f|
+ = form_for [@question, @question.answers.new], remote: true, html: {class: "new_answer"} do |f|
   = f.label :content, 'Form for Answer'
   %br
   = f.text_field :content
@@ -48,3 +49,4 @@
     = render @one_best_answer
   = render @question.answers.where(best_answer: false)
  %hr
+= subscribe_to "/questions/#{@question.id}/answers"

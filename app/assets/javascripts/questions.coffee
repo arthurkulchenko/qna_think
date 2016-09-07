@@ -4,6 +4,7 @@ jQuery ->
   json_mark = JSON.parse(xhr.responseText).mark
   $(this).closest('.rate-form').children('p').hide()
   $(this).closest('.rate-form').prepend("<p>Total mark is: " + json_mark + "</p>")
+  
  $('.question').children('.tack_back_voice').bind 'ajax:complete', (e, data, status, xhr) ->
   json_mark = JSON.parse(xhr.responseText).mark
   alert json_mark

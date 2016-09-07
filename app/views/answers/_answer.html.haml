@@ -21,7 +21,8 @@
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
   %div.button-answer
    %p Edit Answer
-  = form_for answer, url: answer_path(answer), remote: true, html: { class: "edit_answer_form" } do |f|
+  / =# form_for answer, url: answer_path(answer), remote: true, html: { class: "edit_answer_form" }, data: { type: :json } do |f|
+  = form_for answer, remote: true, html: { class: "edit_answer_form" } do |f|
    = f.label :content, "Update Form"
    %br
    = f.text_field :content
