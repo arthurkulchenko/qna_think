@@ -10,6 +10,7 @@ class AnswersController < ApplicationController
 
   def update
     @answer = Answer.find(params[:id])
+    @answers_with_filter = @answer.answers_stack.best_first.includes(:attachments)
     @answer.update(answer_params)
   end
 

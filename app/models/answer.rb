@@ -1,9 +1,10 @@
 class Answer < ApplicationRecord
+
+  include Voting
+  include Attaching
+  
   belongs_to :question
   belongs_to :user
-  has_many :attachments, as: :attachable
-
-  accepts_nested_attributes_for :attachments, reject_if: :all_blank
 
   validates :content, presence: true
 
@@ -21,7 +22,5 @@ class Answer < ApplicationRecord
     return unless @best_answer = question.answers.where(best_answer: true).first
     return @best_answer.toggle(:best_answer).save unless ( id == @best_answer.id ) || ( !best_answer )
   end
-
-  
 
 end
