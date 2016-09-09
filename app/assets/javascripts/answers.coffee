@@ -1,4 +1,20 @@
 jQuery ->
+# currentUser = gon.current_user
+# questionId = (/[\d]+/g).exec(window.location.pathname)[0]
+# channel_of = "/questions/" + questionId + "/answers"
+ #
+# PrivatePub.subscribe channel_of, (data, channel) ->
+#  #$('.answers').last('.answer').append(data.answer.content)
+#  answer_obj = data.answer
+#  $('.answers').last('.answer').append("<%= j render template: 'answers/answer', locals: {answer: answer_obj } %>")
+ $('.new_answer').bind 'ajax:error', (e, xhr, status, error) ->
+  errors = JSON.parse(xhr.responseText)
+  alert errors
+
+#  jQuery.each errors, (index, value) ->
+#   $( "#" + value ).text( "Mine is " + value + "." );
+#   $(this).text(value)
+
  $('.answer').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
   json_mark = JSON.parse(xhr.responseText).mark
   $(this).closest('.rate-form').children('p').hide()
@@ -21,15 +37,6 @@ jQuery ->
   $('.submit-button').click () ->
    $(this).parent('.answer').hide()
 
-currentUser = gon.current_user
-questionId = (/[\d]+/g).exec(window.location.pathname)[0]
-channel_of = "/questions/" + questionId + "/answers"
-
-PrivatePub.subscribe channel_of, (data, channel) ->
- $('.answers').last('.answer').append(data.answer.content)
- # #$('.answers').last('.answer').append("#{escape_javascript(render template: "answers/answer", locals: {answer: data.answer, user: currentUser })}")
-
-#  alert data.message.content
 #-------------
 #  $('.button').click () ->
 #   $(this).parent('.question').children('.edit_question_form').fadeToggle()

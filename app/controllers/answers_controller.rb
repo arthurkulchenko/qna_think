@@ -5,13 +5,14 @@ class AnswersController < ApplicationController
   def create
     @answer = Question.find(params[:question_id]).answers.new(answer_params)
     @answer.user = current_user
-    # respond_to do |format|
+    respond_to do |format|
       if @answer.save
-        PrivatePub.publish_to("/questions/#{@answer.question_id}/answers", answer: @answer)
-      # else
-        # format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
+        format.js
+        # PrivatePub.publish_to("/questions/#{@answer.question_id}/answers", answer: @answer)
+      else
+        format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
       end
-    # end
+    end
   end
 
   def update

@@ -1,7 +1,7 @@
 .answer
  %strong= answer.content
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer.question)
-  = form_for answer, url: answer_path(answer), remote: true, html:{class: "vote_answer_form"} do |f|
+  = form_for answer, url: answer_path(answer), remote: true, html: {class: "vote_answer_form"} do |f|
    .answer-check-box
     - if f.object.best_answer
      #best-answer
@@ -17,8 +17,8 @@
   %ul
   - answer.attachments.each do |attached_file|
    %li
-    = attached_file.identifier 
- - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
+    = attached_file.identifier
+ - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer) && visibility
   %div.button-answer
    %p Edit Answer
   = form_for answer, remote: true, html: { class: "edit_answer_form" }, data: { type: :json } do |f|

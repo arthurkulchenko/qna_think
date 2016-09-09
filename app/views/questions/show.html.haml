@@ -2,7 +2,7 @@
  %h3= @question.title
  .question_content
   %h3= @question.content
- = render partial: 'layouts/voting', locals: {parent_object: @question}
+ = render partial: 'layouts/voting', locals: { parent_object: @question }
  - if user_signed_in? && current_user.is_author_of?(@question)
   / =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
   .attached-files
@@ -29,7 +29,7 @@
   = link_to 'Delete my Question', @question, method: :delete
   %br
  %hr
- = form_for [@question, @question.answers.new], remote: true, html: {class: "new_answer"}, data: { type: :json } do |f|
+ = form_for [@question, @question.answers.new], remote: true, html: {class: "new_answer"} do |f|
   = f.label :content, 'Form for Answer'
   %br
   = f.text_field :content
@@ -45,7 +45,7 @@
  .answers
   - if @one_best_answer
    - if @one_best_answer.best_answer
-    = render @one_best_answer
-  = render @question.answers.where(best_answer: false)
+    = render partial: @one_best_answer, locals: { visibility: true }
+  = render partial: @question.answers.where(best_answer: false), locals: { visibility: true }
  %hr
 = subscribe_to "/questions/#{@question.id}/answers"

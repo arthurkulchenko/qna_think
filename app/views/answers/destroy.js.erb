@@ -1,1 +1,3 @@
-$('.answers').html('<%= j render @answer.answers_stack.best_first %>');
+ // <% publish_to "/questions/#{@answer.question_id}/answers" do %>
+  $('.answers').html('<%= j render @answer.answers_stack.best_first %>');
+ // <%end%>
