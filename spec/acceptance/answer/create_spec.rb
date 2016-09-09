@@ -11,7 +11,6 @@ feature 'answer a question', %q(
     background do
       sign_in(user)
       visit question_path(question)
-      # click_on 'Offer solution'
       fill_in 'Form for Answer', with: 'First of all you need ...'\
                     ' and only then ... Best Regards and Good luck!'
       click_on 'Provide an answer'

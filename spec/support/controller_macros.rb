@@ -14,7 +14,4 @@ module ControllerMacros
     sign_out @user  
   end
 
-  def current_user_in
-    subject.current_user
-  end
 end
