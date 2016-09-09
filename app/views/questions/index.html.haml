@@ -1,6 +1,8 @@
 = link_to "Ask a question", new_question_path
 %br
-%h3 Question index
-- @questions.each do |question|
-    = link_to question.title, question_path(question)
-    %br
+%br
+.question-list
+ - @questions.each do |question|
+  = link_to question.title, question_path(question), html: { class: "question-link" }
+  %br
+= subscribe_to '/questions'

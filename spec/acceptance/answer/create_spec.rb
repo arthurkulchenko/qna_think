@@ -1,5 +1,3 @@
-require_relative '../acceptance_helper'
-
 feature 'answer a question', %q(
   In oreder to help someone
   As a registred user

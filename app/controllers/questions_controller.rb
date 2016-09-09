@@ -13,12 +13,19 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
-    if @question.save
-      redirect_to question_path(@question), notice: 'Please wait for a while,' \
-                                                 ' someone will answer you soon.' 
-    else
-      render :new
+    respond_to do |format|
+      if @question.save
+        format.js
+      else
+        format.html { render :new }
+      end
     end
+    # if @question.save
+    #   redirect_to question_path(@question), notice: 'Please wait for a while,' \
+    #                                              ' someone will answer you soon.' 
+    # else
+    #   render :new
+    # end
   end
 
   def show

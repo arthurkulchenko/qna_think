@@ -1,16 +1,17 @@
-= form_for @question do |f|
- = f.label :title, 'Problem'
+.question-new
+ = form_for @question, remote: true do |f|
+  = f.label :title, 'Problem'
+  %br
+  = f.text_field :title
+  %br
+  = f.label :content, 'Description'
+  %br
+  = f.text_field :content
+  %br
+  #attache-file-to-question
+   = f.fields_for :attachable do |a|
+    = render 'layouts/attachment_fields', f: a 
+   = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link "
+  = f.submit 'Ask for Help'
+  %br
  %br
- = f.text_field :title
- %br
- = f.label :content, 'Description'
- %br
- = f.text_field :content
- %br
- #attache-file-to-question
-  = f.fields_for :attachable do |a|
-   = render 'layouts/attachment_fields', f: a 
-   = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
- = f.submit 'Ask for Help'
- %br
-%br
