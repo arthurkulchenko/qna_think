@@ -1,0 +1,7 @@
+.comment
+ - if parent_object.persisted? && user_signed_in?
+  = form_for [parent_object, parent_object.comments.new], remote: true do |i|
+   = i.label :comment, "Your Comment"
+   = i.text_field :comment
+   %hr
+   = i.submit "Post"

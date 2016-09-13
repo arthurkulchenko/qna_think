@@ -16,4 +16,5 @@ module ApplicationHelper
 #             data: { id: id, fields: fields.gsub("\n", '') },
 #             'data-no-turbolink' => true)
 #   end
+  
 end

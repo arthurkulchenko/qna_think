@@ -2,9 +2,10 @@ class Answer < ApplicationRecord
 
   include Voting
   include Attaching
+  include Commenting
+  include BelongiesToUser
   
   belongs_to :question
-  belongs_to :user
 
   validates :content, presence: true
 
