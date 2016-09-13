@@ -37,3 +37,4 @@
   = link_to 'Delete my Answer', answer_path(answer), method: :delete, remote: true, class: 'delete_answer_link'
   %br
   %br
+  = subscribe_to "/answers/#{answer.id}/comments"

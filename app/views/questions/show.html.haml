@@ -49,3 +49,4 @@
   = render partial: @question.answers.where(best_answer: false), locals: { visibility: true }
  %hr
 = subscribe_to "/questions/#{@question.id}/answers"
+= subscribe_to "/questions/#{@question.id}/comments"
