@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]
   end
 
-  resources :questions, concerns: :votable, shallow: true do
-    resources :answers, concerns: :votable
+  concern :commentable do
+    resources :comments, only: [:create, :destroy]
+  end
+
+  resources :questions, concerns: [:votable, :commentable], shallow: true do
+    resources :answers, concerns: [:votable, :commentable]
   end
 end

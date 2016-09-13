@@ -1,0 +1,3 @@
+<% publish_to "/#{@object.to_channel_name}/#{@object.id}/comments" do %>
+  $(".question").children(".comment").append("<%=j render partial: 'layouts/comment' %>");
+<%end%>
