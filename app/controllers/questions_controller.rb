@@ -15,7 +15,8 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     respond_to do |format|
       if @question.save
-        format.js
+        format.js { redirect_to question_path(@question), notice: 'Please wait for a while,' \
+                                                  ' someone will answer you soon.'  }
       else
         format.html { render :new }
       end

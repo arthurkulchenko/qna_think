@@ -18,7 +18,14 @@ class AnswersController < ApplicationController
   def update
     @answer = Answer.find(params[:id])
     @answers_with_filter = @answer.answers_stack.best_first.includes(:attachments)
-    @answer.update(answer_params)
+    # @answer.update(answer_params)
+    respond_to do |format|
+      if @answer.update(answer_params)
+        format.js
+      else
+        format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy

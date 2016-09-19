@@ -1,8 +1,12 @@
 .answer
- %strong= answer.content
+ .answer-content
+  %strong= answer.content
  = render partial: 'answers/vote', locals: { answer: answer }
  = render partial: 'layouts/voting', locals: { parent_object: answer }
  = render partial: 'layouts/attached_files', locals: { parent_object: answer }
- = render partial: 'answers/edit', locals: { answer: answer, visibility: visibility }
- / =# render partial: 'layouts/comment', locals: { parent_object: answer. }
+ = render partial: 'answers/edit', locals: { answer: answer, visibility: true }
+ .comments
+  = render partial: answer.comments
+ .new_comment
+  = render partial: 'comments/new', locals: { parent_object: answer }
  = subscribe_to "/answers/#{answer.id}/comments"

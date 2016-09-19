@@ -1,1 +1,1 @@
-$('.answers').html('<%= j render @answers_with_filter %>');
+$('#edit_answer_'+'<%="#{@answer.id.to_s}"%>').parent('.answer').children('.answer-content').html('<strong><%= j @answer.content %></strong>');

@@ -16,7 +16,7 @@ feature 'create question', %q(
     fill_in 'Description', with: 'Every time, when I do ..., I get ..., what should I do?'
     click_on 'Ask for Help'
   end
-  scenario 'asking for help' do
+  scenario 'asking for help', js: true do
     expect(page).to have_content 'Please wait for a while,'\
                             ' someone will answer you soon.'
     expect(page).to have_content 'ern Error: missing important thing code:234'

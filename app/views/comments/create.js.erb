@@ -2,3 +2,4 @@
   var classOfObject = '<%="#{@object.class.to_s.downcase.singularize}"%>'
   $("."+classOfObject).children(".comments").children('.comment').last().append("<%=j render partial: 'comments/comment', locals: { comment: @comment } %>");
 <%end%>
+$('#comment_content').val('')

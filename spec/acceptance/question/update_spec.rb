@@ -14,6 +14,7 @@ feature '', %q(
     sign_in(user)
     visit question_path(question)
     # click_on "Edit Question"
+    find(".button").click
     within '.edit_question_form' do
       fill_in "Update Form", with: 'Its corrected question'
       click_on 'Update a question'

@@ -9,11 +9,12 @@ feature '', %q(
   given!(:user){create(:user)}
   given(:another_user){ create(:user) }
   given!(:question){ create(:question, user: user) }
-  given!(:answers){ create_list(:answer, 3, question: question, user: user) }
+  given!(:answers){ create_list(:answer, 1, question: question, user: user) }
 
   scenario 'auth user', js: true do
     sign_in(user)
     visit question_path(question)
+    find(".button-answer").click
     within '.edit_answer_form' do
       fill_in "Update Form", with: 'Hello Iam Lindsay Lohan'
       click_on 'Update an answer'
