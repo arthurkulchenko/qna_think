@@ -6,6 +6,7 @@ jQuery ->
   $(this).closest('.rate-form').prepend("<p>Total mark is: " + json_mark + "</p>")
 
  $(document).on "turbolinks:load", () ->
+  $('.edit_question_form').hide()
   $('.button').click () ->
    $(this).parent('.question').children('.edit_question_form').fadeToggle()
 

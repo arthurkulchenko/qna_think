@@ -18,7 +18,7 @@
   - answer.attachments.each do |attached_file|
    %li
     = attached_file.identifier
- = render partial: 'layouts/comment', locals: { parent_object: answer }
+ / =# render partial: 'layouts/comment', locals: { parent_object: answer. }
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer) && visibility
   %div.button-answer
    %p Edit Answer

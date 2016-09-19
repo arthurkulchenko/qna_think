@@ -25,13 +25,15 @@
    /  = link_to_remove_association "remove file", f
    / %br
    = f.submit 'Update a question'
-  %br
-  = link_to 'Delete my Question', @question, method: :delete
+   %br
+   = link_to 'Delete my Question', @question, method: :delete
   %br
  = render partial: @question.comments.new, locals: { parent_object: @question }
  %br
  .comments
   = render partial: @question.comments
+ .new_comment
+  = render Comment.new
  %hr
 = form_for [@question, @question.answers.new], remote: true, html: {class: "new_answer"} do |f|
  = f.label :content, 'Form for Answer'
