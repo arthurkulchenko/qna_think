@@ -1,6 +1,6 @@
 %div.button
  %p Edit Question
-= form_for @question, url: question_path(@question), remote: true, html: {class:"edit_question_form"} do |f|
+= form_for question, url: question_path(question), remote: true, html: {class:"edit_question_form"} do |f|
  = f.label :content, "Update Form"
  %br
  = f.text_field :content
@@ -13,5 +13,5 @@
  / %br
  = f.submit 'Update a question'
  %br
- = link_to 'Delete my Question', @question, method: :delete
+ = link_to 'Delete my Question', question, method: :delete
 %br

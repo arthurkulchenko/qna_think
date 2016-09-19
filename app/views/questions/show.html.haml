@@ -4,56 +4,15 @@
   %h3= @question.content
  = render partial: 'layouts/voting', locals: { parent_object: @question }
  - if user_signed_in? && current_user.is_author_of?(@question)
-  / =# link_to_function("Edit Question", "$(this).parent('.question').children('.edit_question_form').fadeToggle()",  class: 'appear_link')
-  .attached-files
-   %h4 Attached files
-   %ul
-   - @question.attachments.each do |attached_file|
-    %li
-     = attached_file.identifier
-  %div.button
-   %p Edit Question
-  = form_for @question, url: question_path(@question), remote: true, html: {class:"edit_question_form"} do |f|
-   = f.label :content, "Update Form"
-   %br
-   = f.text_field :content
-   %br
-   / #attache-file-to-question
-   /  = f.fields_for :attachable do |a|
-   /   = render 'layouts/attachment_fields', f: a 
-   /   = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
-   /  = link_to_remove_association "remove file", f
-   / %br
-   = f.submit 'Update a question'
-   %br
-   = link_to 'Delete my Question', @question, method: :delete
-  %br
- = render partial: @question.comments.new, locals: { parent_object: @question }
+  = render partial: 'layouts/attached_files', locals: { parent_object: @question }
+  = render partial: 'questions/edit', locals: { question: @question }
  %br
  .comments
   = render partial: @question.comments
  .new_comment
-  = render Comment.new
+  = render partial: 'comments/new', locals: { parent_object: @question }
  %hr
-= form_for [@question, @question.answers.new], remote: true, html: {class: "new_answer"} do |f|
- = f.label :content, 'Form for Answer'
- %br
- = f.text_field :content
- / #attache-file-to-answer
- /  = f.fields_for :attachable do |attache|
- /   = render 'layouts/attachment_fields', f: attache
- / = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
- / = link_to_remove_association "remove file", f
- %br
- = f.submit 'Provide an answer'
- %hr
- 
-%h2 Answers
-.answers
- - if @one_best_answer
-  - if @one_best_answer.best_answer
-   = render partial: @one_best_answer, locals: { visibility: true }
- = render partial: @question.answers.where(best_answer: false), locals: { visibility: true }
-%hr
+= render partial: 'answers/new', locals: { question: @question }
+= render partial: 'answers/index'
 = subscribe_to "/questions/#{@question.id}/answers"
 = subscribe_to "/questions/#{@question.id}/comments"

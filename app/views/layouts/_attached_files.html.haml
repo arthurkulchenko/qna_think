@@ -1,0 +1,6 @@
+.attached-files
+ %h4 Attached files
+ %ul
+ - parent_object.attachments.each do |attached_file|
+  %li
+   = attached_file.identifier

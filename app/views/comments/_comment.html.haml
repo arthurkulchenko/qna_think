@@ -4,4 +4,4 @@
   %strong= comment.content
   - if user_signed_in? && current_user.is_author_of?(comment)
    %br
-   = link_to 'Delete my comment', comment_path(comment), remote: true, method: :delete
+   = link_to 'Delete my comment', comment_path(comment), remote: true, class: "comment-delete-link", method: :delete

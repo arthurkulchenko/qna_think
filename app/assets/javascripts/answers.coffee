@@ -27,6 +27,8 @@ jQuery ->
   $(this).parent('form').submit()
 
  $(document).on "turbolinks:load", () ->
+  $('.edit_answer_form').hide()
+  $('.attached-files').hide()
 
   $('.answer').children('.delete_answer_link').click () ->
    $(this).parent('.answer').fadeOut()

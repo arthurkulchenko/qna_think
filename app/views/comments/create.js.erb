@@ -1,3 +1,4 @@
 <% publish_to "/#{@object.to_channel_name}/#{@object.id}/comments" do %>
-  $(".question").children(".comment").append("<%=j render partial: 'comments/comment' %>");
+  var classOfObject = '<%="#{@object.class.to_s.downcase.singularize}"%>'
+  $("."+classOfObject).children(".comments").children('.comment').last().append("<%=j render partial: 'comments/comment', locals: { comment: @comment } %>");
 <%end%>

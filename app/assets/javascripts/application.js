@@ -16,5 +16,6 @@
 //= require turbolinks
 //= require cocoon
 //= require_tree .
+$('.attached-files').hide()
 
 // , :onclick => '$(this).parent("form").submit();'
