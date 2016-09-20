@@ -1,17 +1,18 @@
-.question{:id => "#{@question.id}"}
- %h3= @question.title
- .question_content
-  %h3= @question.content
- = render partial: 'layouts/voting', locals: { parent_object: @question }
- - if user_signed_in? && current_user.is_author_of?(@question)
-  = render partial: 'layouts/attached_files', locals: { parent_object: @question }
-  = render partial: 'questions/edit', locals: { question: @question }
- %br
- .comments
-  = render partial: @question.comments
- .new_comment
-  = render partial: 'comments/new', locals: { parent_object: @question }
- %hr
+.questions 
+ .question{:id => "#{@question.id}"}
+  %h3= @question.title
+  .question_content
+   %h3= @question.content
+  = render partial: 'layouts/voting', locals: { parent_object: @question }
+  - if user_signed_in? && current_user.is_author_of?(@question)
+   = render partial: 'layouts/attached_files', locals: { parent_object: @question }
+   = render partial: 'questions/edit', locals: { question: @question }
+  %br
+  .comments
+   = render partial: @question.comments
+  .new_comment
+   = render partial: 'comments/new', locals: { parent_object: @question }
+  %hr
 = render partial: 'answers/new', locals: { question: @question }
 = render partial: 'answers/index', locals: { visibility: true }
 = subscribe_to "/questions/#{@question.id}/answers"
