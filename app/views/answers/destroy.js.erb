@@ -1,3 +1,3 @@
- // <% publish_to "/questions/#{@answer.question_id}/answers" do %>
-  $('.answers').html('<%= j render @answer.answers_stack.best_first %>');
- // <%end%>
+// # <% publish_to "/questions/#{@answer.question_id}/answers" do %>
+  $('.answers').html('<%= j render partial: @answer.answers_stack.best_first, locals: { visibility: false } %>');
+// # <%end%>

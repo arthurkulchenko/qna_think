@@ -10,6 +10,10 @@ jQuery ->
  $('.new_answer').bind 'ajax:error', (e, xhr, status, error) ->
   errors = JSON.parse(xhr.responseText)
   alert errors
+  
+ $('.edit_answer_form').bind 'ajax:error', (e, xhr, status, error) ->
+  errors = JSON.parse(xhr.responseText)
+  alert errors
 
 #  jQuery.each errors, (index, value) ->
 #   $( "#" + value ).text( "Mine is " + value + "." );

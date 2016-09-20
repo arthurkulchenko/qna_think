@@ -1,4 +1,8 @@
 jQuery ->
+ 
+ $('.new_question').bind 'ajax:error', (e, xhr, status, error) ->
+  errors = JSON.parse(xhr.responseText)
+  alert errors
 
  $('.question').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
   json_mark = JSON.parse(xhr.responseText).mark

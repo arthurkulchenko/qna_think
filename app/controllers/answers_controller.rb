@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
         format.js
         # PrivatePub.publish_to("/questions/#{@answer.question_id}/answers", answer: @answer)
       else
-        format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
+        format.js { render json: @answer.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -23,7 +23,7 @@ class AnswersController < ApplicationController
       if @answer.update(answer_params)
         format.js
       else
-        format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
+        format.js { render json: @answer.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

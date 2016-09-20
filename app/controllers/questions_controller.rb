@@ -18,15 +18,9 @@ class QuestionsController < ApplicationController
         format.js { redirect_to question_path(@question), notice: 'Please wait for a while,' \
                                                   ' someone will answer you soon.'  }
       else
-        format.html { render :new }
+        format.js { render json: @question.errors.full_messages, status: :unprocessable_entity }
       end
     end
-    # if @question.save
-    #   redirect_to question_path(@question), notice: 'Please wait for a while,' \
-    #                                              ' someone will answer you soon.' 
-    # else
-    #   render :new
-    # end
   end
 
   def show
