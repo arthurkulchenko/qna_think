@@ -12,6 +12,7 @@ class Answer < ApplicationRecord
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
+  scope :not_best_answers, -> { where(best_answer: false) }
 
   def answers_stack
     question.answers

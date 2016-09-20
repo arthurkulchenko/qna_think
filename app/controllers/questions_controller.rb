@@ -24,7 +24,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @one_best_answer = @question.answers.best_first.first
+    @best_answer = @question.answers.best_first.first
+    @not_best_answers = @question.answers.not_best_answers
   end
 
   def update

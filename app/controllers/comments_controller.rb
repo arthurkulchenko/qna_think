@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  helper_method :parent_object
   
   def create
     @comment = parent_object.comments.new(comment_params)
