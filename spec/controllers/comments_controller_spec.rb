@@ -2,8 +2,8 @@ RSpec.describe CommentsController, type: :controller do
   let(:user){ create(:user) }
   let(:question){ create(:question, user: user) }
   let(:answer){ create(:answer, user: user, question: question) }
-  let(:comment){ create(:comment, user: user, comments_parent: question) }
-  let(:comment2){ create(:comment, user: user, comments_parent: answer) }
+  let(:comment){ create(:comment, user: user, parent: question) }
+  let(:comment2){ create(:comment, user: user, parent: answer) }
 #---------------------------------------------POST(CREATE)
   describe 'POST #create' do
     sign_in_user
@@ -31,7 +31,7 @@ RSpec.describe CommentsController, type: :controller do
     sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:answer){ create(:answer, user: user, question: question) }
-    let!(:comment){ create(:comment, comments_parent: answer, user: @user) }
+    let!(:comment){ create(:comment, parent: answer, user: @user) }
     let(:request){ delete :destroy, answer_id: answer, id: comment, format: :json }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his comment' do
@@ -79,7 +79,7 @@ RSpec.describe CommentsController, type: :controller do
   describe 'DELETE #destroy' do
     sign_in_user
     let!(:question){ create(:question, user: @user) }
-    let!(:comment){ create(:comment, comments_parent: question, user: @user) }
+    let!(:comment){ create(:comment, parent: question, user: @user) }
     let(:request){ delete :destroy, question_id: question, id: comment, format: :json }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his comment' do

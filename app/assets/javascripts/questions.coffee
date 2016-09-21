@@ -1,9 +1,12 @@
 jQuery ->
- 
+##-----------------NEW-QUESTION-AS-JSON--------------------
  $('.new_question').bind 'ajax:error', (e, xhr, status, error) ->
   errors = JSON.parse(xhr.responseText)
   alert errors
-
+ $('.new_questoin').bind 'ajax:success', (e, data, status, xhr) ->
+  questoin = JSON.parse(xhr.responseText)
+  $('.questoin').last().append(questoin.content)
+#------------------NEW-QUESTION-AS-JSON--------------------
  $('.question').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
   json_mark = JSON.parse(xhr.responseText).mark
   $(this).closest('.rate-form').children('p').hide()

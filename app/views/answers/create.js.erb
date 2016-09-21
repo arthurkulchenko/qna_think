@@ -1,4 +1,8 @@
-<% publish_to "/questions/#{@answer.question_id}/answers" do %>
-  $('.answers').last('.answer').append("<%=j render partial: @answer, locals: { visibility: false } %>");
+<% if @answer.errors.any? %>
+  alert('<%= j @answer.errors.full_messages.join('\n') %>')
+<% else %>
+    <% publish_to "/questions/#{@answer.question_id}/answers" do %>
+      $('.answers').last('.answer').append("<%=j render partial: @answer, locals: { visibility: false } %>");
+    <%end%>
 <%end%>
 $('#answer_content').val('');

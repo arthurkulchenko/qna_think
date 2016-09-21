@@ -15,10 +15,12 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     respond_to do |format|
       if @question.save
-        format.js { redirect_to question_path(@question), notice: 'Please wait for a while,' \
+        format.js
+        format.json { redirect_to question_path(@question), notice: 'Please wait for a while,' \
                                                   ' someone will answer you soon.'  }
       else
-        format.js { render json: @question.errors.full_messages, status: :unprocessable_entity }
+        format.js
+        format.json { render json: @question.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
