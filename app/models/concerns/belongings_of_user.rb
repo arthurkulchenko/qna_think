@@ -1,4 +1,4 @@
-module BelongiesToUser
+module BelongingsOfUser
 	
   extend ActiveSupport::Concern
 

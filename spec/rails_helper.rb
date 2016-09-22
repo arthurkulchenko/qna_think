@@ -8,7 +8,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 # require 'rspec/rails'
 # require 'spec_helper'
-# require 'devise'
+require 'devise'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

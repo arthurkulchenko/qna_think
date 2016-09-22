@@ -1,6 +1,7 @@
 %h2 Answers
 .answers
- - if @best_answer && @best_answer.best_answer
-  = render partial: @best_answer, locals: { visibility: visibility }
- = render partial: @not_best_answers, locals: { visibility: visibility }
+ / -# if @best_answer && @best_answer.best_answer
+  / =# render partial: @best_answer, locals: { visibility: visibility }
+ / =# render partial: @not_best_answers, locals: { visibility: visibility }
+ = render partial: @answers, locals: { visibility: visibility }
 %hr

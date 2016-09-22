@@ -1,6 +1,6 @@
 class Vote < ApplicationRecord
   
-  include BelongiesToUser
+  include BelongingsOfUser
 
   belongs_to :ballot, polymorphic: true
   

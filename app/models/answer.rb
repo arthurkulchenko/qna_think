@@ -3,7 +3,7 @@ class Answer < ApplicationRecord
   include Voting
   include Attaching
   include Commenting
-  include BelongiesToUser
+  include BelongingsOfUser
   
   belongs_to :question
 

@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   
-  include BelongiesToUser
+  include BelongingsOfUser
 
   belongs_to :parent, polymorphic: true
   validates :comments_parent_type, :content, presence: true

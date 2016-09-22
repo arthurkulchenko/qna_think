@@ -13,21 +13,23 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
-    respond_to do |format|
-      if @question.save
-        format.js
-        format.json { redirect_to question_path(@question), notice: 'Please wait for a while,' \
-                                                  ' someone will answer you soon.'  }
-      else
-        format.js
-        format.json { render json: @question.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
+    @question.save
+    # respond_to do |format|
+      # if @question.save
+        # format.js
+        # format.json { redirect_to question_path(@question), notice: 'Please wait for a while,' \
+                                                  # ' someone will answer you soon.'  }
+      # else
+        # format.js
+        # format.json { render json: @question.errors.full_messages, status: :unprocessable_entity }
+      # end
+    # end
   end
 
   def show
-    @best_answer = @question.answers.best_first.first
-    @not_best_answers = @question.answers.not_best_answers
+    # @best_answer = @question.answers.best_first.first
+    # @not_best_answers = @question.answers.not_best_answers
+    @answers = @question.answers.best_first
   end
 
   def update

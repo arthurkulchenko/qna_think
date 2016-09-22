@@ -3,18 +3,19 @@ class CommentsController < ApplicationController
   before_action :parent_question_id, only: [:create]
   
   def create
-    parent_object
+    # parent_object
     @comment = parent_object.comments.new(comment_params)
     @comment.user = current_user
-    respond_to do |format|
-      if @comment.save
-        format.js
-        format.json { render json: @comment }
-      else
-        format.js
-        format.json { render json: @comment.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
+    @comment.save
+    # respond_to do |format|
+      # if @comment.save
+        # format.js
+        # format.json { render json: @comment }
+      # else
+        # format.js
+        # format.json { render json: @comment.errors.full_messages, status: :unprocessable_entity }
+      # end
+    # end
   end
 
   def destroy
@@ -28,8 +29,7 @@ class CommentsController < ApplicationController
   private
 
   def parent_object
-    @obj = request.original_fullpath[/[\w]+/]
-    @object ||= @obj.classify.constantize.find(params["#{@obj.singularize}".+('_id').to_sym])
+    @object ||= request.original_fullpath[/[\w]+/].classify.constantize.find(params["#{@obj.singularize}".+('_id').to_sym])
   end
 
   def parent_question_id
