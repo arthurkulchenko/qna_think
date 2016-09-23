@@ -1,6 +1,4 @@
-<% publish_to "/questions/#{@question_id}/comments" do %>
-  var classOfObject = "." + '<%="#{@object.class.to_s.downcase.pluralize}"%>';
-  var idOfObject = "#" + '<%="#{@object.id}"%>';
-  $(classOfObject).children(idOfObject).children(".comments").children('.comment').last().append("<%=j render partial: 'comments/comment', locals: { comment: @comment } %>");
+<% publish_to "/questions/#{parent_question_id}/comments" do %>
+  $('#<%= dom_id(parent) %>').children(".comments").children('.comment').last().append("<%=j render @comment %>");
 <%end%>
 $('#comment_content').val('');

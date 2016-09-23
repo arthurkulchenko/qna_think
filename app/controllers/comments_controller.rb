@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
-  helper_method :parent
-  before_action :parent_question_id, only: [:create]
+  helper_method :parent, :parent_question_id
   
   def create
     @comment = parent.comments.new(comment_params)
@@ -11,15 +10,12 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy if current_user.is_author_of?(@comment)
-    respond_to do |format|
-      format.json { render :nothing => true }
-    end
   end
 
   private
 
   def parent
-    @parent ||= request.original_fullpath[/[\w]+/].classify.constantize.find(params["#{@obj.singularize}".+('_id').to_sym])
+    @parent ||= request.original_fullpath[/[\w]+/].classify.constantize.find(params["#{request.original_fullpath[/[\w]+/].singularize}".+('_id').to_sym])
   end
 
   def parent_question_id

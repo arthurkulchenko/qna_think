@@ -9,6 +9,7 @@
    = render partial: 'questions/edit', locals: { question: @question }
   %br
   .comments
+   .comment
    = render partial: @question.comments
   .new_comment
    = render partial: 'comments/new', locals: { parent_object: @question }

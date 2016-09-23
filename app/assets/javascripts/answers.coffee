@@ -16,10 +16,6 @@ jQuery ->
   $('.edit_answer_form').hide()
   $('.attached-files').hide()
 
-  $('.answer').children('.delete_answer_link').click () ->
-   $(this).parent('.answer').fadeOut()
-   $(this).parent('.answer').remove()
-
   $('.button-answer').click () ->
    $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
   $('.submit-button').click () ->
