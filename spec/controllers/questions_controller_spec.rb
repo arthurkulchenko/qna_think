@@ -63,22 +63,10 @@ RSpec.describe QuestionsController, :type => :controller do
     end
 
     context 'in fail context  -- ' do
-
-      # post "/sessions", {:session => {:email => user.email, 
-      #   :password => user.password}}, {"HTTPS" => "on", 'HTTP_REFERER' => '/signin'}
-      
-      # let(:request) { post :create, :session => { :title => nil, :content => nil}, {'HTTP_REFERER' => '/question/new'}
-      # request.env["HTTP_REFERER"] = "/question/new"
-      
       let(:request) { post :create, question: attributes_for(:with_illegal_values), format: :js }
       it 'do not creates new question' do
         expect{request}.to_not change(Question, :count)
       end
-
-      # it 'renders :new' do
-      #   request
-      #   expect(response).to render_template :new
-      # end
     end
   end
 #---------------------------------------------UPDATE

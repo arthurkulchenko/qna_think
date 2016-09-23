@@ -2,6 +2,5 @@
  - if comment.persisted?
   %p="User #{comment.user_id} says:"
   %strong= comment.content
-  %strong= comment.content
-  - if !current_user.is_author_of?(comment)
+  - unless current_user.is_author_of?(comment)
    = link_to 'Delete my comment', plymorphic_path(comment.parent, comment), method: :delete 

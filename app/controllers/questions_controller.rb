@@ -14,21 +14,9 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     @question.save
-    # respond_to do |format|
-      # if @question.save
-        # format.js
-        # format.json { redirect_to question_path(@question), notice: 'Please wait for a while,' \
-                                                  # ' someone will answer you soon.'  }
-      # else
-        # format.js
-        # format.json { render json: @question.errors.full_messages, status: :unprocessable_entity }
-      # end
-    # end
   end
 
   def show
-    # @best_answer = @question.answers.best_first.first
-    # @not_best_answers = @question.answers.not_best_answers
     @answers = @question.answers.best_first
   end
 
@@ -43,7 +31,7 @@ class QuestionsController < ApplicationController
   private
   
   def authorship_verification
-    redirect_to @question, notice: "You can't modify this Question" unless current_user.is_author_of?(@question)
+    redirect_to @question, notice: 'Deny!' unless current_user.is_author_of?(@question)
   end
 
   def question_params

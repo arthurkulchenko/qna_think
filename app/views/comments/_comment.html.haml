@@ -1,4 +1,4 @@
-.comment
+.comment{:id => "#{comment.class}-#{comment.id}"}
  - if comment.persisted?
   %p="User #{comment.user_id} says:"
   %strong= comment.content

@@ -5,7 +5,6 @@ feature 'delete answer', %q(
   As auth user
   I want to delete my own answer
   )do
-     
     given!(:user){ create(:user) }
     given(:another_user){ create(:user) }
     given!(:question){ create(:question, user: user) }

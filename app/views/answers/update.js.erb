@@ -1,5 +1,6 @@
 <% if @answer.errors.any? %>
   alert('<%= j @answer.errors.full_messages.join('\n') %>')
 <% else %>
-   $('#edit_answer_'+'<%="#{@answer.id.to_s}"%>').parent('.answer').children('.answer-content').html('<strong><%= j @answer.content %></strong>');
+   $('#<%=dom_id(@answer, :edit)%>').parent('.answer').children('.answer-content').html('<strong><%= j @answer.content %></strong>');
+   $('.edit_answer_form').hide();
 <%end%>

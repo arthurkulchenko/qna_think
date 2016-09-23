@@ -3,7 +3,6 @@ feature 'answer a question', %q(
   As a registred user
   I want to give an answer
   ) do
-
     given(:question){ create(:question)  }
     given(:user){ create(:user) }
     background do

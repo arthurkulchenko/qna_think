@@ -1,1 +1,2 @@
-$('.question-list').children('#<%="#{@question.id}"%>').remove();
+$('#<%= dom_id(@question) %>').fadeOut();
+$('#<%= dom_id(@question) %>').remove();
