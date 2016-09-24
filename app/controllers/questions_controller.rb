@@ -2,30 +2,34 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :question_load, only: [:show, :edit, :update, :destroy]
   before_action :authorship_verification, only: [:destroy]
+
+  respond_to :html, except: [:create, :destroy, :update]
+  respond_to :js, only: [:create, :destroy, :update]
+
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def new
-    @question = Question.new
+    respond_with(@question = Question.new)
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.user = current_user
-    @question.save
+    respond_with (@question = Question.create(question_params.merge(user: current_user)))
   end
 
   def show
     @answers = @question.answers.best_first
+    respond_with @question
   end
 
   def update
     @question.update(question_params)
+    respond_with @question
   end
 
   def destroy
-    redirect_to questions_path, notice: 'Your Question is deleted' if @question.delete
+    respond_with(@question.delete)
   end
 
   private

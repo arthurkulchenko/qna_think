@@ -2,5 +2,6 @@
   alert('<%= j @answer.errors.full_messages.join('\n') %>')
 <% else %>
    $('#<%=dom_id(@answer, :edit)%>').parent('.answer').children('.answer-content').html('<strong><%= j @answer.content %></strong>');
+   // $('#<%=dom_id(@answer, :edit)%>').parent('.answer');
    $('.edit_answer_form').hide();
 <%end%>

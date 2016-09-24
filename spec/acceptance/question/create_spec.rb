@@ -3,8 +3,7 @@ require_relative '../acceptance_helper'
 feature 'create question', %q(
   In order to get help
   as a noobie user
-  I want to be able ask for help  -- ) 
-  do
+  I want to be able ask for help  -- ) do
     given(:user){ create(:user) }
     given(:question){ create(:question, user: user) }
     given!(:answers){ create_list(:answer, 3, question: question) }

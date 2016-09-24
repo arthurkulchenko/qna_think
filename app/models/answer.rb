@@ -18,6 +18,8 @@ class Answer < ApplicationRecord
     question.answers
   end
 
+  # @answers_with_filter = @answer.answers_stack.best_first.includes(:attachments)
+
   private
   
   def check_of_best
