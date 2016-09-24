@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  helper_method :parent, :parent_question_id
+  helper_method :parent_question_id, :parent
+  before_action :parent, only: [:create]
   
   def create
     @comment = parent.comments.new(comment_params)
