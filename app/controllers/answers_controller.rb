@@ -1,7 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :answer_loader_and_authorship_verification, only: [:update, :destroy]
-  
+  before_action :authorship_verification, only: [:update, :destroy]
   respond_to :js
 
   def create
@@ -19,13 +18,12 @@ class AnswersController < ApplicationController
 
   private
 
+  def authorship_verification
+    @answer ||= Answer.find(params[:id])
+    redirect_to @answer, notice: 'Deny!' unless current_user.is_author_of?(@answer)
+  end
+
   def answer_params
     params.require(:answer).permit(:content, :best_answer, attachments_attributes: [file:[]])
   end
-
-  def answer_loader_and_authorship_verification
-    @answer ||= Answer.find(params[:id])
-    redirect_to @answer.question, notice: 'Deny!' unless current_user.is_author_of?(@answer)
-  end
-
 end

@@ -11,5 +11,4 @@ class User < ApplicationRecord
   def is_author_of?(obj)
     obj.user_id == id
   end
-
 end

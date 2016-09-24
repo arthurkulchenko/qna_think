@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
   before_action :question_load, only: [:show, :edit, :update, :destroy]
-  before_action :authorship_verification, only: [:destroy]
+  before_action :authorship_verification, only: [:update, :destroy]
 
   respond_to :js, only: [:create, :destroy, :update]
 
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   private
-  
+
   def authorship_verification
     redirect_to @question, notice: 'Deny!' unless current_user.is_author_of?(@question)
   end
@@ -44,5 +44,4 @@ class QuestionsController < ApplicationController
   def question_load
     @question = Question.find(params[:id])
   end
-  
 end
