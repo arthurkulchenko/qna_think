@@ -1,5 +1,6 @@
 class VotesController < ApplicationController
   before_action :authorship_verification, only: [:destroy]
+  
   respond_to :json
 
   def create
@@ -14,7 +15,7 @@ class VotesController < ApplicationController
 
   def authorship_verification
     @vote = Vote.find(params[:id])
-    redirect_to @vote, notice: 'Deny!' unless current_user.is_author_of?(@vote)
+    # redirect_to @vote, notice: 'Deny!' unless current_user.is_author_of?(@vote)
   end
 
   def parent

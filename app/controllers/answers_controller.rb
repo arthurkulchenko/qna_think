@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :answer_loader_and_authorship_verification, only: [:update, :destroy]
+  
   respond_to :js
 
   def create

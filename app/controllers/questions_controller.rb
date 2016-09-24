@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
   before_action :question_load, only: [:show, :edit, :update, :destroy]
   before_action :authorship_verification, only: [:destroy]
 
-  respond_to :html, except: [:create, :destroy, :update]
   respond_to :js, only: [:create, :destroy, :update]
 
   def index

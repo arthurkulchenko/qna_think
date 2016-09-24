@@ -9,7 +9,7 @@ jQuery ->
   json_mark = JSON.parse(xhr.responseText).mark
   alert json_mark
 #--------------------------VOTING-----------------------------
- $('.answer-check-box').click () ->
+ $('.vote-check-box').click () ->
   $(this).parent('form').submit()
 
  $(document).on "turbolinks:load", () ->

@@ -1,10 +1,4 @@
 - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer.question)
  = form_for answer, remote: true do |f|
-  .answer-check-box
-   - if f.object.best_answer
-    #best-answer
-     = f.label :best_answer, 'Is this Answer The Best?'
-     = f.check_box :best_answer, { class: 'vote-check-box' }
-   - else
-    = f.label :best_answer, 'Is this Answer The Best?'
-    = f.check_box :best_answer, { class: 'vote-check-box' }
+  = f.label :best_answer, 'Is this Answer The Best?'
+  = f.check_box :best_answer, { class: 'vote-check-box' }

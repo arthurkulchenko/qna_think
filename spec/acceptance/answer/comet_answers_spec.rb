@@ -19,7 +19,6 @@ feature 'comet answer', %q(
     within '.answer' do
       fill_in 'Your Comment', with: 'IMHO'
       click_on 'Post Comment'
-      save_and_open_page
       expect(page).to have_content 'IMHO'
     end
   end

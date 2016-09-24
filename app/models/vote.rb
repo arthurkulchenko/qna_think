@@ -8,8 +8,14 @@ class Vote < ApplicationRecord
 
   after_create :delete_same_users_vote, :update_mark_sum
   after_destroy :update_mark_sum
+
+  before_destroy :authorship_verivication
   
   private
+
+  def authorship_verification
+    redirect_to self, notice: 'Deny!' unless current_user.is_author_of?(self)
+  end
 
   def delete_same_users_vote
     @votes = Vote.where(ballot: ballot, user: user_id)
