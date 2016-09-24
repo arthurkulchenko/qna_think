@@ -8,6 +8,8 @@ class Vote < ApplicationRecord
   after_create :delete_same_users_vote, :update_mark_sum
   after_destroy :update_mark_sum
 
+  private
+
   def delete_same_users_vote
     @votes = Vote.where(ballot: ballot, user: user_id)
     @votes.first.destroy if @votes.count > 1

@@ -4,8 +4,8 @@
  = render partial: 'answers/vote', locals: { answer: answer }
  = render partial: 'layouts/voting', locals: { parent_object: answer }
  = render partial: 'layouts/attached_files', locals: { parent_object: answer }
- 
- = render partial: 'answers/edit', locals: { answer: answer}
+ - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
+  = render partial: 'answers/edit', locals: { answer: answer}
  .comments
   .comment
   = render partial: answer.comments
