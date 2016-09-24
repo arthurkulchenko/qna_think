@@ -1,0 +1,4 @@
+<% publish_to "/questions/#{parent_question_id}/comments" do %>
+  $('#<%= dom_id(parent) %>').children(".comments").children('.comment').last().append("<%=j render @comment %>");
+<%end%>
+$('#comment_content').val('');

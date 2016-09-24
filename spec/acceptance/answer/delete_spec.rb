@@ -5,7 +5,6 @@ feature 'delete answer', %q(
   As auth user
   I want to delete my own answer
   )do
-     
     given!(:user){ create(:user) }
     given(:another_user){ create(:user) }
     given!(:question){ create(:question, user: user) }
@@ -14,6 +13,7 @@ feature 'delete answer', %q(
     scenario 'deleting answer', js: true do
       sign_in(user)
       visit question_path(question)
+      find(".button-answer").click
       click_on 'Delete my Answer'
       expect(page).to_not have_content answer.content
     end

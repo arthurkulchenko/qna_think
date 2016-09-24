@@ -1,2 +1,9 @@
-$('.answers').last('.answer').append('<%= j render @answer%>');
+<% if @answer.errors.any? %>
+  alert('<%= j @answer.errors.full_messages.join('\n') %>')
+<% else %>
+    <% publish_to "/questions/#{@answer.question_id}/answers" do %>
+      $('.answers').last('.answer').append("<%= j render partial: 'answers/comet_answer', locals: {answer: @answer} %>");
+    <%end%>
+<%end%>
+$('#<%= dom_id(@answer)%>').children('.comments').prepend("<%= j render partial: 'answers/edit', locals: {answer: @answer} %>")
 $('#answer_content').val('');

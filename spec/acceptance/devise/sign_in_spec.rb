@@ -1,5 +1,3 @@
-require_relative '../acceptance_helper'
-
 feature 'logginig', %q(
   To do some actions like give answer or ask for question
   As regilar user

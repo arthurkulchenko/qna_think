@@ -17,4 +17,5 @@ module ControllerMacros
   def current_user_in
     subject.current_user
   end
+
 end

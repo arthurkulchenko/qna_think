@@ -13,16 +13,11 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user = current_user
-    if @question.save
-      redirect_to question_path(@question), notice: 'Please wait for a while,' \
-                                                 ' someone will answer you soon.' 
-    else
-      render :new
-    end
+    @question.save
   end
 
   def show
-    @one_best_answer = @question.answers.best_first.first
+    @answers = @question.answers.best_first
   end
 
   def update
@@ -36,7 +31,7 @@ class QuestionsController < ApplicationController
   private
   
   def authorship_verification
-    redirect_to @question, notice: "You can't modify this Question" unless current_user.is_author_of?(@question)
+    redirect_to @question, notice: 'Deny!' unless current_user.is_author_of?(@question)
   end
 
   def question_params

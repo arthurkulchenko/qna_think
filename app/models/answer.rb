@@ -2,15 +2,17 @@ class Answer < ApplicationRecord
 
   include Voting
   include Attaching
+  include Commenting
+  include BelongingsOfUser
   
   belongs_to :question
-  belongs_to :user
 
   validates :content, presence: true
 
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
+  scope :not_best_answers, -> { where(best_answer: false) }
 
   def answers_stack
     question.answers

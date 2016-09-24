@@ -3,13 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-   has_many :questions, dependent: :destroy
-   has_many :answers, dependent: :destroy
-   has_many :votes, dependent: :destroy
-   has_many :attachments, dependent: :destroy
+  
+  [:questions, :answers, :votes, :comments, :attachments].each do |model|
+    has_many model, dependent: :destroy
+  end
 
-   def is_author_of?(obj)
-     obj.user_id == id
-   end
+  def is_author_of?(obj)
+    obj.user_id == id
+  end
 
 end

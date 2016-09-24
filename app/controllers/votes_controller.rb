@@ -1,13 +1,11 @@
 class VotesController < ApplicationController
 
   def create
-    parent_object
-    @vote = @object.votes.new(vote_params)
+    @vote = parent.votes.new(vote_params)
     @vote.user = current_user
-    
     respond_to do |format|
       if @vote.save
-        format.json { render json: @object.reload }
+        format.json { render json: parent.reload }
       else
         format.json { render json: @vote.errors.full_messages, status: :unprocessable_entity }
       end
@@ -25,9 +23,8 @@ class VotesController < ApplicationController
 
   private
 
-  def parent_object
-    @obj = request.original_fullpath[/[\w]+/]
-    @object = @obj.classify.constantize.find(params["#{@obj.singularize}".+('_id').to_sym])
+  def parent
+    @parent ||= request.original_fullpath[/[\w]+/].classify.constantize.find(params["#{request.original_fullpath[/[\w]+/].singularize}".+('_id').to_sym])
   end
 
   def vote_params

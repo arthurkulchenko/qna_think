@@ -30,7 +30,7 @@ RSpec.describe VotesController, type: :controller do
       let(:request) { delete :destroy, id: vote, format: :json }
       it 'deletes vote' do
         vote
-        expect{ request }.to change(Vote, :count).from(1).to(0)
+        expect{ request }.to change(Vote, :count).by(-1)
       end
     end
     context "failed deletation" do

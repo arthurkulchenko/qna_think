@@ -25,8 +25,8 @@ class AnswersController < ApplicationController
   end
 
   def answer_loader_and_authorship_verification
-    @answer = Answer.find(params[:id])
-    redirect_to @answer.question, notice: "Deny!" unless current_user.is_author_of?(@answer)
+    @answer ||= Answer.find(params[:id])
+    redirect_to @answer.question, notice: 'Deny!' unless current_user.is_author_of?(@answer)
   end
 
 end

@@ -1,0 +1,10 @@
+<% if @question.errors.any? %>
+  alert('<%= j @question.errors.full_messages.join('\n') %>')
+<% else %>
+    <% publish_to "/questions" do %>
+      $('.question-list').last('.question-link').append("<%= j link_to @question.title, question_path(@question), html: { class: 'question-link' } %><br>");
+    <%end%>
+$('.new_question').before("<h3>Please wait for a while, someone will answer you soon.</h3>");
+<%end%>
+$('#question_title').val('');
+$('#question_content').val('');

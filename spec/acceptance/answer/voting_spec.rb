@@ -15,9 +15,7 @@ feature 'answer voting', %q(
       visit question_path(question)
     end
 
-    scenario "owner of answer can't vote for his answer" do
-      expect(page).to have_content "sequenced content -- 2 Total rate is 0 Attached files"
-      # save_and_open_page  
+    scenario "owner of answer can't vote for his answer" do  
     end
 
     scenario "voice is considered", js: true do

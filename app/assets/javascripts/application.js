@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require private_pub
 //= require turbolinks
 //= require cocoon
 //= require_tree .
-// , :onclick => '$(this).parent("form").submit();'
