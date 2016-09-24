@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20160909123015) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "comments_parent_id",                comment: "polimorphic"
-    t.string   "comments_parent_type"
-    t.text     "content",                           comment: "body of comment"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.index ["comments_parent_id"], name: "index_comments_on_comments_parent_id", using: :btree
-    t.index ["comments_parent_type"], name: "index_comments_on_comments_parent_type", using: :btree
+    t.integer  "parent_id",                comment: "polimorphic"
+    t.string   "parent_type"
+    t.text     "content",                  comment: "body of comment"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["parent_id", "parent_type"], name: "index_comments_on_parent_id_and_parent_type", using: :btree
+    t.index ["parent_id"], name: "index_comments_on_parent_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
