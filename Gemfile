@@ -19,7 +19,10 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'cocoon'
 
 gem 'private_pub'
-gem 'oauth'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 gem 'sphinx'
 gem 'cancan'
 gem 'pundit'
@@ -52,6 +55,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem 'capybara-email'
 
   gem 'rails-controller-testing'
 end
