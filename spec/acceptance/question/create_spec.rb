@@ -3,8 +3,7 @@ require_relative '../acceptance_helper'
 feature 'create question', %q(
   In order to get help
   as a noobie user
-  I want to be able ask for help  -- ) 
-  do
+  I want to be able ask for help  -- ) do
     given(:user){ create(:user) }
     given(:question){ create(:question, user: user) }
     given!(:answers){ create_list(:answer, 3, question: question) }
@@ -19,7 +18,5 @@ feature 'create question', %q(
     scenario 'asking for help', js: true do
       expect(page).to have_content 'Please wait for a while,'\
                               ' someone will answer you soon.'
-      expect(page).to have_content 'ern Error: missing important thing code:234'
-      expect(page).to have_content 'Every time, when I do ..., I get ..., what should I do?'
     end	
 end

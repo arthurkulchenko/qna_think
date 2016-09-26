@@ -1,19 +1,24 @@
 class CommentsController < ApplicationController
   helper_method :parent_question_id, :parent
   before_action :parent, only: [:create]
+  before_action :authorship_verification, only: [:destroy]
+  
+  respond_to :js
   
   def create
-    @comment = parent.comments.new(comment_params)
-    @comment.user = current_user
-    @comment.save
+    respond_with(@comment = parent.comments.create(comment_params.merge(user: current_user)))
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    @comment.destroy if current_user.is_author_of?(@comment)
+    respond_with(@comment.delete)
   end
 
   private
+
+  def authorship_verification
+    @comment = Comment.find(params[:id])
+    redirect_to @comment, notice: 'Deny!' unless current_user.is_author_of?(@comment)
+  end
 
   def parent
     @parent ||= request.original_fullpath[/[\w]+/].classify.constantize.find(params["#{request.original_fullpath[/[\w]+/].singularize}".+('_id').to_sym])

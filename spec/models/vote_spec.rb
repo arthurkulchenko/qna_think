@@ -1,6 +1,7 @@
 RSpec.describe Vote, type: :model do
   it { should belong_to(:user) }
-  it { validate_inclusion_of(:mark) }
+  it { should validate_presence_of(:user_id) }
+  it { should validate_inclusion_of(:mark).in_array([-1,0,1]) }
 
   let(:user){create(:user)}
   let(:user2){create(:user)}
@@ -22,12 +23,12 @@ RSpec.describe Vote, type: :model do
 
   context 'with question' do
     it 'deletes same users vote' do
-      expect{Vote.create(ballot: question, mark: -1)}.to change(question, :mark).to(-1)
+      expect{Vote.create(ballot: question, mark: -1, user: user)}.to change(question, :mark).to(-1)
     end
   end
   context 'with answer' do
     it 'deletes same users vote' do
-      expect{Vote.create(ballot: answer, mark: -1)}.to change(answer, :mark).to(-1)
+      expect{Vote.create(ballot: answer, mark: -1, user: user)}.to change(answer, :mark).to(-1)
     end
   end
 end

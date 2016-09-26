@@ -1,5 +1,4 @@
-class Question < ApplicationRecord
-	
+class Question < ApplicationRecord	
   include Voting
   include Attaching
   include Commenting

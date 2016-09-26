@@ -2,5 +2,11 @@
   alert('<%= j @answer.errors.full_messages.join('\n') %>')
 <% else %>
    $('#<%=dom_id(@answer, :edit)%>').parent('.answer').children('.answer-content').html('<strong><%= j @answer.content %></strong>');
+   <%if @answer.best_answer %>
+      $('.best_answer').children('.answer').prependTo('.answers');
+      $('#<%=dom_id(@answer)%>').prependTo('.best_answer');
+      $('.vote-check-box').prop("checked", false);
+      $('#<%=dom_id(@answer)%>').find('.vote-check-box').prop("checked", true);
+   <%end%>
    $('.edit_answer_form').hide();
 <%end%>

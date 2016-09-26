@@ -4,6 +4,8 @@
     <% publish_to "/questions/#{@answer.question_id}/answers" do %>
       $('.answers').last('.answer').append("<%= j render partial: 'answers/comet_answer', locals: {answer: @answer} %>");
     <%end%>
+    $('#<%= dom_id(@answer)%>').children('.comments').prepend("<%= j render partial: 'answers/edit', locals: {answer: @answer} %>");
+    $('.edit_answer_form').hide();
+    $('.attached-files').hide();
 <%end%>
-$('#<%= dom_id(@answer)%>').children('.comments').prepend("<%= j render partial: 'answers/edit', locals: {answer: @answer} %>")
 $('#answer_content').val('');

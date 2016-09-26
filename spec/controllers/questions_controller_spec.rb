@@ -1,19 +1,5 @@
 RSpec.describe QuestionsController, :type => :controller do
   let!(:user){ create(:user) }
-#---------------------------------------------INDEX
-  describe 'GET #index' do
-    before { get :index }
-    let(:questions){ create_list(:question, 3) }
-
-    it 'assigns array of quesitons' do
-      expect(assigns(:questions)).to match_array @questions
-    end
-
-    it 'renders template' do
-      expect(response).to render_template :index
-    end
-
-  end
 #---------------------------------------------NEW
   describe 'GET #new' do
     let(:question){ create(:question, user: user) }
@@ -49,11 +35,6 @@ RSpec.describe QuestionsController, :type => :controller do
       let(:request) { post :create, question: attributes_for(:question), format: :js }
         it 'creates new question' do
           expect{request}.to change(Question, :count).by(1)
-        end
-
-        it 'redirect after save to #index' do
-          request
-          expect(response).to redirect_to question_path(assigns(:question))
         end
 
         it 'relate question with its user', format: :js do
@@ -113,10 +94,6 @@ RSpec.describe QuestionsController, :type => :controller do
         expect(question.user).to eq subject.current_user
       end
       
-      it 'redirects to index' do
-        request
-        expect(response).to redirect_to questions_path
-      end
     end
     context 'not owner try to delete question' do
       sign_in_user

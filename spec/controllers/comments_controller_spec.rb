@@ -32,7 +32,7 @@ RSpec.describe CommentsController, type: :controller do
     let!(:question){ create(:question, user: @user) }
     let!(:answer){ create(:answer, user: user, question: question) }
     let!(:comment){ create(:comment, parent: answer, user: @user) }
-    let(:request){ delete :destroy, answer_id: answer, id: comment, format: :json }
+    let(:request){ delete :destroy, answer_id: answer, id: comment, format: :js }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his comment' do
       it 'deletes comment' do
@@ -80,7 +80,7 @@ RSpec.describe CommentsController, type: :controller do
     sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:comment){ create(:comment, parent: question, user: @user) }
-    let(:request){ delete :destroy, question_id: question, id: comment, format: :json }
+    let(:request){ delete :destroy, question_id: question, id: comment, format: :js }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his comment' do
       it 'deletes comment' do
