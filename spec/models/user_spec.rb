@@ -20,19 +20,40 @@ RSpec.describe User, type: :model do
         end
       end
       context 'if he has\'t authorizations for 3p auth' do
-        let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123', info: {email: user.email} )}
-        it 'returns user' do
-          expect(method_call).to eq user
+        context 'email given' do
+          let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123', info: {email: user.email} )}
+          it 'returns user' do
+            expect(method_call).to eq user
+          end
+        end
+        context 'email don\'t given' do  
+          let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
+          it 'returns user' do
+            expect(method_call).to eq user
+          end
         end
       end
     end
     context 'if user don\'t exist in db' do
-      it 'creates User' do
+      context 'email given' do
+        let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123', info: {email: user.email} )}
+        it 'creates User' do
+        end
+        it 'creates Authorization' do
+        end
+        it 'returns user' do
+          expect(method_call).to eq user
+        end
       end
-      it 'creates Authorization' do
-      end
-      it 'returns user' do
-        expect(method_call).to eq user
+      context 'email don\'t given' do
+        let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
+        it 'creates User' do
+        end
+        it 'creates Authorization' do
+        end
+        it 'returns user' do
+          expect(method_call).to eq user
+        end
       end
     end
   end
