@@ -7,7 +7,7 @@ class OmniauthCallbacks::OmniauthCallbacksController < Devise::OmniauthCallbacks
   # end
   
   def facebook
-    render json: request.env["omniauth.auth"]
+    User.find_for_oauth(request.env["omniauth.auth"])
   end
 
   def twitter

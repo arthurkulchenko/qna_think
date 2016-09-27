@@ -7,15 +7,25 @@ RSpec.describe User, type: :model do
   let(:user){ create(:user) }
   let(:answer){ create(:answer, user: user) }
   let(:a_answer){ create(:answer) }
-  
-  context 'success' do
-    it 'checks is_author_of? method' do
-      expect(user.is_author_of?(answer)).to eq true
+
+  describe '.find_for_auth method' do
+    context '' do
+    end
+    context '' do
     end
   end
-  context 'fail' do
-    it 'checks is_author_of? method' do
-      expect(user.is_author_of?(a_answer)).to eq false
+
+  describe '#is_author_of? method' do  
+    context 'success' do
+      it 'checks is_author_of? method' do
+        expect(user.is_author_of?(answer)).to eq true
+      end
+    end
+    context 'fail' do
+      it 'checks is_author_of? method' do
+        expect(user.is_author_of?(a_answer)).to eq false
+      end
     end
   end
+
 end

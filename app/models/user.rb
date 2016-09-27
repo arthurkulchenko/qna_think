@@ -11,4 +11,14 @@ class User < ApplicationRecord
   def is_author_of?(obj)
     obj.user_id == id
   end
+
+  def self.find_for_auth(request)
+    authorization = Authorization.where(provider: request.provider, uid: request.uid)
+    user = 
+    if authorization
+      authorization.user
+    else
+      
+    end
+  end
 end
