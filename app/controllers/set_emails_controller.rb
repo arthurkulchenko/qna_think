@@ -8,9 +8,6 @@ class SetEmailsController < ApplicationController
     @token = SecureRandom.base64(18)
     EmailConfirmationMailer.please_confirm_email(@user, @token).deliver_now
     @user.update(email_confirmation_token: @token)
-    # @token = SecureRandom.base64(18)
-    # @user.update(user_email_params.merge(email_confirmation_token: @token))
-    # EmailConfirmation.please_confirm_email(@token).deliver_now
     @path = @user.email[(@user.email.index('@')+1)..-1]
     redirect_to @path
   end

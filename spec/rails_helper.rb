@@ -30,6 +30,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.extend ControllerMacros, type: :controller
+  config.include(OmniauthMacros)
   
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   # config.use_transactional_tests = false
@@ -43,4 +44,5 @@ RSpec.configure do |config|
     config.include ::Rails::Controller::Testing::TemplateAssertions, :type => type
     config.include ::Rails::Controller::Testing::Integration, :type => type
   end
+  OmniAuth.config.test_mode = true
 end
