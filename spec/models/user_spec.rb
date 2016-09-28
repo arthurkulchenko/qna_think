@@ -27,10 +27,11 @@ RSpec.describe User, type: :model do
           end
         end
         context 'email don\'t given' do  
-          let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
-          it 'returns user' do
-            expect(method_call).to eq user
-          end
+        # In this way, we won't know the truth
+        #   let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
+        #   it 'returns user' do
+        #     expect(method_call).to eq user
+        #   end
         end
       end
     end
@@ -38,21 +39,27 @@ RSpec.describe User, type: :model do
       context 'email given' do
         let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123', info: {email: user.email} )}
         it 'creates User' do
+          expect{method_call}.to change(User, :count).by(1)
         end
         it 'creates Authorization' do
+          expect{method_call}.to change(Authorization, :count).by(1)
         end
         it 'returns user' do
           expect(method_call).to eq user
         end
       end
       context 'email don\'t given' do
-        let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
+        let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '1231234') }
+        let(:time){ Time.now }
+        let(:id){User.last.id}
         it 'creates User' do
+          expect{method_call}.to change(User, :count).by(1)
         end
         it 'creates Authorization' do
+          expect{method_call}.to change(Authorization, :count).by(1)
         end
         it 'returns user' do
-          expect(method_call).to eq user
+          expect(method_call).to eq User.new(email: 'facebook-1231234@email.com', id: id, created_at: time, updated_at: time)
         end
       end
     end
