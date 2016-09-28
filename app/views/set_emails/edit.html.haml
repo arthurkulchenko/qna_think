@@ -1,0 +1,4 @@
+=form_for @user, url: set_email_path do |f|
+ =f.label :email, 'e-mail'
+ =f.email_field :email
+ =f.submit 'Send me an email'

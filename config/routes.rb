@@ -7,6 +7,9 @@ Rails.application.routes.draw do
                                  controllers: { omniauth_callbacks: 'omniauth_callbacks/omniauth_callbacks' }
   root 'questions#index'
 
+  resources :set_emails, only: [:edit, :update, :show]
+  resources :user, only:[:update]
+
   concern :votable do
     resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]
   end

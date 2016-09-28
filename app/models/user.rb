@@ -35,7 +35,7 @@ class User < ApplicationRecord
     new_user
   end
 
-  def self.find_for_auth(request)
+  def self.find_for_oauth(request)
     if User.find_with_authorization(request)
       User.find_with_authorization(request)
     elsif User.find_by_email(request)
