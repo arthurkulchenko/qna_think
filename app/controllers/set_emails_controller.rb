@@ -6,10 +6,10 @@ class SetEmailsController < ApplicationController
   def update
     @user = User.find(params[:id])
     @token = SecureRandom.base64(18)
+    @user.update(users_params.merge(email_confirmation_token: @token))
     EmailConfirmationMailer.please_confirm_email(@user, @token).deliver_now
-    @user.update(email_confirmation_token: @token)
     @path = @user.email[(@user.email.index('@')+1)..-1]
-    redirect_to @path
+    redirect_to "http://#{@path}"
   end
 
   def show
@@ -20,7 +20,7 @@ class SetEmailsController < ApplicationController
 
   private
 
-  def user_email_params
+  def users_params
     params.require(:user).permit(:email)
   end
 end
