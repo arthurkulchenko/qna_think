@@ -12,36 +12,51 @@ class User < ApplicationRecord
     obj.user_id == id
   end
 
-  def self.find_with_authorization(request)
-    authorization = Authorization.where(provider: request.provider, uid: request.uid.to_s).first
+  def merge_user(user)
+    user_by_email = self
+    elder_user = user.created_at > user_by_email.created_at ? user : user_by_email
+    younger_user = user.created_at < user_by_email.created_at ? user : user_by_email
+    token = SecureRandom.base64(18)
+    # User.reflect_on_all_associations(:has_many)
+    [:authorizations].each do |association|
+      association.name.to_s.classify.constantize.where(user_id: younger_user.id).each do |class_instance|
+        new_attr = class_instance.attributes
+        new_attr.delete("id")
+        association.name.to_s.classify.constantize.create!(new_attr.merge(user: elder_user, email_confirmation_token: token))
+      end
+    end
+    younger_user.destroy
+    elder_user
+  end
+
+  def self.find_by_auth(req)
+    authorization = Authorization.where(provider: req.provider, uid: req.uid.to_s).first
     user = authorization.user if authorization
   end
 
-  def self.find_by_email(request)
-    user = User.find_by(email: request.info[:email]) if request.info
-    if user
-      if !user.authorizations.where(provider: request.provider, uid: request.uid.to_s).first
-        Authorization.create!(provider: request.provider, uid: request.uid, user: user)  
-      end
+  def self.find_by_email(req)
+    user = User.find_by(email: req.info[:email]) if req.info
+    if user && user.authorizations == nil
+      Authorization.create!(provider: req.provider, uid: req.uid, user: user)
     end
     user
   end
 
-  def self.creating_new(request)
+  def self.creating_new(req)
     password = Devise.friendly_token[0..20]
-    g_email = "#{request.provider}-#{request.uid}@email.com"
+    g_email = "#{req.provider}-#{req.uid}@email.com"
     new_user = User.create!(email: g_email, password: password, password_confirmation: password )
-    Authorization.create!(provider: request.provider, uid: request.uid, user: new_user)
+    Authorization.create!(provider: req.provider, uid: req.uid, user: new_user)
     new_user
   end
 
-  def self.find_for_oauth(request)
-    if User.find_with_authorization(request)
-      User.find_with_authorization(request)
-    elsif User.find_by_email(request)
-      User.find_by_email(request)
+  def self.find_for_oauth(req)
+    if User.find_by_auth(req)
+      User.find_by_auth(req)
+    elsif User.find_by_email(req)
+      User.find_by_email(req)
     else
-      User.creating_new(request)
+      User.creating_new(req)
     end
   end
 end

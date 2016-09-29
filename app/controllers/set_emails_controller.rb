@@ -4,10 +4,25 @@ class SetEmailsController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     @token = SecureRandom.base64(18)
-    @user.update(users_params.merge(email_confirmation_token: @token))
-    EmailConfirmationMailer.please_confirm_email(@user, @token).deliver_now
+    @user = User.find(params[:id])
+    @user_by_email = User.find_by(email:params[:user][:email])
+    if @user.email != params[:user][:email]
+      if @user_by_email
+        @user_by_email.merge_user(@user)
+        @user = @user_by_email
+        EmailConfirmationMailer.please_confirm_email(@user, @token).deliver_now
+      else
+        @user.update!(users_params.merge(email_confirmation_token: @token))
+        EmailConfirmationMailer.please_confirm_email(@user, @token).deliver_now
+      end
+    else
+      @user_by_email.merge_user(@user)
+      @user = @user_by_email
+      EmailConfirmationMailer.please_confirm_email(@user, user.token).deliver_now
+    end
+    # @user.update_attributes(email_confirmation_token: @token)
+    # @user.update!(users_params) #.merge(email_confirmation_token: @token)
     @path = @user.email[(@user.email.index('@')+1)..-1]
     redirect_to "http://#{@path}"
   end

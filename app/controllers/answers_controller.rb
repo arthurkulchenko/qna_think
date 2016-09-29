@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    respond_with(@answer.delete)
+    respond_with(@answer.destroy)
   end
 
   private

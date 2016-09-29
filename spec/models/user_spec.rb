@@ -9,9 +9,9 @@ RSpec.describe User, type: :model do
   let(:a_answer){ create(:answer) }
 
   let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
-  let(:method_call){ User.find_for_auth(auth) }
+  let(:method_call){ User.find_by_auth(auth) }
 
-  describe '.find_for_auth method' do
+  describe '.find_by_auth method' do
     context 'if user exist in db' do
       context 'if he has authorizations for 3p auth' do
         let!(:authorization){ create(:authorization, user: user, provider: 'facebook', uid: '123123') }
