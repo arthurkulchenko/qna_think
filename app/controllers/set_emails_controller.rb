@@ -14,7 +14,7 @@ class SetEmailsController < ApplicationController
 
   def show
     @user = User.find_by(email_confirmation_token: params[:id])
-    @user.update_attributes(email_confirmed: true)
+    @user.update_attributes(email_confirmed: true, email_confirmation_token: nil)
     sign_in_and_redirect @user, event: :authentication
   end
 
