@@ -6,7 +6,10 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
+
 require 'devise'
+
+OmniAuth.config.test_mode = true
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -44,5 +47,4 @@ RSpec.configure do |config|
     config.include ::Rails::Controller::Testing::TemplateAssertions, :type => type
     config.include ::Rails::Controller::Testing::Integration, :type => type
   end
-  OmniAuth.config.test_mode = true
 end

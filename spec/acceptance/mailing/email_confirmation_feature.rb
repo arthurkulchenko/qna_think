@@ -21,7 +21,7 @@ I want to recive mail to confirm my email address
     # current_email.subject
     current_email.click_link 'this link'
     expect(page).to have_content 'Log out'
-    current_email.save_and_open
+    # current_email.save_and_open
   end
 
 end
