@@ -1,37 +1,41 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, # :confirmable, :lockable, :timeoutable
          :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
   
   [:questions, :answers, :votes, :comments, :attachments, :authorizations].each do |model|
     has_many model, dependent: :destroy
   end
 
+  before_update :set_token
+
   def is_author_of?(obj)
     obj.user_id == id
   end
 
-  def merge_user(user)
-    user_by_email = self
-    elder_user = user.created_at > user_by_email.created_at ? user : user_by_email
-    younger_user = user.created_at < user_by_email.created_at ? user : user_by_email
-    token = SecureRandom.base64(18)
-    # User.reflect_on_all_associations(:has_many)
-    [:authorizations].each do |association|
-      association.name.to_s.classify.constantize.where(user_id: younger_user.id).each do |class_instance|
-        new_attr = class_instance.attributes
-        new_attr.delete("id")
-        association.name.to_s.classify.constantize.create!(new_attr.merge(user: elder_user, email_confirmation_token: token))
-      end
+  def set_token
+    email_confirmation_token = SecureRandom.base64(18)
+  end
+
+  def merge_user_in(user)
+    user.authorizations.each do |auth|
+      new_attr = auth.attributes
+      new_attr.delete("id")
+      authorizations.create!(new_attr)
     end
-    younger_user.destroy
-    elder_user
+    
+    user.destroy
+    email_confirmation_token = SecureRandom.base64(18)
+    save
+    self
   end
 
   def self.find_by_auth(req)
     authorization = Authorization.where(provider: req.provider, uid: req.uid.to_s).first
-    user = authorization.user if authorization
+    if authorization
+      authorization.user
+    else
+      # User.find_by_email(req)
+    end
   end
 
   def self.find_by_email(req)
@@ -51,6 +55,7 @@ class User < ApplicationRecord
   end
 
   def self.find_for_oauth(req)
+    # User.creating_new(req) unless User.find_by_auth(req)
     if User.find_by_auth(req)
       User.find_by_auth(req)
     elsif User.find_by_email(req)

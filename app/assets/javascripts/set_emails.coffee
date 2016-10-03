@@ -1,2 +1,2 @@
-jQuery ->
-  $('#user_email').val('')
+#jQuery ->
+#  $('#user_email').val('')
