@@ -6,62 +6,68 @@ class User < ApplicationRecord
     has_many model, dependent: :destroy
   end
 
-  before_update :set_token
+  # after_update :checking_email
+
+  # def checking_email
+  #   token = SecureRandom.base64(18)
+  #   EmailConfirmationMailer.please_confirm_email(self, token).deliver_now
+  #   if email_real
+
+  #   end
+  # end
 
   def is_author_of?(obj)
     obj.user_id == id
   end
 
-  def set_token
-    email_confirmation_token = SecureRandom.base64(18)
-  end
-
-  def merge_user_in(user)
+  def merge_this(user)
     user.authorizations.each do |auth|
       new_attr = auth.attributes
       new_attr.delete("id")
       authorizations.create!(new_attr)
     end
-    
     user.destroy
-    email_confirmation_token = SecureRandom.base64(18)
     save
     self
   end
 
   def self.find_by_auth(req)
     authorization = Authorization.where(provider: req.provider, uid: req.uid.to_s).first
-    if authorization
-      authorization.user
-    else
-      # User.find_by_email(req)
-    end
+    authorization.user if authorization
   end
 
   def self.find_by_email(req)
-    user = User.find_by(email: req.info[:email]) if req.info
-    if user && user.authorizations == nil
-      Authorization.create!(provider: req.provider, uid: req.uid, user: user)
+    token = SecureRandom.base64(18)
+    user = User.find_by(email: req.info[:email]) if req.info.has_key?(:email)
+    if user && user.authorizations.empty?
+      user.authorizations.create!(provider: req.provider, uid: req.uid.to_s, confirmation_token: token)
     end
     user
   end
 
   def self.creating_new(req)
     password = Devise.friendly_token[0..20]
-    g_email = "#{req.provider}-#{req.uid}@email.com"
-    new_user = User.create!(email: g_email, password: password, password_confirmation: password )
-    Authorization.create!(provider: req.provider, uid: req.uid, user: new_user)
-    new_user
+    token = SecureRandom.base64(18)
+    if req.info.has_key?(:email)
+      r_email = true
+      g_email = req.info[:email]
+    else
+      r_email = false
+      g_email = "#{req.provider}-#{req.uid}@email.com"
+    end
+    user = User.create!(email: g_email, password: password, password_confirmation: password, email_real: r_email )
+    user.authorizations.create!(provider: req.provider, uid: req.uid.to_s, confirmation_token: token)
+    user
   end
 
   def self.find_for_oauth(req)
-    # User.creating_new(req) unless User.find_by_auth(req)
     if User.find_by_auth(req)
       User.find_by_auth(req)
     elsif User.find_by_email(req)
-      User.find_by_email(req)
-    else
-      User.creating_new(req)
+        User.find_by_email(req)
+      else
+        User.creating_new(req)
+      # end
     end
   end
 end

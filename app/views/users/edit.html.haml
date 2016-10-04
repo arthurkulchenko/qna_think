@@ -1,5 +1,5 @@
 %h3 We are Sorry about distraction, but first of all we need to be sure that You are realy You, for this reason, please, verify Your email address.
-=form_for @user, url: set_email_path do |f|
+=form_for @user do |f|
  =f.label :email, 'e-mail'
  =f.email_field :email, value: ''
  =f.submit 'Send me an email'
