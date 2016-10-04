@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20161003140213) do
     t.datetime "updated_at",                         null: false
     t.boolean  "is_confirmed",       default: false
     t.string   "confirmation_token"
+    t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid", using: :btree
     t.index ["user_id"], name: "index_authorizations_on_user_id", using: :btree
   end
 
