@@ -16,9 +16,6 @@ class OmniauthCallbacks::OmniauthCallbacksController < Devise::OmniauthCallbacks
       set_flash_message(:notice, :seccess, kind: @req.provider) if is_navigational_format?
     else
       redirect_to root_path
-      # redirect_to edit_authorization_path(@user)
-      # redirect_to new_user_password_path(@user)
-      # redirect_to new_password_path(@user)
     end
   end
 end

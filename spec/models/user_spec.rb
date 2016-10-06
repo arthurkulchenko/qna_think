@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   let(:a_answer){ create(:answer) }
 
   let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
-  let(:method_call){ User.find_by_auth(auth) }
+  let(:method_call){ User.find_for_oauth(auth) }
 
   describe '.find_by_auth method' do
     context 'if user exist in db' do
@@ -49,7 +49,8 @@ RSpec.describe User, type: :model do
         end
       end
       context 'email don\'t given' do
-        let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '1231234') }
+        let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '1231234', info: {}) }
+        let(:method_call){ User.find_for_oauth(auth) }
         let(:time){ Time.now }
         let(:id){User.last.id}
         it 'creates User' do

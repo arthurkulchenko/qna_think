@@ -1,6 +1,6 @@
 feature 'loggin via facebook', %q{
   In order to use application without registration procedure
-  As user how have facebook account
+  As user who have facebook account
   I want to log in
   } do
   background do
@@ -8,17 +8,17 @@ feature 'loggin via facebook', %q{
   end
   context "with email" do
     context "without account" do
-      given!(:user){ create(:user, email: 'facebook@facebook.com') }
+      # given!(:user){ create(:user, email: 'facebook@facebook.com') }
       scenario 'try log in without account in current application' do
         visit root_path
         click_on 'Log in'
         click_on 'Sign in with Facebook'
-        expect(page).to have_button 'Send me an email'
+        expect(page).to have_button 'Log out'
       end
      end
   
     context "with account" do
-      given!(:user){ create(:user, email: 'facebook@email.com', email_confirmed: true) }
+      given!(:user){ create(:user, email: 'facebook@email.com', email_real: true) }
       scenario 'try log in without account in current application' do
         visit root_path
         click_on 'Log in'
@@ -34,17 +34,17 @@ feature 'loggin via facebook', %q{
         visit root_path
         click_on 'Log in'
         click_on 'Sign in with Facebook'
-        expect(page).to have_button 'Send me an email'
+        expect(page).to have_button 'Log in'
       end
      end
   
     context "with account" do
       given!(:user){ create(:user) }
-      scenario 'try log in without account in current application' do
+      scenario 'try log in with account in current application' do
         visit root_path
         click_on 'Log in'
         click_on 'Sign in with Facebook'
-        expect(page).to have_button 'Send me an email'
+        expect(page).to have_button 'Log in'
       end
     end
   end

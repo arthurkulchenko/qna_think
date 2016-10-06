@@ -12,7 +12,7 @@ class Authorization < ApplicationRecord
   end
 
   def set_token
-    self.confirmation_token = SecureRandom.base64(18)
+    self.confirmation_token = SecureRandom.base64(18).delete('/') unless is_confirmed 
   end
 
 end

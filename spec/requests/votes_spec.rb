@@ -7,7 +7,7 @@ RSpec.describe "Votes", type: :request do
     it "posts" do
       headers = { "CONTENT_TYPE" => "application/json" }
       post "/answers/#{answer.id}/votes", '{ "vote": { "mark":"1" } }', headers
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(201)
     end
   end
 end

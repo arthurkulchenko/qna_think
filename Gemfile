@@ -17,18 +17,14 @@ gem 'devise'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 # gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'cocoon'
-
+gem 'responders'
 gem 'private_pub'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'cancan'
 
 gem 'sphinx'
-gem 'cancan'
-gem 'pundit'
-gem 'responders'
-
-gem 'gon'
 
 group :production do
   gem 'libv8'

@@ -12,18 +12,17 @@ feature 'loggin via twitter', %q{
       visit root_path
       click_on 'Log in'
       click_on 'Sign in with Twitter'
-      expect(page).to have_button 'Send me an email'
+      expect(page).to have_button 'Log out'
     end
    end
 
   context "within" do
-    given!(:user){ create(:user, email: 'twitter@email.com', email_confirmed: true) }
+    given!(:user){ create(:user, email: 'twitter@email.com', email_real: true) }
     scenario 'try log in without account in current application' do
       visit root_path
       click_on 'Log in'
       click_on 'Sign in with Twitter'
-      # expect(page).to have_link 'Log out'
-      expect(page).to have_button 'Send me an email'
+      expect(page).to have_button 'Log out'
     end
    end
 end

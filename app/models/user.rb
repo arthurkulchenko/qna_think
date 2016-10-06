@@ -12,21 +12,16 @@ class User < ApplicationRecord
   
   def self.find_for_oauth(req)
     authorization = Authorization.where(provider: req.provider, uid: req.uid.to_s).first
-    if authorization
-      authorization.user
-    else
-      if req.info.has_key?(:email) && user = User.find_by(email: req.info[:email])
-        user
-      else
-        password_generating
-        email_genarating(req)
-        user = User.create!(email: @g_email, password: @password, password_confirmation: @password, email_real: @r_email )
-      end
-      if user.authorizations.empty?
-        user.authorizations.create!(provider: req.provider, uid: req.uid.to_s)
-      end
+    return authorization.user if authorization
+    if req.info.has_key?(:email) && user = User.find_by(email: req.info[:email])
       user
+    else
+      password_generating
+      email_genarating(req)
+      user = User.create!(email: @g_email, password: @password, password_confirmation: @password, email_real: @r_email )
     end
+    user.authorizations.create!(provider: req.provider, uid: req.uid.to_s) if user.authorizations.empty?
+    user
   end
 
   private
