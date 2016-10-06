@@ -7,7 +7,7 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    respond_with(@vote.delete)
+    respond_with(@vote.destroy)
   end
 
   private

@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    respond_with(@question.delete)
+    respond_with(@question.destroy)
   end
 
   private

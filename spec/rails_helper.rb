@@ -6,7 +6,10 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
+
 require 'devise'
+
+OmniAuth.config.test_mode = true
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -30,6 +33,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.extend ControllerMacros, type: :controller
+  config.include(OmniauthMacros)
   
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   # config.use_transactional_tests = false

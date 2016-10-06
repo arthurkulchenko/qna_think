@@ -17,15 +17,14 @@ gem 'devise'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 # gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'cocoon'
-
-gem 'private_pub'
-gem 'oauth'
-gem 'sphinx'
-gem 'cancan'
-gem 'pundit'
 gem 'responders'
+gem 'private_pub'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'cancan'
 
-gem 'gon'
+gem 'sphinx'
 
 group :production do
   gem 'libv8'
@@ -52,6 +51,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem 'capybara-email'
 
   gem 'rails-controller-testing'
 end
