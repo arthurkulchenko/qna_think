@@ -1,9 +1,11 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
-  before_action :question_load, only: [:show, :edit, :update, :destroy]
+  load_resource only: [:show, :update, :destroy]
   before_action :authorship_verification, only: [:update, :destroy]
 
   respond_to :js, only: [:create, :destroy, :update]
+  authorize_resource
+  skip_authorization_check, only: [:index]
 
   def index
     respond_with(@questions = Question.all)
@@ -14,7 +16,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    respond_with (@question = Question.create(question_params.merge(user: current_user)))
+    respond_with(@question = Question.create(question_params.merge(user: current_user)))
   end
 
   def show
@@ -41,7 +43,4 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :content, attachments_attributes: [file:[]])	
   end
 
-  def question_load
-    @question = Question.find(params[:id])
-  end
 end
