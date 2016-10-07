@@ -4,8 +4,8 @@ class QuestionsController < ApplicationController
   before_action :authorship_verification, only: [:update, :destroy]
 
   respond_to :js, only: [:create, :destroy, :update]
-  authorize_resource
-  skip_authorization_check, only: [:index]
+  authorize_resource except: [:index]
+
 
   def index
     respond_with(@questions = Question.all)

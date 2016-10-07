@@ -1,5 +1,6 @@
 class VotesController < ApplicationController
   before_action :authorship_verification, only: [:destroy]
+  # skip_authorization_check
   respond_to :json
 
   def create

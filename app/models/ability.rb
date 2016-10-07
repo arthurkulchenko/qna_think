@@ -6,18 +6,15 @@ class Ability
   def initialize(user)
     @user = user
     if user
-      if user.admin?
-        can :manage, :all
-      else
-        user_ability
-      end
+      user.admin? ? ( can :manage, :all ) : user_ability 
     end
     guest_ability
   end
 
   def user_ability
-    can :create, [Question, Answer, Comment, Vote]
-    can :update, [Question, Answer, Comment], user: user
+    can :create, Vote, user: user unless user.is_author_of?('???') 
+    can :delete, Vote, user: user
+    can [:create, :update, :delete], [Question, Answer, Comment, Attachment], user: user
   end
 
   def guest_ability
