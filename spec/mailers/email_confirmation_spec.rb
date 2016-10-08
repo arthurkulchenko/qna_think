@@ -1,5 +1,7 @@
-require "rails_helper"
-
 RSpec.describe EmailConfirmationMailer, type: :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user){create(:user)}
+  let(:mail){ EmailConfirmationMailer.verify_authorization }
+  it "renders the headers" do
+    expect(mail.to).to eq(["to@example.org"])
+  end
 end
