@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   	                             password: 'secret', confirmation: 'verification', 
   	                             unlock: 'unblock', registration: 'register', 
   	                             sign_up: 'cmon_let_me_in' },
-                                 controllers: { omniauth_callbacks: 'omniauth_callbacks/omniauth_callbacks',
-                                                sessions: 'sessions/sessions' }
+                                 controllers: { omniauth_callbacks: 'omniauth_callbacks/omniauth_callbacks'}
   root 'questions#index'
 
   resources :authorizations, only: [:show]
