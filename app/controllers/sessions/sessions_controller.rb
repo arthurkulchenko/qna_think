@@ -1,6 +1,6 @@
 class Sessions::SessionsController < Devise::SessionsController
 # before_action :configure_sign_in_params, only: [:create]
-  skip_authorization_check
+  # skip_authorization_check
   def new
     super
   end

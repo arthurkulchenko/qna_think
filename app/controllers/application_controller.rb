@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html { redirect_to root_path, alert: exception.message }
       format.js { render 'layouts/exception' }
-      format.json { render json: exception.message } # Как отлавливать
+      format.json { render json: exception.message, status: :unprocessable_entity } # Как отлавливать
     end
   end
 
-  check_authorization
+  check_authorization :unless => :devise_controller?
 
 end
