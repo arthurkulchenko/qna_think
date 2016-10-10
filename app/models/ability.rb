@@ -12,6 +12,7 @@ class Ability
   end
 
   def user_ability
+    can [:create, :update], Vote
     can :vote, [Answer, Question] do |parent|
       !user.is_author_of?(parent)
     end

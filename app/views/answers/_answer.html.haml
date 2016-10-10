@@ -1,14 +1,19 @@
 .answer{:id => dom_id(answer)}
  .answer-content
   %strong= answer.content
- = render partial: 'answers/vote', locals: { answer: answer }
- = render partial: 'layouts/voting', locals: { parent_object: answer }
+ - if can? :update, answer.question
+  = render partial: 'answers/best_voting', locals: { answer: answer }
+ - if cannot? :update, answer.question
+  - if can? :create, Vote
+   = render partial: 'layouts/rating', locals: { parent_object: answer }
  = render partial: 'layouts/attached_files', locals: { parent_object: answer }
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
-  = render partial: 'answers/edit', locals: { answer: answer}
+  - if can? :update, answer
+   = render partial: 'answers/edit', locals: { answer: answer}
  .comments
   .comment
   = render partial: answer.comments
 
  .new_comment
-  = render partial: 'comments/new', locals: { parent_object: answer }
+  - if can? :create, Comment  
+   = render partial: 'comments/new', locals: { parent_object: answer }

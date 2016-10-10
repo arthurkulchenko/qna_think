@@ -1,4 +1,4 @@
-= link_to "Ask a question", new_question_path
+= link_to "Ask a question", new_question_path if can? :create, Question
 %br
 %br
 .question-list
