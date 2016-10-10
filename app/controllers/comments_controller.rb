@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   helper_method :parent_question_id, :parent
   before_action :parent, only: [:create]
-  before_action :authorship_verification, only: [:destroy]
   authorize_resource
+  before_action :authorship_verification, only: [:destroy]
   
   respond_to :js
   

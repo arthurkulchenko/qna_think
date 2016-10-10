@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  # authorize_resource
+  authorize_resource
   before_action :authorship_verification, only: [:destroy]
   respond_to :json
   
@@ -10,7 +10,7 @@ class VotesController < ApplicationController
 
   def destroy
     authorize! :destroy, @vote
-    respond_with(@vote.destroy)
+    respond_with(@vote.delete)
   end
 
   private

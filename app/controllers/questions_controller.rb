@@ -2,10 +2,10 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
   skip_authorization_check only: [:index]
   load_resource only: [:show, :update, :destroy]
+  authorize_resource
   before_action :authorship_verification, only: [:update, :destroy]
 
   respond_to :js, only: [:create, :destroy, :update]
-  authorize_resource
 
   def index
     respond_with(@questions = Question.all)
@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    respond_with(@question.destroy)
+    respond_with(@question.delete)
   end
 
   private
@@ -42,5 +42,4 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :content, attachments_attributes: [file:[]])	
   end
-
 end

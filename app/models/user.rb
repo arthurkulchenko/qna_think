@@ -3,7 +3,8 @@ class User < ApplicationRecord
          :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
   
   [:questions, :answers, :votes, :comments, :attachments, :authorizations].each do |model|
-    has_many model, dependent: :destroy
+    has_many model, dependent: :delete_all
+    # SWITCHED DESTROY ON DELETE
   end
 
   def is_author_of?(obj)

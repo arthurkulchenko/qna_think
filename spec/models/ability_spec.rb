@@ -18,9 +18,9 @@ describe Ability do
     [:question, :answer, :comment, :attachment].each do |resource|
       it { should be_able_to :create, resource.to_s.classify.constantize }
       it { should be_able_to :update, create(resource, user: user), user: user }
-      it { should be_able_to :delete, create(resource, user: user), user: user }
+      it { should be_able_to :destroy, create(resource, user: user), user: user }
       it { should_not be_able_to :update, create(resource, user: vote_owner), user: user }
-      it { should_not be_able_to :delete, create(resource, user: vote_owner), user: user }
+      it { should_not be_able_to :destroy, create(resource, user: vote_owner), user: user }
     end
     
     it { should_not be_able_to :create, vote, user: question_owner }

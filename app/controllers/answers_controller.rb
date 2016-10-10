@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
+  authorize_resource
   before_action :authorship_verification, only: [:update, :destroy]
   respond_to :js
-  authorize_resource
 
   def create
     @answer = Question.find(params[:question_id]).answers.create(answer_params.merge(user: current_user))
@@ -15,7 +15,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    respond_with(@answer.destroy)
+    respond_with(@answer.delete)
   end
 
   private
