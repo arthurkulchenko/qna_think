@@ -8,6 +8,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 
 require 'devise'
+require 'cancan/matchers'
 
 OmniAuth.config.test_mode = true
 

@@ -3,7 +3,8 @@ class User < ApplicationRecord
          :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
   
   [:questions, :answers, :votes, :comments, :attachments, :authorizations].each do |model|
-    has_many model, dependent: :destroy
+    has_many model, dependent: :delete_all
+    # SWITCHED DESTROY ON DELETE
   end
 
   def is_author_of?(obj)
@@ -13,14 +14,16 @@ class User < ApplicationRecord
   def self.find_for_oauth(req)
     authorization = Authorization.where(provider: req.provider, uid: req.uid.to_s).first
     return authorization.user if authorization
-    if req.info.has_key?(:email) && user = User.find_by(email: req.info[:email])
-      user
-    else
-      password_generating
-      email_genarating(req)
-      user = User.create!(email: @g_email, password: @password, password_confirmation: @password, email_real: @r_email )
+    User.transaction do
+      if req.info.has_key?(:email) && user = User.find_by(email: req.info[:email])
+        user
+      else
+        password_generating
+        email_genarating(req)
+        user = User.create!(email: @g_email, password: @password, password_confirmation: @password, email_real: @r_email )
+      end
+      user.authorizations.create!(provider: req.provider, uid: req.uid.to_s) if user.authorizations.empty?
     end
-    user.authorizations.create!(provider: req.provider, uid: req.uid.to_s) if user.authorizations.empty?
     user
   end
 
@@ -45,11 +48,13 @@ class User < ApplicationRecord
   end
 
   def merge_this(user)
-    user.authorizations.each do |auth|
-      auth.update(user_id: id)
+    User.transaction do
+      user.authorizations.each do |auth|
+        auth.update(user_id: id)
+      end
+      user.destroy
+      save
     end
-    user.destroy
-    save
     self
   end
   

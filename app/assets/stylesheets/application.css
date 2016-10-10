@@ -26,3 +26,9 @@ a{
 .errors{
   color: red;
 }
+.turbolinks-progress-bar {
+  height: 35px;
+  background-color: yellow;
+  opacity: 0.5;
+  border-bottom: solid black 1px;
+}

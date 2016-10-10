@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   	                             password: 'secret', confirmation: 'verification', 
   	                             unlock: 'unblock', registration: 'register', 
   	                             sign_up: 'cmon_let_me_in' },
-                                 controllers: { omniauth_callbacks: 'omniauth_callbacks/omniauth_callbacks' }
+                                 controllers: { omniauth_callbacks: 'omniauth_callbacks/omniauth_callbacks'}
   root 'questions#index'
 
   resources :authorizations, only: [:show]
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :questions, concerns: [:votable, :commentable], shallow: true do
-    resources :answers, concerns: [:votable, :commentable]
+  resources :questions, concerns: [:votable, :commentable], except: [:edit], shallow: true do
+    resources :answers, concerns: [:votable, :commentable], only: [:create, :update, :destroy]
   end
 end

@@ -1,4 +1,5 @@
 class AuthorizationsController < ApplicationController
+  skip_authorization_check
 
   def show
     @auth = Authorization.find_by(confirmation_token: params[:id])

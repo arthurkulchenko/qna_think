@@ -9,5 +9,5 @@
    = i.radio_button :mark, -1
    %hr
    = i.submit "Rate #{parent_object.class}"
-  - if @vote = parent_object.votes.where(user: current_user).first
-   = link_to "Take back your voice", vote_path(@vote), method: :delete, remote: true
+  / -# if @vote = parent_object.votes.where(user: current_user).first
+  /  =# link_to "Take back your voice", vote_path(@vote), method: :delete, remote: true

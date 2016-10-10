@@ -4,7 +4,7 @@ class Question < ApplicationRecord
   include Commenting
   include BelongingsOfUser
 
-  has_many :answers, dependent: :destroy
+  has_many :answers, dependent: :delete_all
 
   validates :title, :content, presence: true
 end

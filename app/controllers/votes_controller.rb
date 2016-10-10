@@ -1,13 +1,16 @@
 class VotesController < ApplicationController
   before_action :authorship_verification, only: [:destroy]
   respond_to :json
-
+  
   def create
+    @parent = parent
+    authorize! :vote, @parent
     respond_with(@vote = parent.votes.create(vote_params.merge(user: current_user)))
   end
 
   def destroy
-    respond_with(@vote.destroy)
+    authorize! :destroy, @vote
+    respond_with(@vote.delete)
   end
 
   private

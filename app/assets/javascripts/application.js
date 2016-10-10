@@ -16,3 +16,10 @@
 //= require turbolinks
 //= require cocoon
 //= require_tree .
+
+$( document ).ajaxError(function( event, jqxhr, request, settings ) {
+  // json = JSON.parse(jqxhr)
+  alert(jqxhr.responseText);
+  // e, xhr, status, error	
+  // $( "#msg" ).append( "<li>Error requesting page " + settings.url + "</li>" );
+});
