@@ -16,8 +16,8 @@ class Ability
     can :vote, [Answer, Question] do |parent|
       !user.is_author_of?(parent)
     end
-    can :destroy, Vote, user: user
-    can [:create, :update, :destroy], [Question, Answer, Comment, Attachment], user: user
+    can :destroy, Vote, user_id: user.id
+    can [:create, :update, :destroy], [Question, Answer, Comment, Attachment], user_id: user.id
   end
 
   def guest_ability
