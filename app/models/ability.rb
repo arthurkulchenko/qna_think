@@ -21,6 +21,8 @@ class Ability
   end
 
   def guest_ability
+    can :profiles, :all
     can :read, :all  
+    can :me, :all
   end
 end

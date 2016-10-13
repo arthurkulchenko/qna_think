@@ -21,7 +21,7 @@ module QaThinknetikaApp
                   controller_spec: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
-    config.i18n.default_locale = :ru
+    config.i18n.default_locale = :en #ru
     # config.active_record.raise_in_transactional_callbacks = true
     
     # Settings in config/environments/* take precedence over those specified here.

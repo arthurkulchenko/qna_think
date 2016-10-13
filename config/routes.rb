@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  use_doorkeeper
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', 
   	                             password: 'secret', confirmation: 'verification', 
   	                             unlock: 'unblock', registration: 'register', 
@@ -21,4 +22,14 @@ Rails.application.routes.draw do
   resources :questions, concerns: [:votable, :commentable], except: [:edit], shallow: true do
     resources :answers, concerns: [:votable, :commentable], only: [:create, :update, :destroy]
   end
+
+  namespace :api do
+    namespace :v1 do
+      resource :profiles do
+        get :me, on: :collection
+        get :all, on: :collection
+      end
+    end
+  end
+  
 end
