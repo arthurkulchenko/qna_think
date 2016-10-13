@@ -12,7 +12,6 @@ class Ability
   end
 
   def user_ability
-    can [:create, :update], Vote
     can :vote, [Answer, Question] do |parent|
       !user.is_author_of?(parent)
     end
@@ -21,6 +20,7 @@ class Ability
   end
 
   def guest_ability
-    can :read, :all  
+    can [:profiles, :me], User
+    can :read, :all
   end
 end

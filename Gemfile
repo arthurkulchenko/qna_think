@@ -23,6 +23,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancan'
+gem 'doorkeeper'
 
 gem 'sphinx'
 
@@ -63,4 +64,5 @@ group :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'json_spec'
 end
