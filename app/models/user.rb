@@ -10,6 +10,10 @@ class User < ApplicationRecord
   def is_author_of?(obj)
     obj.user_id == id
   end
+
+  def admin?
+    admin
+  end
   
   def self.find_for_oauth(req)
     authorization = Authorization.where(provider: req.provider, uid: req.uid.to_s).first
