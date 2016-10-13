@@ -32,6 +32,11 @@ describe "Question API" do
           expect(response.body).to be_json_eql(question.send(attr.to_sym).to_json).at_path("0/#{attr}")
         end
       end
+
+      it  'question contains short title' do
+        expect(response.body).to be_json_eql(question.title.truncate(10).to_json).at_path("0/short_title")
+      end
+
       context 'answers' do
       it 'included in question object' do
         expect(response.body).to have_json_size(1).at_path("0/answers")
