@@ -58,14 +58,6 @@ describe 'Profile API' do
         expect(response).to be_success
       end
 
-      # %w(email id created_at updated_at admin email_real).each do |attr|
-      #   it "contains #{attr}" do
-      #     response.body.to_json.each do |i|
-      #       expect(i).to be_json_eql(all.send(attr.to_sym).to_json).at_path(attr)
-      #     end
-      #   end
-      # end
-
       %w(password encrypted_password).each do |attr|
         it "does not contains #{attr}" do
           expect(response.body).to_not have_json_path(attr)
