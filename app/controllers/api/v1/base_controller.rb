@@ -1,6 +1,7 @@
 class Api::V1::BaseController < ApplicationController
   # before_action :doorkeeper_authorize!
-  # skip_authorization_check
+  # before_action :authenticate_user!
+  skip_authorization_check
   respond_to :json
 
   protected

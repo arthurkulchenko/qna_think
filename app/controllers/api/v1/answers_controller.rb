@@ -1,7 +1,8 @@
 class Api::V1::AnswersController < Api::V1::BaseController
+  load_and_authorize_resource except: [:create]
+
   def index
-    @answers = Answer.all
-    respond_with(@answer)
+    respond_with(@answers)
   end
 
   def new
@@ -9,12 +10,17 @@ class Api::V1::AnswersController < Api::V1::BaseController
   end
 
   def create
-    respond_with(@answer = current_resource_owner.answers.create!(answer_params))
+    respond_with(
+      @answer = current_resource_owner
+                 .answers.create!(
+                                   answer_params
+                                      .merge(question_id: params[:question_id].to_i)
+                                  )
+                 )
   end
 
   def show
-    @answer = Answer.find(params[:id])
-    respond_with(@answer)
+    respond_with @answer
   end
 
   private

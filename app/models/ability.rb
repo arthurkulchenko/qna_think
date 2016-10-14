@@ -23,4 +23,5 @@ class Ability
     can [:profiles, :me], User
     can :read, :all
   end
+
 end
