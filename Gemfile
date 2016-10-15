@@ -15,7 +15,7 @@ gem 'haml'
 gem 'devise'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-# gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+gem 'remotipart' #, github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'cocoon'
 gem 'responders'
 gem 'private_pub'

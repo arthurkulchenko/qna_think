@@ -5,12 +5,12 @@
  %br
  = f.text_field :content
  %br
- / #attache-file-to-question
- /  = f.fields_for :attachable do |a|
- /   = render 'layouts/attachment_fields', f: a 
- /   = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
- /  = link_to_remove_association "remove file", f
- / %br
+ #attache-file-to-question
+  = f.fields_for :attachable do |a|
+   = render 'layouts/attachment_fields', f: a 
+  /  = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
+  / = link_to_remove_association "remove file", f
+ %br
  = f.submit 'Update a question'
  %br
  = link_to 'Delete my Question', question, method: :delete

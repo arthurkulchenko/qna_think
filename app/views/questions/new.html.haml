@@ -11,7 +11,7 @@
   #attache-file-to-question
    = f.fields_for :attachable do |a|
     = render 'layouts/attachment_fields', f: a 
-   = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link "
+   / = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link "
   = f.submit 'Ask for Help'
   %br
  %br
