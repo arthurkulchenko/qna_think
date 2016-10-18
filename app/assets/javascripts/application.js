@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require private_pub
 //= require turbolinks
 //= require cocoon
@@ -19,7 +20,12 @@
 
 $( document ).ajaxError(function( event, jqxhr, request, settings ) {
   // json = JSON.parse(jqxhr)
-  alert(jqxhr.responseText);
+  // alert(jqxhr.responseText);
   // e, xhr, status, error	
   // $( "#msg" ).append( "<li>Error requesting page " + settings.url + "</li>" );
 });
+$(document).ajaxComplete(function() {
+  $('.button-answer').click(function() {
+    $(this).parent('.answer').children('.edit_answer_form').fadeToggle();
+  });
+})

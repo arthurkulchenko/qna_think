@@ -7,7 +7,6 @@ jQuery ->
 #-------------------VOTE-------------------------
  $(document).on "turbolinks:load", () ->
   $('.edit_question_form').hide()
-  $('.attached-files').hide()
   $('.button').click () ->
    $(this).parent('.question').children('.edit_question_form').fadeToggle()
 

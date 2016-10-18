@@ -36,7 +36,7 @@ class User < ApplicationRecord
   class << self
 
     def email_genarating(req)
-      if req.info.has_key?(:email)
+      if req.info[:email]
         @r_email = true
         @g_email = req.info[:email]
       else

@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :update, :destroy]
   skip_authorization_check only: [:index]
-  load_resource only: [:show, :update, :destroy]
+  load_resource only: [:show, :update, :destroy, :new]
   authorize_resource
   before_action :authorship_verification, only: [:update, :destroy]
 
@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    respond_with(@question = Question.new)
+    respond_with @question
   end
 
   def create
@@ -40,6 +40,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :content, attachments_attributes: [file:[]])	
+    params.require(:question).permit(:title, :content, attachments_attributes: [:id, :file, :_destroy])	
   end
 end

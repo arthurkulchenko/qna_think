@@ -14,7 +14,6 @@ jQuery ->
 
  $(document).on "turbolinks:load", () ->
   $('.edit_answer_form').hide()
-  $('.attached-files').hide()
 
   $('.button-answer').click () ->
    $(this).parent('.answer').children('.edit_answer_form').fadeToggle()

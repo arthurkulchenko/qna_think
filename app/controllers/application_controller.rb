@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html
   
-  protect_from_forgery unless: -> { request.format.json? }
+  # protect_from_forgery unless: -> { request.format.json? }
+  protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
