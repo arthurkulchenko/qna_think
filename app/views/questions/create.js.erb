@@ -1,2 +1,6 @@
 $('.notice-message').remove();
-alert('<%= j @question.errors.full_messages.join("\n") %>');
+errors = '<%= j @question.errors.full_messages.join("\n") %>';
+
+if (errors !== ''){
+  alert(errors);
+}

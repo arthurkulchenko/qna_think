@@ -17,13 +17,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.create(question_params)
-    if @question.errors.any?
-      respond_with(@question)
-    else
-      ActionCable.server.broadcast '/questions',
-                                    ApplicationController.render( partial: 'questions/new_question',
-                                                                  locals: { question: @question} )
-    end
+    respond_with(@question)
   end
 
   def show
