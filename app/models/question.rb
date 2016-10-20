@@ -5,11 +5,12 @@ class Question < ApplicationRecord
   include BelongingsOfUser
 
   has_many :answers, dependent: :delete_all
-
-  # validates :title, :content, presence: true#, { message: "#{value} can not be empty" }
-  validates_with Validators::QuestionValidator
-
+  
   after_create :post_via_comet
+  
+  validates_with Validators::QuestionValidator
+  
+  private
 
   def post_via_comet
     ActionCable.server.broadcast '/questions',

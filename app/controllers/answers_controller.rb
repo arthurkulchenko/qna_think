@@ -1,11 +1,12 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource
+  before_action :set_user, only: [:create]
+  authorize_resource except: [:create]
   before_action :authorship_verification, only: [:update, :destroy]
   respond_to :js
 
   def create
-    @answer = Question.find(params[:question_id]).answers.create(answer_params.merge(user: current_user))
+    @answer = Question.find(params[:question_id]).answers.create(answer_params.merge(user: @user))
     respond_with(@answer)
   end
 
@@ -19,6 +20,10 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user ||= current_user
+  end
 
   def authorship_verification
     @answer ||= Answer.find(params[:id])
