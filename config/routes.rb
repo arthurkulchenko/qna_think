@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   use_doorkeeper
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', 
   	                             password: 'secret', confirmation: 'verification', 
@@ -34,5 +33,5 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+  mount ActionCable.server => '/cable'
 end

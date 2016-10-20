@@ -2,6 +2,7 @@
  %h4 Attached files
  %ul
  - parent_object.attachments.each do |attached|
-  / TODO
-  / if :can .....
-  %li= link_to attached.file.identifier, attached.file.url
+  %li
+   = link_to attached.file.identifier, attached.file.url
+   = link_to 'delete', root_path
+   %br

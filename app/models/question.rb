@@ -6,5 +6,6 @@ class Question < ApplicationRecord
 
   has_many :answers, dependent: :delete_all
 
-  validates :title, :content, presence: true
+  # validates :title, :content, presence: true#, { message: "#{value} can not be empty" }
+  validates_with Validators::QuestionValidator
 end

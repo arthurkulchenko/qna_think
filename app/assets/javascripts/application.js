@@ -13,10 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.remotipart
-//= require private_pub
 //= require turbolinks
 //= require cocoon
 //= require_tree .
+
+// var App = App || {};
+// App.cable = ActionCable.createConsumer();
 
 $( document ).ajaxError(function( event, jqxhr, request, settings ) {
   // json = JSON.parse(jqxhr)

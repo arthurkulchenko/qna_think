@@ -6,9 +6,9 @@
  = f.text_field :content
  %br
  #attache-file-to-question
-  = f.fields_for :attachments do |a|
+  - f.fields_for :attachments do |a|
    = render 'layouts/attachment_fields', f: a 
-   = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
+  = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
  %br
  = f.submit 'Update a question'
  %br

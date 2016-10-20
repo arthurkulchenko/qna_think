@@ -5,11 +5,11 @@ class Ability
 
   def initialize(user)
     @user = user
-    # if user
-    #   user.admin? ? ( can :manage, :all ) : ( user_ability )
-    # end
-    # guest_ability
-    can :manage, :all
+    if user
+      user.admin? ? ( can :manage, :all ) : ( user_ability )
+    end
+    guest_ability
+    # can :manage, :all
   end
 
   def user_ability

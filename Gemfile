@@ -10,7 +10,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'thin'
+# gem 'thin'
+gem 'puma'
 gem 'haml'
 gem 'devise'
 
@@ -18,7 +19,7 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'remotipart' #, github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'cocoon'
 gem 'responders'
-gem 'private_pub'
+# gem 'private_pub'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'

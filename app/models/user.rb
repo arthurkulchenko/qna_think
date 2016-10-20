@@ -4,7 +4,6 @@ class User < ApplicationRecord
   
   [:questions, :answers, :votes, :comments, :attachments, :authorizations].each do |model|
     has_many model, dependent: :delete_all
-    # SWITCHED DESTROY ON DELETE
   end
 
   def is_author_of?(obj)
@@ -18,7 +17,7 @@ class User < ApplicationRecord
   def self.find_for_oauth(req)
     authorization = Authorization.where(provider: req.provider, uid: req.uid.to_s).first
     return authorization.user if authorization
-    User.transaction do
+    # User.transaction do
       if req.info.has_key?(:email) && user = User.find_by(email: req.info[:email])
         user
       else
@@ -27,7 +26,7 @@ class User < ApplicationRecord
         user = User.create!(email: @g_email, password: @password, password_confirmation: @password, email_real: @r_email )
       end
       user.authorizations.create!(provider: req.provider, uid: req.uid.to_s) if user.authorizations.empty?
-    end
+    # end
     user
   end
 

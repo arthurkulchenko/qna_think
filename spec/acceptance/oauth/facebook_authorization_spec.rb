@@ -8,7 +8,6 @@ feature 'loggin via facebook', %q{
   end
   context "with email" do
     context "without account" do
-      # given!(:user){ create(:user, email: 'facebook@facebook.com') }
       scenario 'try log in without account in current application' do
         visit root_path
         click_on 'Log in'
