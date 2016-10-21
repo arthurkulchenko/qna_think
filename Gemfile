@@ -10,6 +10,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'actioncable', '~> 5.0', '>= 5.0.0.1'
+
 # gem 'thin'
 gem 'puma'
 gem 'haml'
