@@ -7,7 +7,8 @@ class QuestionsChannel < ApplicationCable::Channel
   end
 
   def start_stream
-    stream_from "/questions"
+    stream_from '/questions'
+    # stream_from "/#{params[:controller]}"
   end
 
 end

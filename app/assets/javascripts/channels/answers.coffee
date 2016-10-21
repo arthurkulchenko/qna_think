@@ -1,7 +1,7 @@
 App.answers = App.cable.subscriptions.create "AnswersChannel",
   connected: ->
     console.log "You are connected to 'AnswersChannel'"
-    @perform('start_stream_answers', question_id: 137)
+    @perform('start_stream_answers', question_id: gon.question.id)
 
   disconnected: ->
     # Called when the subscription has been terminated by the server

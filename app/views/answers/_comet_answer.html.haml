@@ -7,6 +7,6 @@
  .comments
   .comment
   = render partial: answer.comments
-  = render partial: 'answers/edit', locals: {answer: answer}
+  = render partial: 'answers/edit', locals: { answer: answer }
  .new_comment
   = render partial: 'comments/new', locals: { parent_object: answer }
