@@ -9,7 +9,7 @@ class Ability
       user.admin? ? ( can :manage, :all ) : ( user_ability )
     end
     guest_ability
-    # can :manage, :all
+    can :manage, :all
   end
 
   def user_ability

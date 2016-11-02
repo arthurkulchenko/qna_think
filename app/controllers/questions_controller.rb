@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   load_resource only: [:show, :update, :destroy, :new]
   authorize_resource
   before_action :authorship_verification, only: [:update, :destroy]
+  # before_action :catch_not_found, only: [:show, :update, :destroy]
 
   respond_to :js, only: [:create, :destroy, :update]
 
@@ -45,4 +46,11 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :content, attachments_attributes: [:id, :file, :_destroy])	
   end
+
+  # def catch_not_found
+  #   redirect_to root_path, notice: "Record Not Found" unless @question.exist?
+  # #   yield
+  # # rescue ActiveRecord::RecordNotFound
+  # #   redirect_to root_url, :flash => { :error => "Record not found." }
+  # end
 end
