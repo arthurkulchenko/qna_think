@@ -26,6 +26,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancan'
+
 gem 'doorkeeper'
 gem 'active_model_serializers'
 gem 'oj'
@@ -65,6 +66,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "nyan-cat-formatter"
   gem 'capybara'
   gem 'capybara-webkit'
   # gem 'selenium-webdriver'
