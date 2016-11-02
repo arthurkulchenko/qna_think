@@ -19,3 +19,9 @@ jQuery ->
    $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
   $('.submit-button').click () ->
    $(this).parent('.answer').hide()
+
+#-------------------------DELETING----------------------------
+ $('.delete_answer_link').click -> 
+  parent = $(this).first().parents(".answer")
+  parent.fadeOut()
+  parent.remove()

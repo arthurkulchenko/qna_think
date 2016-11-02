@@ -14,3 +14,9 @@ jQuery ->
    json_mark = JSON.parse(xhr.responseText).mark
    $(this).closest('.rate-form').children('p').remove()
    $(this).closest('.rate-form').prepend("<p>Total mark is: " + json_mark + "</p>")
+
+#-------------------------DELETING----------------------------
+ $('.delete_question_link').click -> 
+  parent = $(this).first().parents(".question")
+  parent.fadeOut()
+  parent.remove()

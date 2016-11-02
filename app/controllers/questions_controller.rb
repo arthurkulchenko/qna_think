@@ -17,13 +17,13 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    gon.user_current = current_user
+    # gon.user_current = current_user
     @question = current_user.questions.create(question_params)
     respond_with(@question)
   end
 
   def show
-    gon.question = @question
+    # gon.question = @question
     @answers = @question.answers.best_first
     respond_with @question
   end

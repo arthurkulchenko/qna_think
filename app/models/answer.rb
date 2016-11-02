@@ -9,7 +9,6 @@ class Answer < ApplicationRecord
   validates :content, :question_id, presence: true
 
   before_update :check_of_best
-  after_create :post_via_comet
 
   scope :best_first, -> { order(best_answer: :desc) }
   scope :not_best_answers, -> { where(best_answer: false) }
@@ -21,11 +20,4 @@ class Answer < ApplicationRecord
     return @best_answer.toggle(:best_answer).save unless ( id == @best_answer.id ) || ( !best_answer )
   end
 
-  def post_via_comet
-    ActionCable.server.broadcast "/question/#{question_id}/answers",
-                                 ApplicationController.render( 
-                                                               partial: 'answers/comet_answer',
-                                                               locals: { answer: self } 
-                                                             )
-  end
 end
