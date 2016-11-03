@@ -11,17 +11,17 @@ jQuery ->
 #--------------------------VOTING-----------------------------
  $('.vote-check-box').click () ->
   $(this).parent('form').submit()
-
- $(document).on "turbolinks:load", () ->
-  $('.edit_answer_form').hide()
-
-  $('.button-answer').click () ->
-   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-  $('.submit-button').click () ->
-   $(this).parent('.answer').hide()
-
 #-------------------------DELETING----------------------------
  $('.delete_answer_link').click -> 
   parent = $(this).first().parents(".answer")
   parent.fadeOut()
   parent.remove()
+
+$(document).on "turbolinks:load", () ->
+
+  $('.submit-button').click () ->
+   $(this).parent('.answer').hide()
+
+  $('.button-answer').click () ->
+   $('.edit_answer_form').hide()
+   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()

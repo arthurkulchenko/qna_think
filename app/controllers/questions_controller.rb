@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   before_action :authorship_verification, only: [:update, :destroy]
   # before_action :catch_not_found, only: [:show, :update, :destroy]
 
-  respond_to :js, only: [:create, :destroy, :update]
+  respond_to :json, only: [:create, :destroy]
 
   def index
     respond_with(@questions = Question.all)
@@ -17,24 +17,31 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    # gon.user_current = current_user
+    # respond_with :api, :v1, @thing
     @question = current_user.questions.create(question_params)
     respond_with(@question)
   end
 
   def show
-    # gon.question = @question
+    gon.current_user = current_user if current_user
     @answers = @question.answers.best_first
     respond_with @question
   end
 
   def update
     @question.update(question_params)
-    respond_with @question
+    respond_to do |format|
+      format.json { render json: @question }
+    end
+    # respond_with @question
   end
 
   def destroy
-    respond_with(@question.delete)
+    # respond_with(@question.delete)
+    @question.delete
+    respond_to do |format|
+      format.html { render nothing: true }
+    end
   end
 
   private
