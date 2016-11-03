@@ -14,7 +14,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(jpg jpeg gif png txt)
+    %w(jpg jpeg gif png txt md)
   end
 
   def content_type_blacklist

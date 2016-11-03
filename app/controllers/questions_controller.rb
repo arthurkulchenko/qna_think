@@ -19,7 +19,10 @@ class QuestionsController < ApplicationController
   def create
     # respond_with :api, :v1, @thing
     @question = current_user.questions.create(question_params)
-    respond_with(@question)
+    respond_with @question do |format|
+      format.js { render nothing: true }
+      format.json { render json: @question }
+    end
   end
 
   def show
@@ -30,17 +33,17 @@ class QuestionsController < ApplicationController
 
   def update
     @question.update(question_params)
-    respond_to do |format|
+    respond_with @question do |format|
+      format.js { render nothing: true }
       format.json { render json: @question }
     end
     # respond_with @question
   end
 
   def destroy
-    # respond_with(@question.delete)
-    @question.delete
-    respond_to do |format|
-      format.html { render nothing: true }
+    respond_with @question.delete do |format|
+      format.js { render nothing: true }
+      format.json { render nothing: true }
     end
   end
 

@@ -4,11 +4,13 @@ class Question < ApplicationRecord
   include Commenting
   include BelongingsOfUser
 
-  has_many :answers, dependent: :delete_all
+  has_many :answers, dependent: :destroy
   
   after_create :post_via_comet
   
-  validates_with Validators::QuestionValidator
+  validates_with Validators::QuestionValidator, fields: [:title, :content]
+  #  Custom validation do not pass tests
+  validates :title, :content, presence: true
   
   private
 

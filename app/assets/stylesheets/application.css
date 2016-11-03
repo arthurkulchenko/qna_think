@@ -32,3 +32,6 @@ a{
   opacity: 0.5;
   border-bottom: solid black 1px;
 }
+.hidden_class{
+  display: none;
+}

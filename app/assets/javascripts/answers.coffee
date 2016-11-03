@@ -23,5 +23,4 @@ jQuery ->
  $('.delete_answer_link').click -> 
   parent = $(this).first().parents(".answer")
   parent.fadeOut()
-  parent.remove()
- 
+  parent.remove() 

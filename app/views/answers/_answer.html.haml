@@ -17,3 +17,9 @@
  .new_comment
   - if can? :create, Comment  
    = render partial: 'comments/new', locals: { parent_object: answer }
+
+.hidden_class
+ .answer
+  = content_tag data: {answer: @answer}
+  .comments
+   = content_tag data: { comments: answer.comments }
