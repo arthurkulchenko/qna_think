@@ -13,5 +13,5 @@
  %br
  = f.submit 'Update an answer'
  %br
- = link_to 'Delete my Answer', answer_path(answer), method: :delete, remote: true, class: 'delete_answer_link'
+ = link_to 'Delete my Answer', answer_path(answer), method: :delete, remote: true, class: 'delete_answer_link', 'data-turbolinks' => "false"
 %br
