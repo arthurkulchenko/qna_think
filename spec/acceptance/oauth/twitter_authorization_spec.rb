@@ -12,6 +12,7 @@ feature 'loggin via twitter', %q{
       visit root_path
       click_on 'Log in'
       click_on 'Sign in with Twitter'
+      # save_and_open_page
       expect(page).to have_button 'Log out'
     end
    end
@@ -22,6 +23,7 @@ feature 'loggin via twitter', %q{
       visit root_path
       click_on 'Log in'
       click_on 'Sign in with Twitter'
+      # save_and_open_page
       expect(page).to have_button 'Log out'
     end
    end
