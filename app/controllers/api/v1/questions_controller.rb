@@ -5,16 +5,18 @@ class Api::V1::QuestionsController < Api::V1::BaseController
     respond_with @questions
   end
 
-  def show
-    respond_with @question
-  end
-
   def new
     respond_with @question
   end
 
   def create
-    respond_with(@question = current_resource_owner.questions.create!(question_params))
+    @current_ability ||= Ability.new(current_resource_owner)
+    authorize! :create, Question
+    respond_with @question = current_resource_owner.questions.create!(question_params)
+  end
+
+  def show
+    respond_with @question
   end
 
   private

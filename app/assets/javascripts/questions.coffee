@@ -1,4 +1,6 @@
 jQuery ->
+ $(".mark").click ->
+  $(this).parent().submit()
 ##------------------VOTE-------------------------
  $('.question').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
   json_mark = JSON.parse(xhr.responseText).mark
@@ -23,5 +25,5 @@ jQuery ->
 #-------------------------UPDATE------------------
 $('.question').children('.edit_question_form').bind 'ajax:success', (e, data, status, xhr) ->
   json_mark = JSON.parse(xhr.responseText).content
-  #$('.question_content').html('<h3><%= j @question.content %></h3>');
+  $('.question_content').html('<h3><%= j @question.content %></h3>');
   $('.edit_question_form').hide();

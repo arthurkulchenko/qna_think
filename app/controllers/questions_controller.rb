@@ -20,8 +20,13 @@ class QuestionsController < ApplicationController
     # respond_with :api, :v1, @thing
     @question = current_user.questions.create(question_params)
     respond_with @question do |format|
-      format.js { render nothing: true }
-      format.json { render json: @question }
+      if @question.errors.any?
+        format.js { render json: @question.errors.full_messages, status: 422 }
+        format.json { render json: @question.errors.full_messages, status: 422 }
+      else
+        format.js { render nothing: true }
+        format.json { render json: @question }
+      end
     end
   end
 
@@ -41,7 +46,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    respond_with @question.delete do |format|
+    respond_with @question.destroy do |format|
       format.js { render nothing: true }
       format.json { render nothing: true }
     end

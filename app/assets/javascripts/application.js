@@ -21,9 +21,9 @@
 // App.cable = ActionCable.createConsumer();
 
 $( document ).ajaxError(function( event, jqxhr, request, settings ) {
-  // json = JSON.parse(jqxhr)
-  // alert(jqxhr.responseText);
-  // e, xhr, status, error	
+  json = JSON.parse(jqxhr.responseText)
+  alert(json);
+  // e, xhr, status, error
   // $( "#msg" ).append( "<li>Error requesting page " + settings.url + "</li>" );
 });
 $(document).ajaxComplete(function() {

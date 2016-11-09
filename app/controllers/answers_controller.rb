@@ -1,12 +1,11 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  # skip_authorization_check :create
   authorize_resource except: [:create]
   before_action :authorship_verification, only: [:update, :destroy]
   respond_to :js, :json
 
   def create
-    # authorize! :create Question
+    authorize! :create, Answer
     @answer = Question.find(params[:question_id]).answers.create(answer_params.merge(user: current_user))
     ActionCable.server.broadcast "/question/#{@answer.question_id}/answers", @answer
     respond_with @answer
