@@ -11,6 +11,7 @@ class Ability
 
   def user_ability
     can_by_default
+    can [:profiles, :me], User
     can :vote, [Answer, Question] do |parent|
       !user.is_author_of?(parent)
     end
@@ -21,7 +22,6 @@ class Ability
 
   def guest_ability
     can_by_default
-    can [:profiles, :me], User
   end
 
   def can_by_default

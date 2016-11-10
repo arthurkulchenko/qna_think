@@ -10,7 +10,6 @@ class Api::V1::AnswersController < Api::V1::BaseController
   end
 
   def create
-    @current_ability ||= Ability.new(current_resource_owner)
     authorize! :create, Answer
     respond_with @answer = current_resource_owner.answers.create!(answer_params.merge(question_id: params[:question_id].to_i))
   end

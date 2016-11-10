@@ -10,7 +10,6 @@ class Api::V1::QuestionsController < Api::V1::BaseController
   end
 
   def create
-    @current_ability ||= Ability.new(current_resource_owner)
     authorize! :create, Question
     respond_with @question = current_resource_owner.questions.create!(question_params)
   end
