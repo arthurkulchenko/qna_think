@@ -12,19 +12,18 @@ feature 'question voting', %q(
 
     scenario "owner of question can't vote for his question" do
       visit question_path(user_question)
-      expect(page).to_not have_button "Rate Question"
+      expect(page).to_not have_css ".new_vote"
     end
 
     scenario "not owner of question can rate question" do
       visit question_path(question)
-      expect(page).to have_button "Rate Question"
+      expect(page).to have_css ".new_vote"
     end
 
     scenario "voice is considered", js: true do
       visit question_path(question)
-      # choose "Good", visible: false # не может найти элемент
-      page.execute_script("document.getElementById('Questions-rate').checked = true")
-      click_on 'Rate Question'
+      page.execute_script("$('#Questions-rate').click()")
+      page.execute_script("$('#Questions-rate').parent().submit()")
       expect(page).to have_content "Total mark is: 1"
     end
 end

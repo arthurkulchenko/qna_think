@@ -8,12 +8,11 @@ feature 'loggin via facebook', %q{
   end
   context "with email" do
     context "without account" do
-      # given!(:user){ create(:user, email: 'facebook@facebook.com') }
       scenario 'try log in without account in current application' do
         visit root_path
         click_on 'Log in'
         click_on 'Sign in with Facebook'
-        expect(page).to have_button 'Log out'
+        expect(page).to have_link 'Log out'
       end
      end
   
@@ -34,7 +33,9 @@ feature 'loggin via facebook', %q{
         visit root_path
         click_on 'Log in'
         click_on 'Sign in with Facebook'
-        expect(page).to have_button 'Log in'
+        # expect(page).to have_link 'Log in'
+        # policy of email confirmation
+        expect(page).to have_link 'Log out'
       end
      end
   
@@ -44,7 +45,9 @@ feature 'loggin via facebook', %q{
         visit root_path
         click_on 'Log in'
         click_on 'Sign in with Facebook'
-        expect(page).to have_button 'Log in'
+        # policy of email confirmation
+        # expect(page).to have_link 'Log in'
+        expect(page).to have_link 'Log out'
       end
     end
   end

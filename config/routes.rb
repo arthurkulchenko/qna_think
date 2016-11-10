@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   use_doorkeeper
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', 
   	                             password: 'secret', confirmation: 'verification', 
@@ -27,9 +26,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :profiles do
         get :me, on: :collection
-        get :index, on: :collection
+        get :index, on: :collection 
+      end
+      resources :questions, only: [:index, :show, :new, :create], shallow: true do
+        resources :answers, only: [:index, :show, :new, :create]
       end
     end
   end
-  
+  mount ActionCable.server => '/cable'
 end

@@ -3,14 +3,13 @@ class VotesController < ApplicationController
   respond_to :json
   
   def create
-    @parent = parent
-    authorize! :vote, @parent
-    respond_with(@vote = parent.votes.create(vote_params.merge(user: current_user)))
+    authorize! :vote, parent
+    respond_with @vote = parent.votes.create(vote_params.merge(user: current_user))
   end
 
   def destroy
     authorize! :destroy, @vote
-    respond_with(@vote.delete)
+    respond_with @vote.delete 
   end
 
   private

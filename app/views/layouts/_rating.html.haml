@@ -3,11 +3,12 @@
  - if parent_object.persisted? && user_signed_in? && !current_user.is_author_of?(parent_object)
   = form_for [parent_object, parent_object.votes.new], remote: true do |i|
    = i.label :mark, "Good"
-   = i.radio_button :mark, 1, id: "#{parent_object.class}s-rate"
+   = i.radio_button :mark, 1, id: "#{parent_object.class}s-rate", class: 'mark'
+   %hr
+   = i.label :mark, "Neutral"
+   = i.radio_button :mark, 0, class: 'mark'
    %hr
    = i.label :mark, "Bad"
-   = i.radio_button :mark, -1
+   = i.radio_button :mark, -1, class: 'mark'
    %hr
-   = i.submit "Rate #{parent_object.class}"
-  / -# if @vote = parent_object.votes.where(user: current_user).first
-  /  =# link_to "Take back your voice", vote_path(@vote), method: :delete, remote: true
+   - i.submit "Rate #{parent_object.class}"

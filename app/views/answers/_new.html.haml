@@ -2,10 +2,10 @@
  = f.label :content, 'Form for Answer'
  %br
  = f.text_field :content
- / #attache-file-to-answer
- /  = f.fields_for :attachable do |attache|
- /   = render 'layouts/attachment_fields', f: attache
- / = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
+ #attache-file-to-answer
+  = f.fields_for :attachments do |attache|
+   = render 'layouts/attachment_fields', f: attache
+ = link_to_add_association 'add file', f, :attachments, partial: 'layouts/attachment_fields', class: "add-fields-link"
  / = link_to_remove_association "remove file", f
  %br
  = f.submit 'Provide an answer'

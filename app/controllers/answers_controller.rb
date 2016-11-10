@@ -1,12 +1,15 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  authorize_resource
+  authorize_resource except: [:create]
   before_action :authorship_verification, only: [:update, :destroy]
-  respond_to :js
+  respond_to :js, :json
 
   def create
+    authorize! :create, Answer
     @answer = Question.find(params[:question_id]).answers.create(answer_params.merge(user: current_user))
-    respond_with(@answer)
+    ActionCable.server.broadcast "/question/#{@answer.question_id}/answers", @answer
+    respond_with @answer
+    # respond_with :api, :v1, @thing
   end
 
   def update
@@ -15,7 +18,10 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    respond_with(@answer.delete)
+    respond_with @answer.destroy do |format|
+      format.js { render nothing: true }
+      format.json { render head: :no_content }
+    end
   end
 
   private

@@ -1,19 +1,24 @@
 # encoding: utf-8
 
 class FileUploader < CarrierWave::Uploader::Base
+  CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
   delegate :identifier, to: :file
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
-  # Choose what kind of storage to use for this uploader:
   storage :file
-  # storage :fog
 
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  def extension_whitelist
+    %w(jpg jpeg gif png txt md)
+  end
+
+  def content_type_blacklist
+    ['application/text', 'application/json']
   end
 
 end

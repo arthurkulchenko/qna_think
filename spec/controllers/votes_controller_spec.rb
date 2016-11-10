@@ -6,6 +6,7 @@ RSpec.describe VotesController, type: :controller do
 
   describe 'POST#CREATE' do
     sign_in_user
+    # subject.current_user
     context 'success with question' do
       let(:request) { post :create, id: :vote, question_id: question, vote: attributes_for(:voted_plus), format: :json }
       it 'adds new vote' do

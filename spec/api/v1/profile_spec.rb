@@ -39,12 +39,12 @@ describe 'Profile API' do
   describe 'GET /index' do
     context 'unauth' do
       it 'return 401 status if there no auth token' do
-        get '/api/v1/profiles/index', format: :json
+        get '/api/v1/profiles', format: :json
         expect(response.status).to eq 401
       end
 
       it 'return 401 status if there auth token invalid' do
-        get '/api/v1/profiles/index', format: :json, access_token: "invalid_token"
+        get '/api/v1/profiles', format: :json, access_token: "invalid_token"
         expect(response.status).to eq 401
       end
     end
@@ -52,7 +52,7 @@ describe 'Profile API' do
     context 'auhtorized' do
       let(:some){ create(:user) }
       let(:access_token){ create(:access_token, resource_owner_id: some.id) }
-      before { get '/api/v1/profiles/index', format: :json, access_token: access_token.token }
+      before { get '/api/v1/profiles', format: :json, access_token: access_token.token }
 
       it 'return 200 status' do
         expect(response).to be_success

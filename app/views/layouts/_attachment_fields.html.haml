@@ -1,5 +1,5 @@
 .attache-partial.nested-fields
  .field
   = f.label :file
-  = f.file_field :file, multiple: true
- / = link_to_remove_association "remove file", f.object
+  = f.file_field :file
+ = link_to_remove_association "remove file", f

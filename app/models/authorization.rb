@@ -8,7 +8,7 @@ class Authorization < ApplicationRecord
 
   def send_email
     EmailConfirmationMailer.verify_authorization(user, confirmation_token)
-                                                .deliver_now unless is_confirmed
+                                                .deliver_now if user.email_real && !is_confirmed
   end
 
   def set_token

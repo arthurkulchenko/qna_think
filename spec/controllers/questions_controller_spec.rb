@@ -64,9 +64,7 @@ RSpec.describe QuestionsController, type: :controller do
         expect(subject.current_user).to eq question.user
       end
       it 'patching' do
-        request
-        question.reload
-        expect(question.content).to eq "UNIQ"
+        expect{ request }.to change(question, :content).to("UNIQ") 
       end
     end
     context 'fail' do

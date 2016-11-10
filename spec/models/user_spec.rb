@@ -1,7 +1,7 @@
 RSpec.describe User, type: :model do
   
   [:questions, :answers, :votes, :comments, :attachments, :authorizations].each do |model|
-    it { should have_many(model).dependent(:destroy) }
+    it { should have_many(model).dependent(:delete_all) }
   end
 
   let(:user){ create(:user) }
@@ -21,6 +21,7 @@ RSpec.describe User, type: :model do
       end
       context 'if he has\'t authorizations for 3p auth' do
         context 'email given' do
+          let!(:user){ create(:user) }
           let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123', info: {email: user.email} )}
           it 'returns user' do
             expect(method_call).to eq user

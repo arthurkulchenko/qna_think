@@ -15,6 +15,7 @@ feature '', %q(
     visit question_path(question)
     # click_on "Edit Question"
     find(".button").click
+    # Assets fail to load
     within '.edit_question_form' do
       fill_in "Update Form", with: 'Its corrected question'
       click_on 'Update a question'

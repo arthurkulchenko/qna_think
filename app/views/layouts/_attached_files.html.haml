@@ -1,6 +1,8 @@
 .attached-files
  %h4 Attached files
  %ul
- - parent_object.attachments.each do |attached_file|
+ - parent_object.attachments.each do |attached|
   %li
-   = attached_file.identifier
+   = link_to attached.file.identifier, attached.file.url
+   = link_to 'delete', root_path
+   %br

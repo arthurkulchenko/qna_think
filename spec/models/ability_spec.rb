@@ -1,4 +1,6 @@
 describe Ability do
+  to_class = ->(i){ i.to_s.classify.constantize }
+
   subject(:ability) { Ability.new(user) }
 
   describe 'user' do
@@ -8,7 +10,6 @@ describe Ability do
     let(:question){ create(:question, user: question_owner) }
     let!(:vote){ create(:vote, user: user, ballot: question)}
     let(:stranger){ create(:user, admin: true) }
-
     
     let(:question2){ create(:question, user: vote_owner) }
 
@@ -16,17 +17,19 @@ describe Ability do
     it { should be_able_to :read, :all }
     
     [:question, :answer, :comment, :attachment].each do |resource|
-      it { should be_able_to :create, resource.to_s.classify.constantize }
-      it { should be_able_to :update, create(resource, user: user), user: user }
-      it { should be_able_to :destroy, create(resource, user: user), user: user }
+      it { should be_able_to :create, to_class.call(resource) }
+      let(:resource){ create(resource, user: user) }
+      [:update, :destroy].each { |action| it { should be_able_to action, to_class.call(resource), user: user } }
+      # it { should_not be_able_to :update, create(resource, user: user), user: user }
+      # it { should_not be_able_to :destroy, create(resource, user: user), user: user }
       it { should_not be_able_to :update, create(resource, user: vote_owner), user: user }
       it { should_not be_able_to :destroy, create(resource, user: vote_owner), user: user }
     end
     
-    it { should_not be_able_to :create, vote, user: question_owner }
+    it { should_not be_able_to :create, Vote, user: question_owner }
     it { should be_able_to :create, Vote, user: user unless question.user }
 
-    it { should be_able_to :destroy, vote, user: user }
+    it { should be_able_to :destroy, Vote, user: user }
   end
 
   describe 'admin' do

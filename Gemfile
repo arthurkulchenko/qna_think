@@ -10,20 +10,28 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'thin'
+gem 'actioncable', '~> 5.0', '>= 5.0.0.1'
+
+# gem 'thin'
+gem 'puma'
 gem 'haml'
 gem 'devise'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
-# gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+gem 'remotipart' #, github: 'mshibuya/remotipart', ref: '3a6acb3'
 gem 'cocoon'
 gem 'responders'
-gem 'private_pub'
+# gem 'private_pub'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancan'
+
 gem 'doorkeeper'
+gem 'active_model_serializers'
+gem 'oj'
+gem 'oj_mimic_json'
+gem 'gon'
 
 gem 'sphinx'
 
@@ -58,6 +66,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "nyan-cat-formatter"
   gem 'capybara'
   gem 'capybara-webkit'
   # gem 'selenium-webdriver'

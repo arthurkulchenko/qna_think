@@ -3,18 +3,18 @@ feature 'answer a question', %q(
   As a registred user
   I want to give an answer
   ) do
-    given(:question){ create(:question)  }
-    given(:user){ create(:user) }
+    given!(:question){ create(:question)}
+    # DO NOT CREATE QUESTION
+    given!(:user){ create(:user) }
     background do
       sign_in(user)
+      # save_and_open_page
       visit question_path(question)
-      fill_in 'Form for Answer', with: 'First of all you need ...'\
-                    ' and only then ... Best Regards and Good luck!'
-      click_on 'Provide an answer'
     end
     
-    scenario 'answer apears after its create', js: true do
-      expect(page).to have_content 'First of all you need ...'\
-                  ' and only then ... Best Regards and Good luck!'
+    scenario 'answer apears after its create', js: true do      
+      fill_in 'Form for Answer', with: 'Advice'
+      click_on 'Provide an answer'
+      expect(page).to have_content 'Advice'
     end
 end

@@ -1,11 +1,12 @@
 .answer{:id => dom_id(answer)}
  .answer-content
   %strong= answer.content
- = render partial: 'answers/vote', locals: { answer: answer }
- = render partial: 'layouts/voting', locals: { parent_object: answer }
+ = render partial: 'answers/best_voting', locals: { answer: answer }
+ = render partial: 'layouts/rating', locals: { parent_object: answer }
  = render partial: 'layouts/attached_files', locals: { parent_object: answer }
  .comments
   .comment
   = render partial: answer.comments
+  = render partial: 'answers/edit', locals: { answer: answer }
  .new_comment
   = render partial: 'comments/new', locals: { parent_object: answer }

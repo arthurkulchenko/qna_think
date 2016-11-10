@@ -19,8 +19,8 @@ feature 'answer voting', %q(
     end
 
     scenario "voice is considered", js: true do
-      page.execute_script("document.getElementById('Answers-rate').checked = true")
-      click_on 'Rate Answer'
+      page.execute_script("$('#Answers-rate').click()")
+      page.execute_script("$('#Answers-rate').parent().submit()")
       expect(page).to have_content "Total mark is: 1"
     end
 end

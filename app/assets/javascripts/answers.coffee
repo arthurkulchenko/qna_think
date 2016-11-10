@@ -1,4 +1,12 @@
 jQuery ->
+
+ $(document).on "turbolinks:load", () ->
+  $(".edit_answer_form").hide()
+  $('.submit-button').click () ->
+   $(this).parent('.answer').hide()
+
+  $('.button-answer').click () ->
+   $(this).parent().children(".edit_answer_form").fadeToggle()
 ##-------------------------VOTING-----------------------------
  $('.answer').children('.rate-form').children('form').bind 'ajax:success', (e, data, status, xhr) ->
   json_mark = JSON.parse(xhr.responseText).mark
@@ -11,12 +19,8 @@ jQuery ->
 #--------------------------VOTING-----------------------------
  $('.vote-check-box').click () ->
   $(this).parent('form').submit()
-
- $(document).on "turbolinks:load", () ->
-  $('.edit_answer_form').hide()
-  $('.attached-files').hide()
-
-  $('.button-answer').click () ->
-   $(this).parent('.answer').children('.edit_answer_form').fadeToggle()
-  $('.submit-button').click () ->
-   $(this).parent('.answer').hide()
+#-------------------------DELETING----------------------------
+ $('.delete_answer_link').click -> 
+  parent = $(this).first().parents(".answer")
+  parent.fadeOut()
+  parent.remove() 

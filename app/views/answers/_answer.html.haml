@@ -4,8 +4,7 @@
  - if can? :update, answer.question
   = render partial: 'answers/best_voting', locals: { answer: answer }
  - if cannot? :update, answer.question
-  - if can? :create, Vote
-   = render partial: 'layouts/rating', locals: { parent_object: answer }
+  = render partial: 'layouts/rating', locals: { parent_object: answer }
  = render partial: 'layouts/attached_files', locals: { parent_object: answer }
  - if answer.persisted? && user_signed_in? && current_user.is_author_of?(answer)
   - if can? :update, answer
@@ -17,3 +16,9 @@
  .new_comment
   - if can? :create, Comment  
    = render partial: 'comments/new', locals: { parent_object: answer }
+
+.hidden_class
+ .answer
+  = content_tag data: {answer: @answer}
+  .comments
+   = content_tag data: { comments: answer.comments }
