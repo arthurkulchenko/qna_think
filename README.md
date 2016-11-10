@@ -1,14 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* ruby 2.3.0
-
-* Database PostgreSQL
-
-* rspec
-
-* Services (job queues, cache servers, search engines, etc.)
+## Current tasks
+* Вынести в shared examples тесты для API (общие части) 
+* Вынести в shared examples тесты моделей и контроллеров для голосования (консерны, если они используются у вас в проекте) 
+* Просмотреть спеки других моделей, контроллеров, API и вынести общие тесты в shared examples
+* Покрыть тестами вызовы PrivatePub.publish_to в контроллерах (если есть), используя message expectations.
