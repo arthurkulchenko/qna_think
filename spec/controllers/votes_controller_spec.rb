@@ -1,3 +1,4 @@
+include ActiveSupport::Inflector
 RSpec.describe VotesController, type: :controller do
   let(:user){ create(:user) }
   let(:user2){ create(:user) }
