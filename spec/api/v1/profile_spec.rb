@@ -5,26 +5,14 @@ describe 'Profile API' do
   let(:me_path){'/api/v1/profiles/me'}
   let(:index_path){'/api/v1/profiles'}
 
-  context 'unauth' do
-    it 'return 401 status if there no auth token' do
-      make_get_request me_path
-      expect(response.status).to eq 401
-    end
-    it 'return 401 status if there auth token invalid' do
-      make_get_request me_path, access_token: "invalid_token"
-      expect(response.status).to eq 401
-    end
+  context 'index' do
+    let(:path){ me_path }
+    it_behaves_like "API Unauth"
   end
-
-  context 'unauth' do
-    it 'return 401 status if there no auth token' do
-      make_get_request index_path
-      expect(response.status).to eq 401
-    end
-    it 'return 401 status if there auth token invalid' do
-      make_get_request index_path, access_token: "invalid_token"
-      expect(response.status).to eq 401
-    end
+  
+  context 'index' do
+    let(:path){ index_path }
+    it_behaves_like "API Unauth"
   end
   
   describe 'GET /me' do
