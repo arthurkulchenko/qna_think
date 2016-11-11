@@ -7,25 +7,17 @@ shared_examples_for "API Authenticable" do
   let!(:answer){ create(:answer, question: question) }
   let(:comments){create_list(:comment, 2, question: question)}
   let(:attachments){create_list(:attachment, 2, question: question)}
-
-  context 'unauth' do
-    it 'return 401 status if there no auth token' do
-      make_get_request(index_path, access_token: nil)
-      expect(response.status).to eq 401
-    end
-    it 'return 401 status if there auth token invalid' do
-      make_get_request(index_path, access_token: "invalid_token")
-      expect(response.status).to eq 401
-    end
+  
+  context 'index' do
+    let(:path){ index_path }
+    it_behaves_like "API Unauth"
   end
+
   context 'authorized' do
-    before { make_get_request index_path, access_token: access_token.token }
 
     describe 'GET #index' do
-
-      it 'returns 200 status code' do
-        expect(response).to be_success
-      end
+      before { make_get_request index_path, access_token: access_token.token }
+      it_behaves_like "Success status"
 
       it "comment object contained" do
         expect(response.body).to be_json_eql(model_instance.comments.to_json).at_path("0/comments")
@@ -45,9 +37,7 @@ shared_examples_for "API Authenticable" do
 
     describe "GET show" do
       before { make_get_request show_path, access_token: access_token.token }
-      it 'returns 200 status code' do
-        expect(response).to be_success
-      end
+      it_behaves_like "Success status"
 
       %w(id content created_at updated_at).each do |attr|
         it "model_instance object contains #{attr}" do
