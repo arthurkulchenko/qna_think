@@ -27,13 +27,6 @@ RSpec.describe User, type: :model do
             expect(method_call).to eq user
           end
         end
-        context 'email don\'t given' do  
-        # In this way, we won't know the truth
-        #   let(:auth){ OmniAuth::AuthHash.new(provider: 'facebook', uid: '123123')}
-        #   it 'returns user' do
-        #     expect(method_call).to eq user
-        #   end
-        end
       end
     end
     context 'if user don\'t exist in db' do

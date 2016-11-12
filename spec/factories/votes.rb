@@ -14,11 +14,6 @@ FactoryGirl.define do
     mark -1
   end
 
-  factory :voted_neutral, class: Vote do
-    user 
-    mark 0
-  end
-
   factory :illigal_voted, class: Vote do
     user 
     mark -2

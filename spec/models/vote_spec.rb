@@ -1,6 +1,5 @@
 RSpec.describe Vote, type: :model do
-  it { should belong_to(:user) }
-  it { should validate_presence_of(:user_id) }
+  it_behaves_like "User Belongings"
   it { should validate_inclusion_of(:mark).in_array([-1,0,1]) }
 
   let(:user){create(:user)}
@@ -9,6 +8,24 @@ RSpec.describe Vote, type: :model do
   let(:answer){create(:answer, user: user2, question: question)}
   let(:vote1){create(:vote, user: user, ballot: question, mark: 1)}
   let(:vote2){create(:vote, user: user, ballot: answer, mark: 1)}
+  subject { build(:vote, ballot: question) }
+  let(:new_vote) { create(:voted_plus, ballot: question) }
+
+  context 'mokking' do
+    it 'method updates parents mark sum' do
+      expect(subject).to receive(:update_mark_sum)
+      subject.save
+    end
+    it 'method do not updates parents mark sum' do
+      subject.save
+      expect(subject).to_not receive(:update_mark_sum)
+      subject.update(mark: -1)
+    end
+    it "returns mark" do
+      allow(new_vote).to receive(:update_mark_sum).and_return(1)
+      expect{ create(:voted_plus, ballot: question) }.to change(question, :mark).by(1)
+    end
+  end
   
   context 'with question' do
     it 'updates parent\'s mark' do

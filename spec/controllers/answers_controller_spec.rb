@@ -4,6 +4,8 @@ RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question, user: user) }
   let(:answer) { create(:answer, question: question, user: user) }
   let(:answers) { create_list(:answer, 3, question: question, user: user) }
+  let(:model){ Answer }
+  let(:model_instanse) { answer }
 
 #---------------------------------------------#POST(CREATE)
   describe 'POST #create' do
@@ -19,11 +21,6 @@ RSpec.describe AnswersController, type: :controller do
         request
         expect(assigns(:answer).user).to eq @user
       end
-  
-      # it 'renders answers create' do
-      #   request
-      #   expect(response).to render_template 'answers/create'
-      # end
     
     end
 
@@ -37,7 +34,6 @@ RSpec.describe AnswersController, type: :controller do
   end
 #---------------------------------------------UPDATE
   describe 'PATCH #update' do
-    sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:answer){ create(:answer, question: question, user: @user) }
     let(:request) { patch :update, id: answer, question_id: question, answer: attributes_for(:answer, content: "UNIQ"), format: :js }
@@ -65,9 +61,9 @@ RSpec.describe AnswersController, type: :controller do
   end
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do
-    sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:answer){ create(:answer, question: question, user: @user) }
+
     let(:request){ delete :destroy, question: question, id: answer, format: :js }
     let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his question' do
@@ -90,4 +86,5 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+  
 end
