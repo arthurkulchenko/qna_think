@@ -369,6 +369,7 @@ DEPENDENCIES
   puma
   rails (~> 5.0.0)
   rails-controller-testing
+  rake (~> 11.3)
   remotipart
   responders
   rspec-rails
