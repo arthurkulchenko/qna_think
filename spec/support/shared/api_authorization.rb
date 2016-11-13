@@ -1,12 +1,4 @@
 shared_examples_for "API Authenticable" do
-  let(:user) { create(:user) }
-  let(:access_token) { create(:access_token) }
-  let!(:questions) {create_list(:question, 2)}
-  let(:question){ questions.first }
-  let(:answers){ create_list(:answer, 2, question: question) }
-  let!(:answer){ create(:answer, question: question) }
-  let(:comments){create_list(:comment, 2, question: question)}
-  let(:attachments){create_list(:attachment, 2, question: question)}
   
   context 'index' do
     let(:path){ index_path }
