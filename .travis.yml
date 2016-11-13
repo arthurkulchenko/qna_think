@@ -4,5 +4,8 @@ rvm:
 services:
   - postgresql
   - redis-server
+before_script:
+  createdb 'qa_thinknetika_app_test'
+  createuser 'qa_thinknetika_app'
 # before_script:
 #   - psql -c 'create database travis_ci_test;' -U postgres
