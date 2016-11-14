@@ -16,7 +16,7 @@ gem 'actioncable', '~> 5.0', '>= 5.0.0.1'
 gem 'puma'
 gem 'haml'
 gem 'devise'
-gem 'sidekiq'
+gem 'delayed_job_active_record' #gem 'sidekiq'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'remotipart' #, github: 'mshibuya/remotipart', ref: '3a6acb3'
