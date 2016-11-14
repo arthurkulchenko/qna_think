@@ -30,7 +30,7 @@ class User < ApplicationRecord
   end
 
   private
-  #TOTEST
+
   def self.sending_digest_newsletter
     self.digest_subscribers.find_each do |user|
       # if Date.today.at_middle_of_day

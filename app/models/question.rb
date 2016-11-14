@@ -11,11 +11,11 @@ class Question < ApplicationRecord
   #  Custom validation do not pass tests, but it makes errors more pretty
   # validates_with Validators::QuestionValidator, fields: [:title, :content]
   validates :title, :content, presence: true
-  scope :last_24_hours, -> { where(create_at: DateTime.yesterday) }
+  scope :last_24_hours, -> { where(created_at: DateTime.yesterday) }
   
   private
   # TOTEST
-  def question_newslatter
+  def question_newsletter
     QuestionSubscriptionMailer.question_newslettering(User.subscribed_on_changings(self), self)
   end
 
