@@ -9,6 +9,7 @@ $(document).ready ->
      @perform('start_stream_answers')
  
    disconnected: ->
+     console.log("You are disconnected from AnswersChannel")
      # Called when the subscription has been terminated by the server
  
    received: (data) ->

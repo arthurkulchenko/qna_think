@@ -4,6 +4,7 @@ App.questions = App.cable.subscriptions.create "QuestionsChannel",
     @perform 'start_stream'
 
   disconnected: ->
+    console.log("You are disconnected from QuestionsChannel")
     # Called when the subscription has been terminated by the server
 
   received: (data) ->

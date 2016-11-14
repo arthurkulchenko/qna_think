@@ -19,7 +19,10 @@ class Vote < ApplicationRecord
     ballot.update(mark: ballot.votes.sum(:mark))
   end
 
+
   def updating_in_bg
-    self.update_mark_sum
+    # self.delay.update_mark_sum
+    update_mark_sum
   end
+  handle_asynchronously :updating_in_bg
 end

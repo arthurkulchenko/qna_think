@@ -6,6 +6,7 @@ $(document).ready ->
      # Called when the subscription is ready for use on the server
  
    disconnected: ->
+     console.log("You are disconnected from QuestionsCommentsChannel")
      # Called when the subscription has been terminated by the server
  
    received: (data) ->
