@@ -6,6 +6,8 @@ class User < ApplicationRecord
     has_many model, dependent: :delete_all
   end
 
+  scope :digest_subscribers, -> { where(subscibe_on_digest: true) }
+
   def is_author_of?(obj)
     obj.user_id == id
   end

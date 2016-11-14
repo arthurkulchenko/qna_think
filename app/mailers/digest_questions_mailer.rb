@@ -1,2 +1,0 @@
-class DigestQuestionsMailer < ApplicationMailer
-end

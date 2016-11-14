@@ -7,13 +7,17 @@ class Answer < ApplicationRecord
   belongs_to :question
 
   validates :content, :question_id, presence: true
-
+  after_create :new_answer_lettering
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
   scope :not_best_answers, -> { where(best_answer: false) }
   
   private
+  # TOTEST
+  def new_answer_lettering
+    # QuestionSubscriptionMailer.new_answer_letter(question.user, self).deliver_later(:queue)
+  end
 
   def check_of_best
     return unless @best_answer = question.answers.best_first.first
