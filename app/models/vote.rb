@@ -5,8 +5,8 @@ class Vote < ApplicationRecord
   
   validates :mark, inclusion: { in: [-1,0,1], message: "%{value} is not a valid value" }
 
-  after_create :delete_same_users_vote, :updating_in_bg
-  after_destroy :updating_in_bg
+  after_create :delete_same_users_vote, :update_mark_sum
+  after_destroy :update_mark_sum
 
   private
 
@@ -19,10 +19,4 @@ class Vote < ApplicationRecord
     ballot.update(mark: ballot.votes.sum(:mark))
   end
 
-
-  def updating_in_bg
-    self.delay.update_mark_sum
-    # update_mark_sum
-  end
-  handle_asynchronously :updating_in_bg
 end

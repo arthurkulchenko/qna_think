@@ -14,7 +14,6 @@ class Question < ApplicationRecord
   private
 
   def post_via_comet
-    # ActionCable.server.broadcast_to(self, Question)
     ActionCable.server.broadcast '/questions',
                                   ApplicationController.render( 
                                   	                            partial: 'questions/new_question',
