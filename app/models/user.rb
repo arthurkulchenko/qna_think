@@ -46,6 +46,10 @@ class User < ApplicationRecord
 
   end
 
+  def backgrounding_method method
+    self.delay.method
+  end
+
   def merge_this(user)
     User.transaction do
       user.authorizations.each do |auth|
