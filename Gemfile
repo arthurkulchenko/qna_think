@@ -17,6 +17,7 @@ gem 'puma'
 gem 'haml'
 gem 'devise'
 gem 'delayed_job_active_record' #gem 'sidekiq'
+gem 'whenever'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'remotipart' #, github: 'mshibuya/remotipart', ref: '3a6acb3'

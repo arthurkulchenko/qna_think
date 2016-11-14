@@ -73,4 +73,12 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.sending_digest_newsletter' do
+    let(:users){create_list(:user, 2)}
+    it 'sends maill and recive params' do
+      users.each { |user| expect(QuestionSubscriptionMailer).to recive(send_digest).with(user, questions).and_call.original }
+      User.sending_digest_newsletter
+    end
+  end
+
 end
