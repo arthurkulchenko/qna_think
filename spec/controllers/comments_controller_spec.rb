@@ -4,31 +4,36 @@ RSpec.describe CommentsController, type: :controller do
   let(:answer){ create(:answer, user: user, question: question) }
   let(:comment){ create(:comment, user: user, parent: question) }
   let(:comment2){ create(:comment, user: user, parent: answer) }
+  let(:model){ Comment }
+  let(:model_instanse){ comment }
+  let(:model_instanse2){ comment2 }
+  # -------------
+  let(:options){ answer_id: model_instanse, comment: attributes_for(:comment_with_wrong_values) }
+  sign_in_user
 #---------------------------------------------POST(CREATE)
   describe 'POST #create' do
-    sign_in_user
-    context 'in success context  -- ' do
-      let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment), format: :js }
-        it 'creates new comment' do
-          expect{request}.to change(Comment, :count).by(1)
-        end
+    it_behaves_like "Post method"
+    # context 'in success context  -- ' do
+    #   let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment), format: :js }
+    #     it 'creates new comment' do
+    #       expect{request}.to change(Comment, :count).by(1)
+    #     end
 
-        it 'relate comment with its user' do
-          request
-          expect(assigns(:comment).user).to eq @user
-        end
-    end
+    #     it 'relate comment with its user' do
+    #       request
+    #       expect(assigns(:comment).user).to eq @user
+    #     end
+    # end
 
-    context 'in fail context  -- ' do      
-      let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment_with_wrong_values), format: :js }
-      it 'do not creates new comment' do
-        expect{request}.to_not change(Comment, :count)
-      end
-    end
+    # context 'in fail context  -- ' do      
+    #   let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment_with_wrong_values), format: :js }
+    #   it 'do not creates new comment' do
+    #     expect{request}.to_not change(Comment, :count)
+    #   end
+    # end
   end
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do
-    sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:answer){ create(:answer, user: user, question: question) }
     let!(:comment){ create(:comment, parent: answer, user: @user) }
@@ -55,7 +60,6 @@ RSpec.describe CommentsController, type: :controller do
 
 #---------------------------------------------#POST(CREATE)
   describe 'POST #create' do
-    sign_in_user
     context 'success comment creating  --' do
       let(:request) { post :create, id: :comment, question_id: question, comment: attributes_for(:comment), format: :js }
       it 'create new comment' do
@@ -77,7 +81,6 @@ RSpec.describe CommentsController, type: :controller do
   end
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do
-    sign_in_user
     let!(:question){ create(:question, user: @user) }
     let!(:comment){ create(:comment, parent: question, user: @user) }
     let(:request){ delete :destroy, question_id: question, id: comment, format: :js }

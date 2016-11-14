@@ -1,12 +1,14 @@
+include ActiveSupport::Inflector
 RSpec.describe VotesController, type: :controller do
   let(:user){ create(:user) }
   let(:user2){ create(:user) }
   let(:question){ create(:question, user: user2) }
   let(:vote){ create(:vote, user: user, ballot: question) }
+  let(:model){ Vote }
+  let(:model-instanse){ vote }
+  sign_in_user
 
   describe 'POST#CREATE' do
-    sign_in_user
-    # subject.current_user
     context 'success with question' do
       let(:request) { post :create, id: :vote, question_id: question, vote: attributes_for(:voted_plus), format: :json }
       it 'adds new vote' do
@@ -26,7 +28,6 @@ RSpec.describe VotesController, type: :controller do
   end
   describe 'DESTROY#DELETE' do
     context "success deletation" do
-      sign_in_user
       let(:user){ subject.current_user }
       let(:request) { delete :destroy, id: vote, format: :json }
       it 'deletes vote' do
@@ -35,7 +36,6 @@ RSpec.describe VotesController, type: :controller do
       end
     end
     context "failed deletation" do
-      sign_in_user
       let(:request) { delete :destroy, id: vote, format: :json }
       it 'do not deletes vote' do
         vote

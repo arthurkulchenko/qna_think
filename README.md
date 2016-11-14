@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/arthurkulchenko/qna_think.svg?branch=lesson_16_advanced_rspec)](https://travis-ci.org/arthurkulchenko/qna_think)
 # README
 
 ## Current tasks

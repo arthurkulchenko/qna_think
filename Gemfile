@@ -16,6 +16,7 @@ gem 'actioncable', '~> 5.0', '>= 5.0.0.1'
 gem 'puma'
 gem 'haml'
 gem 'devise'
+gem 'sidekiq'
 
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'remotipart' #, github: 'mshibuya/remotipart', ref: '3a6acb3'
@@ -28,9 +29,11 @@ gem 'omniauth-twitter'
 gem 'cancan'
 
 gem 'doorkeeper'
+
 gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
+
 gem 'gon'
 
 gem 'sphinx'
@@ -61,6 +64,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara-email'
+  gem 'parallel_tests'
 
   gem 'rails-controller-testing'
 end
@@ -74,4 +78,5 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'json_spec'
+  gem 'rake', '~> 11.3'
 end

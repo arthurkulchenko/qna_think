@@ -1,9 +1,12 @@
 RSpec.describe QuestionsController, type: :controller do
   let!(:user){ create(:user) }
+  let(:another_user){ create(:user, email: 'another@email.rspec') }
+  let(:question){ create(:question, user: user) }
+  let(:model){ Question }
+  let(:model_instanse){ question }
+  sign_in_user
 #---------------------------------------------NEW
   describe 'GET #new' do
-    let(:question){ create(:question, user: user) }
-    sign_in_user
     before { get :new }
 
     it 'renders template' do
@@ -16,7 +19,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 #---------------------------------------------SHOW
   describe 'GET #show' do
-    let(:question){ create(:question, user: user) }
     before { get :show, id: question }
 
     it 'assigns right question' do
@@ -29,18 +31,17 @@ RSpec.describe QuestionsController, type: :controller do
   end
 #---------------------------------------------POST(CREATE)
   describe 'POST #create' do
-    let(:question){ create(:question, user: user) }
-    sign_in_user
     context 'in success context  -- ' do
       let(:request) { post :create, question: attributes_for(:question), format: :js }
-        it 'creates new question' do
-          expect{request}.to change(Question, :count).by(1)
-        end
 
-        it 'relate question with its user', format: :js do
-          request
-          expect(assigns(:question).user).to eq @user
-        end
+      it 'creates new question' do
+        expect{request}.to change(Question, :count).by(1)
+      end
+
+      it 'relate question with its user', format: :js do
+        request
+        expect(assigns(:question).user).to eq @user
+      end
     end
 
     context 'in fail context  -- ' do
@@ -52,8 +53,6 @@ RSpec.describe QuestionsController, type: :controller do
   end
 #---------------------------------------------UPDATE
   describe 'PATCH #update' do
-    let(:question){ create(:question, user: user) }
-    sign_in_user
     let!(:question){ create(:question, user: @user) }
     let(:request) { patch :update, id: question, question: attributes_for(:question, content: "UNIQ"), format: :js }
     context 'successful' do
@@ -64,7 +63,9 @@ RSpec.describe QuestionsController, type: :controller do
         expect(subject.current_user).to eq question.user
       end
       it 'patching' do
-        expect{ request }.to change(question, :content).to("UNIQ") 
+        request
+        question.reload
+        expect(question.content).to eq "UNIQ"
       end
     end
     context 'fail' do
@@ -78,11 +79,9 @@ RSpec.describe QuestionsController, type: :controller do
   end
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do
-    let(:question){ create(:question, user: user) }
-    sign_in_user
     let!(:question){ create(:question, user: @user) }
+
     let(:request){ delete :destroy, id: question, format: :js }
-    let(:another_user){ create(:user, email: 'another@email.rspec') }
     context 'owner deleting his question' do
       it 'deletes question' do
         expect{ request }.to change(Question, :count).by(-1)
