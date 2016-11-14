@@ -20,9 +20,9 @@ class Question < ApplicationRecord
       QuestionSubscriptionMailer.send_digest(User.digest_subscribers, Question.last_24_hours).deliver_later(:queue)
     end
   end
-
+  # TOTEST
   def question_newslatter
-    
+    QuestionSubscriptionMailer.question_newslettering(User.subscribed_on_changings(self), self)
   end
 
   def post_via_comet

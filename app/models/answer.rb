@@ -7,7 +7,7 @@ class Answer < ApplicationRecord
   belongs_to :question
 
   validates :content, :question_id, presence: true
-  after_create :new_answer_lettering
+  after_create :new_answer_lettering, :answers_amount
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
@@ -15,8 +15,12 @@ class Answer < ApplicationRecord
   
   private
   # TOTEST
+  def answers_amount
+    self.question.update(question.answers.sum)
+  end
+  # TOTEST
   def new_answer_lettering
-    # QuestionSubscriptionMailer.new_answer_letter(question.user, self).deliver_later(:queue)
+    QuestionSubscriptionMailer.new_answer_letter(question.user, self).deliver_later(:queue)
   end
 
   def check_of_best

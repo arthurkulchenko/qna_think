@@ -7,6 +7,7 @@ class User < ApplicationRecord
   end
 
   scope :digest_subscribers, -> { where(subscibe_on_digest: true) }
+  scope :subscribed_on_changings, -> (question) { where(subsctiptions: question) }
 
   def is_author_of?(obj)
     obj.user_id == id
