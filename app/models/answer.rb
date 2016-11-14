@@ -16,11 +16,11 @@ class Answer < ApplicationRecord
   private
   # TOTEST
   def answers_amount
-    self.question.update(question.answers.sum)
+    self.question.update(answers_amount: question.answers.count)
   end
   # TOTEST
   def new_answer_lettering
-    QuestionSubscriptionMailer.new_answer_letter(question.user, self).deliver_later(:queue)
+    QuestionSubscriptionMailer.new_answer_letter(question.user, self)#.deliver_later(:queue)
   end
 
   def check_of_best

@@ -32,10 +32,10 @@ class User < ApplicationRecord
   private
   #TOTEST
   def self.sending_digest_newsletter
-    self.digest_subscribers.find_each |user| do
-      if Date.today.at_middle_of_day
-        QuestionSubscriptionMailer.send_digest(user, Question.last_24_hours).deliver_later#(:queue)
-      end
+    self.digest_subscribers.find_each do |user|
+      # if Date.today.at_middle_of_day
+        QuestionSubscriptionMailer.send_digest(user, Question.last_24_hours)#.deliver_later#(:queue)
+      # end
     end
   end
 
@@ -67,6 +67,6 @@ class User < ApplicationRecord
     end
     self
   end
-  handle_asynchronously :merge_this
+  # handle_asynchronously :merge_this
   
 end

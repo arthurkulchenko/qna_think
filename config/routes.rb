@@ -1,4 +1,10 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  authenticate :user, -> (user) { user.admin? } do
+    # No route 'GET /sidekiq'
+    # TODO root_path unless user.admin?
+    mount Sidekiq::Web => '/sidekiq'
+  end
   use_doorkeeper
   devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout', 
   	                             password: 'secret', confirmation: 'verification', 
