@@ -20,7 +20,7 @@ class Answer < ApplicationRecord
   end
   # TOTEST
   def new_answer_lettering
-    QuestionSubscriptionMailer.new_answer_letter(question.user, self)#.deliver_later(:queue)
+    Subscribtion.create(user: user, subscribtable: question)
   end
 
   def check_of_best
