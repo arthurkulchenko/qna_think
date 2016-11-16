@@ -2,12 +2,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, # :confirmable, :lockable, :timeoutable
          :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
   
-  [:questions, :answers, :votes, :comments, :attachments, :authorizations].each do |model|
+  [:questions, :answers, :votes, :comments, :attachments, :authorizations, :subscriptions].each do |model|
     has_many model, dependent: :delete_all
   end
 
   scope :digest_subscribers, -> { where(subscibe_on_digest: true) }
-  scope :subscribed_on_changings, -> (question) { where(subsctiptions: question) }
+  scope :subscribed_on_changings, -> (question) { where(subscriptions: question) }
 
   def is_author_of?(obj)
     obj.user_id == id

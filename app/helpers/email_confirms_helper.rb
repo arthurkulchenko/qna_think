@@ -1,2 +1,0 @@
-module EmailConfirmsHelper
-end

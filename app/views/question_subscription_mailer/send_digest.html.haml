@@ -1,4 +1,4 @@
 %h1= "Hello, #{@user}, we have new questions for ya!"
 %ul
  = @questions.each do |question|
-  %li= link_to question.title, question_path(question), html: { class: "question-link", id: "#{question.id}" }
+  %li= link_to question.title, question_url(question), html: { class: "question-link", id: "#{question.id}" }

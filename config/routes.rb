@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   root 'questions#index'
 
   resources :authorizations, only: [:show]
-  resources :user, only:[:update]
+  resources :users, only:[:update, :show]
 
   concern :votable do
     resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]

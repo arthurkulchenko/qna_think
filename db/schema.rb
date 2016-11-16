@@ -121,10 +121,8 @@ ActiveRecord::Schema.define(version: 20161114141303) do
     t.integer  "user_id"
     t.string   "subscribtable_type"
     t.integer  "subscribtable_id"
-    t.string   "subscribtable_kind"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["subscribtable_kind"], name: "index_subscribtions_on_subscribtable_kind", using: :btree
     t.index ["subscribtable_type", "subscribtable_id"], name: "index_subscribtions_on_subscribtable_type_and_subscribtable_id", using: :btree
     t.index ["user_id", "subscribtable_id"], name: "index_subscribtions_on_user_id_and_subscribtable_id", using: :btree
     t.index ["user_id"], name: "index_subscribtions_on_user_id", using: :btree

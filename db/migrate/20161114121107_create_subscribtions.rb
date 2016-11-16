@@ -3,7 +3,6 @@ class CreateSubscribtions < ActiveRecord::Migration[5.0]
     create_table :subscribtions do |t|
       t.belongs_to :user, foreign_key: true
       t.belongs_to :subscribtable, polymorphic: true
-      t.string :subscribtable_kind, index: true
 
       t.timestamps
     end

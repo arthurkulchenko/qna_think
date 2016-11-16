@@ -4,7 +4,7 @@ rvm:
 services:
   - postgresql
   - redis-server
-  - sidekiq
+  - sidekiq -q default -q mailers
 before_script:
   - psql -c "CREATE USER qa_thinknetika_app WITH PASSWORD 'qa_qa_app_think';" -U postgres
   - psql -c "CREATE database qa_thinknetika_app_test;" -U postgres
