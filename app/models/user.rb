@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, # :confirmable, :lockable, :timeoutable
          :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
   
-  [:questions, :answers, :votes, :comments, :attachments, :authorizations, :subscriptions].each do |model|
+  [:questions, :answers, :votes, :comments, :attachments, :authorizations, :subscribtions].each do |model|
     has_many model, dependent: :delete_all
   end
 

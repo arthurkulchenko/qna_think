@@ -1,8 +1,8 @@
 .user-page
  .subscriptions-block
   = form_for current_user ,remote: true do |f|
-   = f.label :subscibe_on_digest, "Digest subscription"
-   = f.check_box :subscibe_on_digest, id: "user-digest-subscription"
+   = f.label :subscibe_on_digest, "Digest subscribtion"
+   = f.check_box :subscibe_on_digest, id: "user-digest-subscribtion"
   %hr
-  = current_user.subscriptions.each do |subscription|
-    = link_to subscription.question.title, question_path(subscription.question)
+  - current_user.subscribtions.each do |subscribtion|
+   = link_to subscribtion.question.title, question_path(subscribtion.question)

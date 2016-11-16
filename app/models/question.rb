@@ -19,7 +19,7 @@ class Question < ApplicationRecord
   # TOTEST
   def question_newsletter
     # if user.is_author_of?(self)
-    #   # QuestionSubscriptionMailer.question_newslettering(User.subscribed_on_changings(self), self)
+      QuestionSubscriptionMailer.question_newslettering(User.subscribed_on_changings(self), self)
     # else
     # end
   end
