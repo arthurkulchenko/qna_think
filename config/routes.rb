@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # resources :subscribtions, only: [:create]
 
   concern :subscribtable do
-    resources :subscribtions, only: [:create], defaults: { format: 'json' }
+    resources :subscribtions, defaults: { format: 'json' }, only: [:create, :show, :destroy]
   end
 
   concern :votable do
