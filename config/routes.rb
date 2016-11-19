@@ -15,6 +15,11 @@ Rails.application.routes.draw do
 
   resources :authorizations, only: [:show]
   resources :users, only:[:update, :show]
+  # resources :subscribtions, only: [:create]
+
+  concern :subscribtable do
+    resources :subscribtions, only: [:create], defaults: { format: 'json' }
+  end
 
   concern :votable do
     resources :votes, defaults: { format: 'json' }, only: [:create, :destroy]
@@ -24,7 +29,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :questions, concerns: [:votable, :commentable], except: [:edit], shallow: true do
+  resources :questions, concerns: [:votable, :commentable, :subscribtable], except: [:edit], shallow: true do
     resources :answers, concerns: [:votable, :commentable], only: [:create, :update, :destroy]
   end
 

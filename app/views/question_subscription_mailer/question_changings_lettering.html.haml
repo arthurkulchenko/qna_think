@@ -1,0 +1,17 @@
+%h1= "Hello, #{@user} there are some changings in #{@question.title} - Question"
+/ =# render template: 'questions/show'
+.questions 
+ .question{:class => dom_id(@question), :id => @question.id}
+  %h3= @question.title
+  .question_content
+   %h3= @question.content
+  %br
+  .comments
+   .comment
+   = render partial: @question.comments
+  %hr
+%h2 Answers
+.best_answer
+.answers
+ = render @question.answers
+%hr

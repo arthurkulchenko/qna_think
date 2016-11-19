@@ -1,0 +1,4 @@
+.subscribe-form
+ - if parent_object.persisted? && user_signed_in? && !current_user.is_author_of?(parent_object)
+  = form_for [parent_object, parent_object.subscribtions.new], remote: true do |i|
+   = i.submit "Subscribtion"

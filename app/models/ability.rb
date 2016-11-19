@@ -11,8 +11,8 @@ class Ability
   end
 
   def user_ability
-    can [:create, :update, :destroy], [Question, Answer, Comment, Attachment], user: user
-    
+    # TODO add subscribtion
+    can [:create, :update, :destroy], [Question, Answer, Comment, Attachment, Subscribtion], user: user    
     can [:profiles, :me], User
     can :vote, [Answer, Question] do |parent|
       !user.is_author_of?(parent)
