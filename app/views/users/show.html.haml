@@ -5,4 +5,7 @@
    = f.check_box :subscibe_on_digest, id: "user-digest-subscribtion"
   %hr
   - current_user.subscribtions.each do |subscribtion|
-   = link_to subscribtion.question.title, question_path(subscribtion.question)
+   %ul 
+    My Subscribtions
+    %li= link_to subscribtion.subscribtable.title, question_path(subscribtion.subscribtable)
+    = link_to "Unsubscribe", subscribtion_path(current_user.subscribtions.where(subscribtable: subscribtion.subscribtable).first), remote: true, method: :delete

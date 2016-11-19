@@ -1,10 +1,6 @@
 .questions 
  .subscriptions-block
-  - unless current_user.is_author_of?(@question)
-   - if can? :create, Subscribtion
-    = render partial: "layouts/subscribable", locals: { parent_object: @question }
-    / =# form_for @question.subscribtions.new, remote: true do |f|
-    /  =# f.submit 'Subscribe'
+  = render partial: "layouts/subscribable", locals: { parent_object: @question }
  .question{:class => dom_id(@question), :id => @question.id}
   %h3= @question.title
   .question_content
