@@ -1,0 +1,5 @@
+%h1 Hello, if You see this page, then you need to confirm your email.
+= form_for @user, url: email_confirm_path(@user.id) do |f|
+ = f.label :email
+ = f.email_field :email, value: ""
+ = f.submit "Send me an email"

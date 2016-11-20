@@ -30,6 +30,7 @@ class Question < ApplicationRecord
   end
 
   def background_job
+    # TODO need to add cheking if content or title updated
     self.question_newsletter
   end
 

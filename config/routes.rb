@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   	                             sign_up: 'cmon_let_me_in' },
                                  controllers: { omniauth_callbacks: 'omniauth_callbacks/omniauth_callbacks'}
   root 'questions#index'
-
+ 
+  resources :email_confirms, only: [:edit, :update]
   resources :authorizations, only: [:show]
   resources :users, only:[:update, :show]
   # resources :subscribtions, only: [:create]

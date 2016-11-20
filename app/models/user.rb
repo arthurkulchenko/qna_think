@@ -55,15 +55,8 @@ class User < ApplicationRecord
 
   end
 
-  def merge_this(user)
-    User.transaction do
-      user.authorizations.each do |auth|
-        auth.update(user_id: id)
-      end
-      user.destroy
-      save
-    end
-    self
+  def merge_into(user)
+    MergingUsersJob.perform(user, self)
   end
   # handle_asynchronously :merge_this
   

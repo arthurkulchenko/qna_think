@@ -11,7 +11,6 @@ class Ability
   end
 
   def user_ability
-    # TODO add subscribtion
     can [:create, :update, :destroy], [Question, Answer, Comment, Attachment, Subscribtion], user: user    
     can [:profiles, :me], User
     can :vote, [Answer, Question] do |parent|

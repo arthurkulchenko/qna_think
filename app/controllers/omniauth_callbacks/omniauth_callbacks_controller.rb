@@ -15,7 +15,12 @@ class OmniauthCallbacks::OmniauthCallbacksController < Devise::OmniauthCallbacks
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :seccess, kind: @req.provider) if is_navigational_format?
     else
-      redirect_to root_path
+      if @user.email_real
+        redirect_to root_path  
+      else
+        redirect_to edit_email_confirm_path(@authorization)
+      end
+      
     end
   end
 end
