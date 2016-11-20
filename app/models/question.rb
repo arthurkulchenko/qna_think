@@ -18,7 +18,7 @@ class Question < ApplicationRecord
   def question_newsletter
     Subscribtion.where(subscribtable: self).find_each do |subscribtion|
       unless subscribtion.user.is_author_of?(self)
-        QuestionSubscriptionMailer.question_changings_lettering(subscribtion.user, self)
+        QuestionSubscriptionMailer.question_changings_lettering(subscribtion.user, self).deliver_later
       end
     end
   end
@@ -27,21 +27,10 @@ class Question < ApplicationRecord
 
   def subscribe_on_new_answers
     Subscribtion.create(user: user, subscribtable: self)
-    self.question_newsletter
   end
 
-  # TOTEST
-  # WHY IT FAILS?
-  # def question_newsletter
-  #   Subscribtion.where(subscribtable: self).find_each do |subscribtion|
-  #     unless subscribtion.user.is_author_of?(self)
-  #       QuestionSubscriptionMailer.question_changings_lettering(subscribtion.user, self)
-  #     end
-  #   end
-  # end
-
   def background_job
-    self.delay.question_newsletter
+    self.question_newsletter
   end
 
   def post_via_comet

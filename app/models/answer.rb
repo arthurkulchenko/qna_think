@@ -7,21 +7,17 @@ class Answer < ApplicationRecord
   belongs_to :question
 
   validates :content, :question_id, presence: true
-  after_create :new_answer_lettering #, :answers_amount
+  after_create :new_answer_lettering
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
   scope :not_best_answers, -> { where(best_answer: false) }
   
   private
-  # TOTEST
-  # def answers_amount
-  #   self.question.update(answers_amount: question.answers.count)
-  # end
-  # TOTEST
+  
   def new_answer_lettering
     Subscribtion.where(subscribtable: self.question).find_each do |subscribtion|
-      QuestionSubscriptionMailer.new_answer_letter(subscribtion.user, self)
+      QuestionSubscriptionMailer.new_answer_letter(subscribtion.user, self).deliver_later
     end
   end
 
