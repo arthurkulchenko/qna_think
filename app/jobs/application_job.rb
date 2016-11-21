@@ -1,1 +1,3 @@
-class ApplicationJob < ActiveJob::Base;end
+class ApplicationJob < ActiveJob::Base
+  # Sidekiq::Queue.all.each &:clear
+end

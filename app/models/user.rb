@@ -55,7 +55,7 @@ class User < ApplicationRecord
 
   end
 
-  def merge_into(user)
+  def merge_into_old(user)
     MergingUsersJob.perform(user, self)
   end
   # handle_asynchronously :merge_this
