@@ -16,9 +16,7 @@ class Answer < ApplicationRecord
   private
   
   def new_answer_lettering
-    Subscribtion.where(subscribtable: self.question).find_each do |subscribtion|
-      QuestionSubscriptionMailer.new_answer_letter(subscribtion.user, self).deliver_later
-    end
+    NewAnswerLetteringJob.perform(self)
   end
 
   def check_of_best

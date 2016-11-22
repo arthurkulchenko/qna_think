@@ -28,40 +28,36 @@ class User < ApplicationRecord
     user
   end
 
-  def self.associations_list
-    self.reflect_on_all_associations(:has_many).map(&:name)
-  end
-
   private
 
-  def self.sending_digest_newsletter
-    self.digest_subscribers.find_each do |user|
-      # if Date.today.at_middle_of_day ?
-      QuestionSubscriptionMailer.send_digest(user, Question.last_24_hours).deliver_later#(:queue)
+    def merge_into_old(user)
+      MergingUsersJob.perform(user, self)
     end
-  end
-
-  class << self
-
-    def email_genarating(req)
-      if req.info[:email]
-        @r_email = true
-        @g_email = req.info[:email]
-      else
-        @r_email = false
-        @g_email = "#{req.provider}-#{req.uid}@email.com"
+  
+    class << self
+  
+      def associations_list
+        reflect_on_all_associations(:has_many).map(&:name)
       end
+  
+      def sending_digest_newsletter
+        DigestLetteringJob.perform()
+      end
+  
+      def email_genarating(req)
+        if req.info[:email]
+          @r_email = true
+          @g_email = req.info[:email]
+        else
+          @r_email = false
+          @g_email = "#{req.provider}-#{req.uid}@email.com"
+        end
+      end
+  
+      def password_generating
+        @password = Devise.friendly_token[0..20]
+      end
+  
     end
-
-    def password_generating
-      @password = Devise.friendly_token[0..20]
-    end
-
-  end
-
-  def merge_into_old(user)
-    MergingUsersJob.perform(user, self)
-  end
-  # handle_asynchronously :merge_this
   
 end

@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+  - 2.3.0
+services:
+  - postgresql
+  - redis-server
+  - sidekiq -q default -q mailers
+before_script:
+  - psql -c "CREATE USER qa_thinknetika_app WITH PASSWORD 'qa_qa_app_think';" -U postgres
+  - psql -c "CREATE database qa_thinknetika_app_test;" -U postgres
+script: bin/rails db:migrate RAILS_ENV=test
+addons:
+    code_climate:
+        repo_token: e06e4b4e95b161fc5508924bd2688dd974af50cf98082ddc04f8918fc4a917a8
