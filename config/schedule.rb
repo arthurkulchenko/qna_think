@@ -13,8 +13,8 @@
 #   rake "some:great:rake:task"
 # end
 #
-every 1.days do
-  runner "User.sending_digest_newsletter"
-end
+# every 1.days do
+#   runner "User.sending_digest_newsletter"
+# end
 
 # Learn more: http://github.com/javan/whenever

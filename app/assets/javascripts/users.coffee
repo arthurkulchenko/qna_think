@@ -1,3 +1,4 @@
 jQuery ->
-  $("#user-digest-subscription").click ->
-    $(this).parent().submit()
+  $(document).ready ->
+    $("#user-digest-subscription").click ->
+      $(this).parent().submit()
