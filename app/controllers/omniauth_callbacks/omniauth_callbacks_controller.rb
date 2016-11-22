@@ -20,7 +20,6 @@ class OmniauthCallbacks::OmniauthCallbacksController < Devise::OmniauthCallbacks
       else
         redirect_to edit_email_confirm_path(@authorization)
       end
-      
     end
   end
 end

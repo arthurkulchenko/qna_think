@@ -28,6 +28,10 @@ class User < ApplicationRecord
     user
   end
 
+  def self.associations_list
+    self.reflect_on_all_associations(:has_many).map(&:name)
+  end
+
   private
 
   def self.sending_digest_newsletter
