@@ -1,5 +1,11 @@
-require 'rails_helper'
-
 RSpec.describe NewAnswerLetteringJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe " new answer lettering" do
+    let(:answer){ create(:answer)}
+        
+    it "send email every time new answer creates" do
+      expect(QuestionSubscriptionMailer).to receive(:new_answer_letter).with(answer.question.user, answer).and_call_original
+      NewAnswerLetteringJob.perform_now(answer)
+    end
+
+  end
 end

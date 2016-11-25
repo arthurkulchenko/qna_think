@@ -2,10 +2,6 @@ RSpec.describe MergingUsersJob, type: :job do
   describe ".merging_users" do
     let!(:user){ create(:user) }
     let!(:user_2){ create(:user) }
-
-    let!(:question){ create(:question, user: user)}
-    let!(:answer){ create(:answer, user: user)}
-    let!(:comment){ create(:comment, user: user)}
     
     context "it merge users" do
       before { MergingUsersJob.perform_now(user, user_2) }
