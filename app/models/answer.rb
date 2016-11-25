@@ -16,7 +16,7 @@ class Answer < ApplicationRecord
   private
   
   def new_answer_lettering
-    NewAnswerLetteringJob.perform(self)
+    NewAnswerLetteringJob.perform_now(self)
   end
 
   def check_of_best

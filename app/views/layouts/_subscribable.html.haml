@@ -3,7 +3,7 @@
   - if can? :create, Subscribtion
    - unless current_user.is_author_of?(@question)
     - if current_user.subscribtions.where(subscribtable: parent_object).first
-     = button_to "Unsubscribe", subscribtion_path(current_user.subscribtions.where(subscribtable: parent_object).first), remote: true, method: :delete
+     = button_to "Unsubscribe", subscribtion_path(current_user.subscribtions.where(subscribtable: parent_object).first), remote: true, method: :delete, id: "unsubscribe"
     - else
      = form_for [parent_object, parent_object.subscribtions.new], remote: true do |i|
-      = i.submit "Subscribe"
+      = i.submit "Subscribe", id: "subscribe"

@@ -1,4 +1,4 @@
-class Question < ApplicationRecord	
+class Question < ApplicationRecord
   include Voting
   include Attaching
   include Commenting
@@ -14,12 +14,12 @@ class Question < ApplicationRecord
   # validates_with Validators::QuestionValidator, fields: [:title, :content]
   validates :title, :content, presence: true
   scope :last_24_hours, -> { where(created_at: DateTime.yesterday) }
+
+  def question_newsletter
+    QuestionChangingsJob.perform_now(self)
+  end
   
   private
-
-    def question_newsletter
-      QuestionChangingsJob.perform(self)
-    end
   
     def subscribe_on_new_answers
       Subscribtion.create(user: user, subscribtable: self)

@@ -28,11 +28,11 @@ class User < ApplicationRecord
     user
   end
 
-  private
+  def merge_with_old(user)
+    MergingUsersJob.perform_now(user, self)
+  end
 
-    def merge_into_old(user)
-      MergingUsersJob.perform(user, self)
-    end
+  private
   
     class << self
   
@@ -41,7 +41,7 @@ class User < ApplicationRecord
       end
   
       def sending_digest_newsletter
-        DigestLetteringJob.perform()
+        DigestLetteringJob.perform_now()
       end
   
       def email_genarating(req)
