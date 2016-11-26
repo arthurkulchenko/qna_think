@@ -20,8 +20,6 @@ describe Ability do
       it { should be_able_to :create, to_class.call(resource) }
       let(:resource){ create(resource, user: user) }
       [:update, :destroy].each { |action| it { should be_able_to action, to_class.call(resource), user: user } }
-      # it { should_not be_able_to :update, create(resource, user: user), user: user }
-      # it { should_not be_able_to :destroy, create(resource, user: user), user: user }
       it { should_not be_able_to :update, create(resource, user: vote_owner), user: user }
       it { should_not be_able_to :destroy, create(resource, user: vote_owner), user: user }
     end

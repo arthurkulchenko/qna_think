@@ -7,13 +7,17 @@ class Answer < ApplicationRecord
   belongs_to :question
 
   validates :content, :question_id, presence: true
-
+  after_create :new_answer_lettering
   before_update :check_of_best
 
   scope :best_first, -> { order(best_answer: :desc) }
   scope :not_best_answers, -> { where(best_answer: false) }
   
   private
+  
+  def new_answer_lettering
+    NewAnswerLetteringJob.perform_now(self)
+  end
 
   def check_of_best
     return unless @best_answer = question.answers.best_first.first

@@ -5,7 +5,7 @@ RSpec.describe VotesController, type: :controller do
   let(:question){ create(:question, user: user2) }
   let(:vote){ create(:vote, user: user, ballot: question) }
   let(:model){ Vote }
-  let(:model-instanse){ vote }
+  let(:model_instanse){ vote }
   sign_in_user
 
   describe 'POST#CREATE' do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011111525) do
+ActiveRecord::Schema.define(version: 20161114141303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,14 +28,12 @@ ActiveRecord::Schema.define(version: 20161011111525) do
   end
 
   create_table "attachments", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "file"
     t.string   "attachable_type"
     t.integer  "attachable_id"
-    t.string   "attachable_kind",              comment: "need to describe what model is use it"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "user_id"
-    t.index ["attachable_kind"], name: "index_attachments_on_attachable_kind", using: :btree
     t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id", using: :btree
     t.index ["user_id"], name: "index_attachments_on_user_id", using: :btree
   end
@@ -109,11 +107,23 @@ ActiveRecord::Schema.define(version: 20161011111525) do
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
-    t.integer  "mark",       default: 0
+    t.integer  "mark",           default: 0
+    t.integer  "answers_amount"
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
+  end
+
+  create_table "subscribtions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "subscribtable_type"
+    t.integer  "subscribtable_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["subscribtable_type", "subscribtable_id"], name: "index_subscribtions_on_subscribtable_type_and_subscribtable_id", using: :btree
+    t.index ["user_id", "subscribtable_id"], name: "index_subscribtions_on_user_id_and_subscribtable_id", using: :btree
+    t.index ["user_id"], name: "index_subscribtions_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -131,6 +141,7 @@ ActiveRecord::Schema.define(version: 20161011111525) do
     t.datetime "updated_at",                             null: false
     t.boolean  "email_real",             default: true
     t.boolean  "admin",                  default: false
+    t.boolean  "subscibe_on_digest",     default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -155,5 +166,6 @@ ActiveRecord::Schema.define(version: 20161011111525) do
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "questions", "users"
+  add_foreign_key "subscribtions", "users"
   add_foreign_key "votes", "users"
 end

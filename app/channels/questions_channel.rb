@@ -4,7 +4,6 @@ class QuestionsChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    console.log("You are disconnected")
   end
 
   def start_stream

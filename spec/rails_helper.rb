@@ -9,6 +9,10 @@ ActiveRecord::Migration.maintain_test_schema!
 
 require 'devise'
 require 'cancan/matchers'
+require 'sidekiq/testing'
+
+# Sidekiq::Testing.inline!
+Sidekiq::Testing.fake!
 
 OmniAuth.config.test_mode = true
 

@@ -18,4 +18,5 @@ class Vote < ApplicationRecord
   def update_mark_sum
     ballot.update(mark: ballot.votes.sum(:mark))
   end
+
 end

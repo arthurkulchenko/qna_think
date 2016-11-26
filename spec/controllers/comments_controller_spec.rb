@@ -8,29 +8,29 @@ RSpec.describe CommentsController, type: :controller do
   let(:model_instanse){ comment }
   let(:model_instanse2){ comment2 }
   # -------------
-  let(:options){ answer_id: model_instanse, comment: attributes_for(:comment_with_wrong_values) }
+  # let(:options){ answer_id: model_instanse, comment: attributes_for(:comment_with_wrong_values) }
   sign_in_user
 #---------------------------------------------POST(CREATE)
   describe 'POST #create' do
-    it_behaves_like "Post method"
-    # context 'in success context  -- ' do
-    #   let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment), format: :js }
-    #     it 'creates new comment' do
-    #       expect{request}.to change(Comment, :count).by(1)
-    #     end
+    # it_behaves_like "Post method"
+    context 'in success context  -- ' do
+      let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment), format: :js }
+        it 'creates new comment' do
+          expect{request}.to change(Comment, :count).by(1)
+        end
 
-    #     it 'relate comment with its user' do
-    #       request
-    #       expect(assigns(:comment).user).to eq @user
-    #     end
-    # end
+        it 'relate comment with its user' do
+          request
+          expect(assigns(:comment).user).to eq @user
+        end
+    end
 
-    # context 'in fail context  -- ' do      
-    #   let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment_with_wrong_values), format: :js }
-    #   it 'do not creates new comment' do
-    #     expect{request}.to_not change(Comment, :count)
-    #   end
-    # end
+    context 'in fail context  -- ' do      
+      let(:request) { post :create, id: :comment2, answer_id: answer, comment: attributes_for(:comment_with_wrong_values), format: :js }
+      it 'do not creates new comment' do
+        expect{request}.to_not change(Comment, :count)
+      end
+    end
   end
 #---------------------------------------------DELETE
   describe 'DELETE #destroy' do

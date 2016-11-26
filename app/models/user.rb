@@ -2,9 +2,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, # :confirmable, :lockable, :timeoutable
          :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :twitter]
   
-  [:questions, :answers, :votes, :comments, :attachments, :authorizations].each do |model|
+  [:questions, :answers, :votes, :comments, :attachments, :authorizations, :subscribtions].each do |model|
     has_many model, dependent: :delete_all
   end
+
+  scope :digest_subscribers, -> { where(subscibe_on_digest: true) }
 
   def is_author_of?(obj)
     obj.user_id == id
@@ -26,35 +28,36 @@ class User < ApplicationRecord
     user
   end
 
+  def merge_with_old(user)
+    MergingUsersJob.perform_now(user, self)
+  end
+
   private
-
-  class << self
-
-    def email_genarating(req)
-      if req.info[:email]
-        @r_email = true
-        @g_email = req.info[:email]
-      else
-        @r_email = false
-        @g_email = "#{req.provider}-#{req.uid}@email.com"
+  
+    class << self
+  
+      def associations_list
+        reflect_on_all_associations(:has_many).map(&:name)
       end
-    end
-
-    def password_generating
-      @password = Devise.friendly_token[0..20]
-    end
-
-  end
-
-  def merge_this(user)
-    User.transaction do
-      user.authorizations.each do |auth|
-        auth.update(user_id: id)
+  
+      def sending_digest_newsletter
+        DigestLetteringJob.perform_now()
       end
-      user.destroy
-      save
+  
+      def email_genarating(req)
+        if req.info[:email]
+          @r_email = true
+          @g_email = req.info[:email]
+        else
+          @r_email = false
+          @g_email = "#{req.provider}-#{req.uid}@email.com"
+        end
+      end
+  
+      def password_generating
+        @password = Devise.friendly_token[0..20]
+      end
+  
     end
-    self
-  end
   
 end
