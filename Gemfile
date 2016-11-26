@@ -35,8 +35,8 @@ gem 'oj'
 gem 'oj_mimic_json'
 
 gem 'gon'
-
-gem 'sphinx'
+gem 'mysql2'
+gem 'thinking-sphinx'
 
 group :production do
   gem 'libv8'
