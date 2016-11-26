@@ -20,3 +20,5 @@
 .byebug_history
 /diffs
 dump.rdb
+config/*.sphinx.conf
+db/sphinx
