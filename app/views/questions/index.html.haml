@@ -1,5 +1,6 @@
 = link_to "Ask a question", new_question_path if can? :create, Question
 %br
+= render partial: 'layouts/searchings'
 %br
 .question-list
  - @questions.each do |question|

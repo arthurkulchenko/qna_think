@@ -1,0 +1,6 @@
+.searching_form
+ = form_tag "/searchings", method: "post", remote:true do
+  = select_tag "searching", options_for_select(["Global", "User", "Question", "Answer", "Comment"])
+  = search_field_tag "query", "please type text here"
+  = submit_tag "Search"
+.search_result
