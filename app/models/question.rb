@@ -12,8 +12,6 @@ class Question < ApplicationRecord
   after_create :post_via_comet, :subscribe_on_new_answers
   after_update :question_newsletter
 
-  after_save ThinkingSphinx::RealTime.callback_for(:question)
-
   scope :last_24_hours, -> { where(created_at: DateTime.yesterday) }
 
   def question_newsletter

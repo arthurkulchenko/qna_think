@@ -6,7 +6,7 @@ services:
   - redis-server
   - rails r "Sidekiq::Queue.all.each(&:clear)"
   - sidekiq -q default -q mailers
-  - ts:start # indexing by sphinx
+  - rake ts:start # indexing by sphinx
 before_script:
   # Need concationation in YAML and ENVIROMENT variable
   - psql -c "CREATE USER qa_thinknetika_app WITH PASSWORD 'qa_qa_app_think';" -U postgres

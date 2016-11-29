@@ -10,8 +10,6 @@ class Answer < ApplicationRecord
   after_create :new_answer_lettering
   before_update :check_of_best
 
-  after_save ThinkingSphinx::RealTime.callback_for(:answer)
-
   scope :best_first, -> { order(best_answer: :desc) }
   scope :not_best_answers, -> { where(best_answer: false) }
   
