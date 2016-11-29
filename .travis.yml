@@ -4,9 +4,11 @@ rvm:
 services:
   - postgresql
   - redis-server
+  - rails r "Sidekiq::Queue.all.each(&:clear)"
   - sidekiq -q default -q mailers
-  # to clear Sidekiq::Queue.all.each(&:clear)
+  - ts:start # indexing by sphinx
 before_script:
+  # Need concationation in YAML and ENVIROMENT variable
   - psql -c "CREATE USER qa_thinknetika_app WITH PASSWORD 'qa_qa_app_think';" -U postgres
   - psql -c "CREATE database qa_thinknetika_app_test;" -U postgres
 script: bin/rails db:migrate RAILS_ENV=test

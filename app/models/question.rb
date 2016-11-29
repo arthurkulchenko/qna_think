@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+  include ActiveModel::Dirty
   include Voting
   include Attaching
   include Commenting
@@ -6,28 +7,23 @@ class Question < ApplicationRecord
   include BelongingsOfUser
 
   has_many :answers, dependent: :destroy
+  validates :title, :content, presence: true
   
   after_create :post_via_comet, :subscribe_on_new_answers
-  after_update :background_job
+  after_update :question_newsletter
 
-  #  Custom validation do not pass tests, but it makes errors more pretty
-  # validates_with Validators::QuestionValidator, fields: [:title, :content]
-  validates :title, :content, presence: true
+  after_save ThinkingSphinx::RealTime.callback_for(:question)
+
   scope :last_24_hours, -> { where(created_at: DateTime.yesterday) }
 
   def question_newsletter
-    QuestionChangingsJob.perform_now(self)
+    QuestionChangingsJob.perform_now(self) if self.content_changed?
   end
   
   private
   
     def subscribe_on_new_answers
       Subscribtion.create(user: user, subscribtable: self)
-    end
-  
-    def background_job
-      # TODO need to add cheking if content or title updated
-      self.question_newsletter
     end
   
     def post_via_comet

@@ -1,5 +1,4 @@
-ThinkingSphinx::Index.define :question, with: :active_record do
-  indexes title, sortable: true
+ThinkingSphinx::Index.define :answer, with: :active_record do
   indexes content
   indexes user.email, as: :author, sortable: true
 
