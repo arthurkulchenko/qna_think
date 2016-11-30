@@ -15,7 +15,8 @@ feature 'answer voting', %q(
       visit question_path(question)
     end
 
-    scenario "owner of answer can't vote for his answer" do  
+    scenario "owner of answer can't vote for his answer" do
+      expect(page).to_not have_content "Total mark is: 1"
     end
 
     scenario "voice is considered", js: true do
