@@ -16,12 +16,9 @@ class SearchingsController < ApplicationController
                 else
                   if ["User", "Question", "Answer", "Comment"].include?(in_area)
                     in_area.classify.safe_constantize.search prepare(text)
-                  else
-                    flash[:notice] = "Don't mess with me!"
                   end
                 end
       @result.push content: "Nothing is found" if @result.empty?
-      @result
     end
 
     def prepare(text)

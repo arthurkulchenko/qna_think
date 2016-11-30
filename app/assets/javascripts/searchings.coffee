@@ -9,6 +9,8 @@ jQuery ->
         break
       if result.value.email
         $(".search_result").append("<table><tr><td>Type</td><td>Content</td></tr><tr><td><p>User</p></td><td><p>"+result.value.email+"</p></td></tr></table>")
-      if result.value.content
+      if result.value.content != "Nothing is found"
         #alert Object.getOwnPropertyNames(result.value)
         $(".search_result").append("<table><tr><td>Type</td><td>Content</td></tr><tr><td><p>"+result.value.class_name+"</p></td><td><p>"+result.value.content+"</p></td></tr></table>")
+      if result.value.content == "Nothing is found"
+        $(".search_result").append(result.value.content)
