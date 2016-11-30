@@ -2,6 +2,8 @@ jQuery ->
   $('#search_form').bind 'ajax:complete', (e, data, status, xhr) ->
     $(".search_result").children().remove()
     res = JSON.parse(data.responseText)
+    #if res == null
+    # alert "null result"
     iterator = res[Symbol.iterator]()
     loop
       result = iterator.next()
