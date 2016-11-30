@@ -22,7 +22,7 @@ class SearchingsController < ApplicationController
     end
 
     def prepare(text)
-      %w(@).each { |s| text.gsub!(s, "\\"+s) if text.include?(s) }
+      %w(@ -).each { |s| text.gsub!(s, "\\"+s) if text.include?(s) }
       text
     end
 
