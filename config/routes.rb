@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :email_confirms, only: [:edit, :update]
   resources :authorizations, only: [:show]
   resources :users, only:[:update, :show]
-  # resources :subscribtions, only: [:create]
+  resources :searchings, only: [:create]
 
   concern :subscribtable do
     resources :subscribtions, defaults: { format: 'json' }, only: [:create, :show, :destroy]
@@ -45,5 +45,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  
   mount ActionCable.server => '/cable'
+
 end

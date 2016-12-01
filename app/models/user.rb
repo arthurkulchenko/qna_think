@@ -6,6 +6,8 @@ class User < ApplicationRecord
     has_many model, dependent: :delete_all
   end
 
+  after_save ThinkingSphinx::RealTime.callback_for(:user)
+
   scope :digest_subscribers, -> { where(subscibe_on_digest: true) }
 
   def is_author_of?(obj)
