@@ -5,9 +5,10 @@ set :application, 'qa_thinknetika_app_name'
 set :repo_url, 'git@github.com:arthurkulchenko/qna_think.git'
 set :deploy_to, '/home/thinknetika/qa_thinknetika_app'
 set :deploy_user, "thinknetika"
-set :format, :airbrussh
-set :log_level, :debug
-set :bundle_flags, '--verbose'
+# set :format, :airbrussh
+set :format, :pretty
+# set :log_level, :debug
+# set :bundle_flags, '--verbose'
 set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: false
 append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs, 'bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundler'

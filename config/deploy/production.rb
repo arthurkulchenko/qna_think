@@ -47,7 +47,6 @@ set :rails_env, :production
    forward_agent: true,
    auth_methods: %w(publickey password),
    port: 22
-   verbose: :debug
    #4321
  }
 #
