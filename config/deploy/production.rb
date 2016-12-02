@@ -32,7 +32,6 @@ role :db, %w{thinknetika@62.109.20.146}, my_property: :my_value
 # Feel free to add new variables to customise your setup.
 set :rails_env, :production
 
-
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
@@ -42,13 +41,13 @@ set :rails_env, :production
 # Global options
 # --------------
 # Makes possible skip addind deploy keys to git repo
- set :ssh_options, {
-   keys: %w(/Users/megalapa/.ssh/id_rsa),
-   forward_agent: true,
-   auth_methods: %w(publickey password),
-   port: 22
-   #4321
- }
+ # set :ssh_options, {
+ #   keys: %w(/Users/megalapa/.ssh/id_rsa),
+ #   forward_agent: true,
+ #   auth_methods: %w(publickey password),
+ #   port: 22
+ #   #4321
+ # }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------

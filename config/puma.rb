@@ -48,8 +48,11 @@ plugin :tmp_restart
 
 # setuid thinknetika
 # setgid thinknetika
+set :puma_threads,    [4, 16]
+set :puma_workers,    0
 
 # workers 1
+# preload_app!
 # threads 1, 6
 # app_dir = File.expand_path("../..", __FILE__)
 # shared_dir = "#{app_dir}/shared"
