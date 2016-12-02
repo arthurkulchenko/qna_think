@@ -14,6 +14,9 @@ append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs, 'bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundler'
 set :keep_releases, 3
 
+set :puma_threads,    [4, 16]
+set :puma_workers,    0
+
 # set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
