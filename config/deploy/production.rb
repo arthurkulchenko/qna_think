@@ -30,7 +30,7 @@ role :db, %w{thinknetika@62.109.20.146}, my_property: :my_value
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-set :rails_env, :prodaction
+set :rails_env, :production
 
 
 # Custom SSH Options
