@@ -42,12 +42,13 @@ set :rails_env, :prodaction
 # Global options
 # --------------
 # Makes possible skip addind deploy keys to git repo
- # set :ssh_options, {
- #   keys: %w(/Users/megalapa/.ssh/id_rsa),
- #   forward_agent: true,
- #   auth_methods: %w(publickey password),
- #   # port: 4321
- # }
+ set :ssh_options, {
+   keys: %w(/Users/megalapa/.ssh/id_rsa),
+   forward_agent: true,
+   auth_methods: %w(publickey password),
+   port: 22 
+   #4321
+ }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
