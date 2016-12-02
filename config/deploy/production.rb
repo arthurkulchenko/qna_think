@@ -46,7 +46,8 @@ set :rails_env, :production
    keys: %w(/Users/megalapa/.ssh/id_rsa),
    forward_agent: true,
    auth_methods: %w(publickey password),
-   port: 22 
+   port: 22
+   verbose: :debug
    #4321
  }
 #

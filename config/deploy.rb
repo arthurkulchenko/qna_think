@@ -7,11 +7,11 @@ set :deploy_to, '/home/thinknetika/qa_thinknetika_app'
 set :deploy_user, "thinknetika"
 set :format, :airbrussh
 set :log_level, :debug
+set :bundle_flags, '--verbose'
 set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: false
 append :linked_files, 'config/database.yml', 'config/secrets.yml'
+append :linked_dirs, 'bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundler'
 # set :linked_files, %w(config/database.yml config/secrets.yml)
-# Default value for linked_dirs is []
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 # set :linked_dirs %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundler public/system)
 set :keep_releases, 3
 
