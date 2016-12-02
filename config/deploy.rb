@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
-set :application, 'qa_thinknetika_app_name'
+set :application, 'qa_thinknetika_app'
 set :repo_url, 'git@github.com:arthurkulchenko/qna_think.git'
 set :deploy_to, '/home/thinknetika/qa_thinknetika_app'
 set :deploy_user, "thinknetika"
@@ -42,4 +42,18 @@ namespace :deploy do
   #     # end
   #   end
   # end
+end
+namespace :puma do
+  task :start, :except => { :no_release => true } do
+    run "/etc/init.d/puma start #{application}"
+  end
+  after "deploy:start", "puma:start"
+  task :stop, :except => { :no_release => true } do
+    run "/etc/init.d/puma stop #{application}"
+  end
+  after "deploy:stop", "puma:stop"
+  task :restart, roles: :app do
+    run "/etc/init.d/puma restart #{application}"
+  end
+  after "deploy:restart", "puma:restart"
 end
