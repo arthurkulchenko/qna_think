@@ -18,8 +18,8 @@ server '62.109.20.146', user: 'thinknetika', roles: %w{app db web}, primary: tru
 # Don't use `:all`, it's a meta role.
 
 role :app, %w{thinknetika@62.109.20.146}, my_property: :my_value
-# role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
-# role :db,  %w{deploy@example.com}
+role :web, %w{thinknetika@62.109.20.146}, my_property: :my_value
+role :db, %w{thinknetika@62.109.20.146}, my_property: :my_value
 
 
 
@@ -42,12 +42,12 @@ set :rails_env, :prodaction
 # Global options
 # --------------
 # Makes possible skip addind deploy keys to git repo
- set :ssh_options, {
-   keys: %w(/Users/megalapa/.ssh/id_rsa),
-   forward_agent: true,
-   auth_methods: %w(publickey password),
-   # port: 4321
- }
+ # set :ssh_options, {
+ #   keys: %w(/Users/megalapa/.ssh/id_rsa),
+ #   forward_agent: true,
+ #   auth_methods: %w(publickey password),
+ #   # port: 4321
+ # }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
