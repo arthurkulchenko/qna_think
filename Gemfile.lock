@@ -7,6 +7,15 @@ GIT
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
 
+GIT
+  remote: git://github.com/seuros/capistrano-puma.git
+  revision: e18b30c18aceceed003e8007c268125317a17a9d
+  specs:
+    capistrano3-puma (2.0.0)
+      capistrano (~> 3.5)
+      capistrano-bundler
+      puma (~> 3.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -379,6 +388,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano-ssh-doctor
+  capistrano3-puma!
   capybara
   capybara-email
   capybara-webkit
