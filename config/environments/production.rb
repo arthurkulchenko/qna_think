@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  # config.action_cable.allowed_request_origins = ['http://localhost:3001']
+  config.action_cable.allowed_request_origins = ['http://62.109.20.146']
   config.action_cable.url = "ws://62.109.20.146/cable"
   # Code is not reloaded between requests.
   config.cache_classes = true
