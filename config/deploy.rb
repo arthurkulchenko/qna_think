@@ -7,9 +7,10 @@ set :repo_url, 'git@github.com:arthurkulchenko/qna_think.git'
 # set :deploy_user, "thinknetika"
 set :user, "thinknetika"
 set :format, :airbrussh #:pretty
+set :format_options, command_output: true, color: true, truncate: 150, log_file: 'log/capistrano.log'
 set :pty, false
 # set :pty, true
-set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: false
+# set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: false
 append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs, 'bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundler'
 set :keep_releases, 3
