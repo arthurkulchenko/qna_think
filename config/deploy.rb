@@ -1,4 +1,3 @@
-require 'capistrano_colors'
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
@@ -7,7 +6,7 @@ set :repo_url, 'git@github.com:arthurkulchenko/qna_think.git'
 # set :deploy_to, '/home/thinknetika/qa_thinknetika_app'
 # set :deploy_user, "thinknetika"
 set :user, "thinknetika"
-set :format, :pretty
+set :format, :airbrussh #:pretty
 set :pty, false
 # set :pty, true
 set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: false
@@ -85,4 +84,5 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+
 end
