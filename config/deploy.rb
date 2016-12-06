@@ -79,7 +79,28 @@ namespace :deploy do
       invoke 'puma:restart'
     end
   end
-
+# ----------------------
+  task :invoke, :command do |task, args|
+    on roles(:app) do
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, args[:command]
+        end
+      end
+    end
+  end
+  # desc 'make ts:rebuild'
+  # task :ts_rebuild do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     # execute "bundle exec rake ts:rebuild"
+  #     invoke 'rake ts:rebuild'
+  #     # invoke 'puma:restart'
+  #   end
+  # end
+  # task :ts_rebuild, roles(:app) do
+  #   # execute 'cd #{current_path}; rake ts:rebuild'
+  # end
+# ----------------------
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
