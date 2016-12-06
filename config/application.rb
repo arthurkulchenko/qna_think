@@ -25,6 +25,7 @@ module QaThinknetikaApp
     end
     config.i18n.default_locale = :en #ru
     config.action_cable.disable_request_forgery_protection = false
+    config.action_view.embed_authenticity_token_in_remote_forms = true
     # config.middleware.use Warden::Manager
     # config.active_record.raise_in_transactional_callbacks = true
     
