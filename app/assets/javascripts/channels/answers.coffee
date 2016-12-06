@@ -13,7 +13,7 @@ $(document).ready ->
      # Called when the subscription has been terminated by the server
  
    received: (data) ->
-    if gon.current_user isnt '' then current_user = gon.current_user 
+    #if gon.current_user isnt '' then current_user = gon.current_user 
     
     simple_answer = '<div class="answer"><div class="answer-content"><strong>' + data.content + '</strong></div></div>'
 
