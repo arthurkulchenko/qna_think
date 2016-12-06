@@ -7,13 +7,10 @@ require "capistrano/rvm"
 require "capistrano/bundler"
 require "capistrano/rails"
 require 'capistrano/puma'
+require 'thinking_sphinx/capistrano'
 
 require 'capistrano/setup'
-# require 'capistrano/deploy'
-# require 'capistrano/rails'
-# require 'capistrano/bundler'
-# require 'capistrano/rvm'
-# require 'capistrano/puma'
+
 # require 'capistrano/puma/workers'
 # require 'capistrano/puma/nginx'  
 

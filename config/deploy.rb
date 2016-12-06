@@ -7,8 +7,8 @@ set :repo_url, 'git@github.com:arthurkulchenko/qna_think.git'
 # set :deploy_user, "thinknetika"
 set :user, "thinknetika"
 set :format, :pretty
-# set :pty, false
-set :pty, true
+set :pty, false
+# set :pty, true
 set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: false
 append :linked_files, 'config/database.yml', 'config/secrets.yml'
 append :linked_dirs, 'bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'vendor/bundler'
@@ -80,8 +80,9 @@ namespace :deploy do
     end
   end
 # ----------------------
+  desc 'INVOKERS COMMAND'
   task :invoke, :command do |task, args|
-    on roles(:app) do
+    on roles(:app), in: :sequence, wait: 5 do
       within current_path do
         with rails_env: fetch(:rails_env) do
           execute :rake, args[:command]
