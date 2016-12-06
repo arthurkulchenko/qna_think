@@ -86,6 +86,7 @@ GEM
     capistrano3-puma (1.2.1)
       capistrano (~> 3.0)
       puma (>= 2.6)
+    capistrano_colors (0.5.5)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
@@ -383,6 +384,7 @@ DEPENDENCIES
   capistrano-upload-config
   capistrano3-nginx
   capistrano3-puma
+  capistrano_colors
   capybara
   capybara-email
   capybara-webkit
