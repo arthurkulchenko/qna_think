@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery prepend: true
 
   rescue_from CanCan::AccessDenied do |exception|
-    respond_to do |format|
+    respond_with do |format|
       format.html { redirect_to root_path, alert: exception.message }
       format.js { render partial: 'layouts/exception', status: :forbidden, locals: { exception: exception } }
       format.json { render json: exception.message, status: :unauthorized }

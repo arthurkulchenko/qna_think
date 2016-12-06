@@ -16,7 +16,6 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    # respond_with :api, :v1, @thing
     @question = current_user.questions.create(question_params)
     respond_with @question do |format|
       if @question.errors.any?
@@ -30,7 +29,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    gon.current_user = current_user if current_user
     @answers = @question.answers.best_first
     respond_with @question
   end
