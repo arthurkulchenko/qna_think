@@ -8,7 +8,8 @@ production:
   mysql41: 9312
   morphology: stem_en
   morphology: stem_ru
-  pid_file: /path/to/app/shared/tmp/searchd.pid
-  indices_location: /path/to/app/shared/db/sphinx
-  configuration_file: /path/to/app/shared/production.sphinx.conf
-  binlog_path: /path/to/app/shared/binlog
+  pid_file: /home/thinknetika/qa_thinknetika_app/shared/tmp/searchd.pid
+  indices_location: /home/thinknetika/qa_thinknetika_app/shared/db/sphinx
+  configuration_file: /home/thinknetika/qa_thinknetika_app/shared/production.sphinx.conf
+  binlog_path: /home/thinknetika/qa_thinknetika_app/shared/binlog
+  
