@@ -15,10 +15,10 @@ require 'capistrano/setup'
 # require 'capistrano/puma/nginx' 
 
 require 'capistrano/rails/assets'
-require 'capistrano/nginx'
+# require 'capistrano/nginx' ----------------- problems
 
-require 'capistrano/puma/nginx'
-require 'capistrano/upload-config' 
+# require 'capistrano/puma/nginx'
+# require 'capistrano/upload-config' 
 
 # Include tasks from other gems included in your Gemfile
 #
